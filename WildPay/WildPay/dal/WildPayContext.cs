@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using WildPay.Models;
 
-namespace WildPay.BDD
+namespace WildPay.DAL
 {
     public class WildPayContext : DbContext
     {

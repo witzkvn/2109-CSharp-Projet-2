@@ -13,14 +13,17 @@ namespace WildPay.Models
         public string Title { get; set; }
         public double Value { get; set; }
 
-        [ForeignKey("User")]
-        public int FKuserId { get; set; }
+        public int FkUserId { get; set; }
+        [ForeignKey("FkUserId")]
+        public User User { get; set; }
 
-        [ForeignKey("Category")]
-        public int FKcategoryId { get; set; }
+        public int FkCategoryId { get; set; }
+        [ForeignKey("FkCategoryId")]
+        public Category Category { get; set; }
 
-        [ForeignKey("Group")]
-        public int FKgroupId { get; set; }
+        public int FkGroupId { get; set; }
+        [ForeignKey("FkGroupId")]
+        public Group Group { get; set; }
 
         public Expense()
         {

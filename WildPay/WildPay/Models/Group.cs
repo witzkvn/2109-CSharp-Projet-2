@@ -11,8 +11,9 @@ namespace WildPay.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [ForeignKey("User")]
-        public int FKuserId { get; set; }
+        //public int FkUserId { get; set; }
+        //[ForeignKey("FkUserId")]
+        //public User Author { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }
