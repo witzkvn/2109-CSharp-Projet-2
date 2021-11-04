@@ -13,5 +13,11 @@ namespace WildPay.Controllers
         {
             return View();
         }
+        public void OnPost()
+        {
+            Console.WriteLine("hello ?");
+            Console.ReadLine();
+        }
+
     }
 }
