@@ -12,7 +12,6 @@ namespace WildPay.Models
         public int Id { get; private set; }
 
         [Required(ErrorMessage = "L'adresse email est obligatoire")]
-        [Index(IsUnique = true)]
         [EmailAddress(ErrorMessage = "Adresse email invalide")]
         public string Email { get; set; }
 
