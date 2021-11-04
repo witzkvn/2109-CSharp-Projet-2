@@ -38,3 +38,12 @@ BEGIN
 	(@date, @title, @value)
 END
 GO
+
+CREATE PROCEDURE sp_SuppressionCategory
+@CategoryId INT
+AS
+BEGIN
+DELETE FROM [Category]
+WHERE Id = @CategoryId
+END
+GO
