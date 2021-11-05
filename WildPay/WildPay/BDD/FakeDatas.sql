@@ -18,9 +18,9 @@ BEGIN
 		('Cat2'),
 		('Cat3')
 
-	INSERT INTO [Group](Id, Name, CreatedAt) VALUES
-		((SELECT Id FROM [User] WHERE Email = 'admin@test.com'),'G1', GETDATE()),
-		((SELECT Id FROM [User] WHERE Email = 'test1@test.com'), 'G2', GETDATE())
+	INSERT INTO [Group](Name, CreatedAt) VALUES
+		('G1', GETDATE()),
+		('G2', GETDATE())
 
 	INSERT INTO [UserGroup](User_Id,Group_Id) VALUES
 		((SELECT Id FROM [User] WHERE Email = 'test1@test.com'),(SELECT Id FROM [Group] WHERE Name = 'G1')),
