@@ -16,6 +16,7 @@ AS
 BEGIN
 	INSERT INTO [Category](Name) VALUES
 	(@name)
+	INSERT INTO [
 END
 GO
 
