@@ -13,7 +13,7 @@ namespace WildPay.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202111031953259_initial"; }
+            get { return "202111041549097_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,7 +12,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false, maxLength: 20),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -20,9 +20,9 @@
                 "dbo.Expense",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Date = c.DateTime(nullable: false),
-                        Title = c.String(),
+                        Id = c.Int(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 50),
                         Value = c.Double(nullable: false),
                         FkUserId = c.Int(nullable: false),
                         FkCategoryId = c.Int(nullable: false),
@@ -40,8 +40,9 @@
                 "dbo.Group",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Id = c.Int(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -50,11 +51,11 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Email = c.String(),
-                        Firstname = c.String(),
-                        Lastname = c.String(),
-                        Password = c.String(),
-                        Image = c.String(),
+                        Email = c.String(nullable: false),
+                        Firstname = c.String(maxLength: 20),
+                        Lastname = c.String(maxLength: 20),
+                        Password = c.String(nullable: false),
+                        Image = c.Binary(),
                     })
                 .PrimaryKey(t => t.Id);
             
