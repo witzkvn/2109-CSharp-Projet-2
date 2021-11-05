@@ -27,6 +27,19 @@ CREATE PROCEDURE sp_GetUserById
    END
 GO
 
+CREATE PROCEDURE sp_UpdateUserImageById
+	@UserId VARCHAR(100),
+	@ImageFile varbinary(MAX)
+   AS
+   BEGIN
+	   BEGIN TRANSACTION
+		   UPDATE [WildPay-1].[dbo].[User] 
+			SET [Image] = @ImageFile
+			WHERE Id = @UserId;
+	   COMMIT;
+   END
+GO
+
 
 -- CATEGORY
 CREATE PROCEDURE sp_CreerCategory
