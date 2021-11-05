@@ -137,10 +137,6 @@
     <Compile Include="Migrations\202111041549097_initial.designer.cs">
       <DependentUpon>202111041549097_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111041551192_testfakedata1.cs" />
-    <Compile Include="Migrations\202111041551192_testfakedata1.designer.cs">
-      <DependentUpon>202111041551192_testfakedata1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Expense.cs" />
@@ -208,9 +204,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111041549097_initial.resx">
       <DependentUpon>202111041549097_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111041551192_testfakedata1.resx">
-      <DependentUpon>202111041551192_testfakedata1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
