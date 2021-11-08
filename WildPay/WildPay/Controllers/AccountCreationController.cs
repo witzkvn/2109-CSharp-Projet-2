@@ -4,35 +4,41 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WildPay.Models;
+using WildPay.Tools;
 
 namespace WildPay.Controllers
 {
     public class AccountCreationController : Controller
     {
-        // GET: AccountCreation
+        public AccountCreationController()
+        {
+            ViewBag.Message ="First Action View";
+        }
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Index(User newUser)
         {
             if (ModelState.IsValid)
             {
-                DAL.WildPayContext context = new DAL.WildPayContext();
-                context.Users.Add(newUser);
-                // Validate User
-                // retour à la page d'authentification
-                //return RedirectToAction("Index", "Home");
+                if (FormatTools.IsPasswordFormatOk(newUser.Password))
+                {
+                    newUser.Password = FormatTools.HashPassword(newUser.Password);
+                    // ajout de l'utilisateur à faire 
+                    // retour à la page d'authentification
+                    //return RedirectToAction("Index", "Home");
+                    return View("../Home/Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Format mot de passe incorrect ";
+                }
             }
-            return View();
+            return View("../Home/Index");
         }
-
-        //public ActionResult CreateUser(User newUser)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Validate User
-        //        // retour à la page d'authentification
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    return View();
-        //}
 
     }
 }

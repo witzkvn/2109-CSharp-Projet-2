@@ -1,7 +1,7 @@
 ﻿@model WildPay.Models.User
 
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Message</h2>
 
 
 @using (Html.BeginForm())
@@ -43,7 +43,7 @@
 
     </div>
     <div class="editor-field">
-        @Html.EditorFor(Model => Model.Password)
+        @Html.PasswordFor(Model => Model.Password)
         @Html.ValidationMessageFor(Model => Model.Password)
     </div>
 
