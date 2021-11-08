@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bienvenue sur WildPay !</h2>
+
+<form method="post">
+    <fieldset>
+        <legend>Connectez-vous</legend>
+        <p>
+            <label for="Email">Email:</label><br />
+            <input type="text" name="Email" value="@Request.Form["Email"]" />
+        </p>
+
+        <p>
+            <label for="pwd">Mot de passe:</label><br />
+            <input type="text" name="pwd" value="@Request.Form["pwd"]" />
+        </p>
+
+        <p><input type="submit" name="buttonSubmit" value="Connexion" /></p>
+        <a>@Html.ActionLink("Pas de compte ? inscription", "About", "Home")</a>
+    </fieldset>
+</form>
