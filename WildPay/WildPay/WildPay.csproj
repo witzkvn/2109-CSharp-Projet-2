@@ -147,6 +147,7 @@
     <Compile Include="Tools\FormatTools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BDD\FakeDatas.sql" />
     <Content Include="BDD\ProcedureStockee.sql" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
