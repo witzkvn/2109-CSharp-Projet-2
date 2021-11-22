@@ -20,7 +20,7 @@
                 "dbo.Expense",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         CreatedAt = c.DateTime(nullable: false),
                         Title = c.String(nullable: false, maxLength: 50),
                         Value = c.Double(nullable: false),
@@ -40,7 +40,7 @@
                 "dbo.Group",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         CreatedAt = c.DateTime(nullable: false),
                         Name = c.String(nullable: false, maxLength: 50),
                     })
