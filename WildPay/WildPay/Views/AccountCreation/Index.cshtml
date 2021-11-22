@@ -1,0 +1,55 @@
+﻿@model WildPay.Models.User
+
+
+<h2>@ViewBag.Message</h2>
+
+
+@using (Html.BeginForm())
+{
+     @Html.ValidationSummary(true)
+
+<fieldset>
+    <legend>Nouvel utilisateur</legend>
+    <div class="editor-label">
+        @Html.LabelFor(Model => Model.Lastname)
+
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(Model => Model.Lastname)
+        @Html.ValidationMessageFor(Model => Model.Lastname)
+    </div>
+
+
+    <div class="editor-label">
+        @Html.LabelFor(Model => Model.Firstname)
+
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(Model => Model.Firstname)
+        @Html.ValidationMessageFor(Model => Model.Firstname)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(Model => Model.Email)
+
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(Model => Model.Email)
+        @Html.ValidationMessageFor(Model => Model.Email)
+    </div>
+
+
+    <div class="editor-label">
+        @Html.LabelFor(Model => Model.Password)
+
+    </div>
+    <div class="editor-field">
+        @Html.PasswordFor(Model => Model.Password)
+        @Html.ValidationMessageFor(Model => Model.Password)
+    </div>
+
+    <input type="submit" value="CreateUser" />
+
+</fieldset>
+
+}
