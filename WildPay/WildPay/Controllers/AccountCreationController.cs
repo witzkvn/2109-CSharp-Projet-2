@@ -37,7 +37,7 @@ namespace WildPay.Controllers
                     ViewBag.Message = "Format mot de passe incorrect ";
                 }
             }
-            return View("../Home/Index");
+            return View("Index");
         }
 
     }
