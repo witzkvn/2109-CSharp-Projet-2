@@ -1,0 +1,50 @@
+﻿:root {
+    /*backgrounds*/
+    --bg-light: #ffffff;
+    --bg-medium: #f5f5f5;
+    --bg-dark: #eeeeee;
+    --bg-darker: #e7e7e7;
+    --bg-white-light: #ffffff;
+    --bg-white-medium: #f5f5f5;
+    --bg-white-dark: #eeeeee;
+    --bg-white-darker: #f7f7f7;
+    --bg-black-light: #33475C;
+    --bg-black-medium: #2C3E50;
+    --bg-black-dark: #0D1321;
+    --bg-black-darker: #06090E;
+    /*primary color*/
+    --primary-light: #59D98E;
+    --primary-medium: #2ECC71;
+    --primary-dark: #2AB764;
+    /*secondary color*/
+    --secondary-pale: rgba(0, 255, 213, 0.1);
+    --secondary-light: #FFAA33;
+    --secondary-medium: #FF990A;
+    --secondary-dark: #F58F00;
+    /*accent color*/
+    --accent-light: #ffcc29;
+    --accent-medium: #e7b81d;
+    --accent-dark: #d3a200;
+    /*greys*/
+    --grey-light: #E9EBEC;
+    --grey-medium: #D3D7D9;
+    --grey-dark: #BDC3C7;
+    --grey-darker: #A7AFB4;
+    /*blacks*/
+    --black-light: #3d3d3d;
+    --black-medium: #2c2c2c;
+    --black-dark: #1d1d1d;
+    --black-darker: #111111;
+    /*texts colors*/
+    --text-color: #232323;
+    --text-white: #eeeeee;
+    --text-grey: #aaaaaa;
+    --text-black: #232323;
+    /*overlays*/
+    --black-overlay: rgba(0, 0, 0, 0.2);
+    --black-overlay-dark: rgba(0, 0, 0, 0.8);
+    /*social */
+    --error: rgb(202, 28, 51);
+    --success: rgb(14, 143, 46);
+    --info: rgb(211, 171, 41);
+}
