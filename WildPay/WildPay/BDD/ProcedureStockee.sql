@@ -1,4 +1,9 @@
-﻿-- USER
+﻿Use [WildPay-1]
+GO
+
+-- USER
+DROP PROCEDURE IF EXISTS sp_CreerUser;
+GO
 CREATE PROCEDURE sp_CreerUser
 @firstname VARCHAR(50),
 @lastname VARCHAR(50),
@@ -11,6 +16,9 @@ BEGIN
 END
 GO
 
+
+DROP PROCEDURE IF EXISTS sp_GetUserByEmail;
+GO
 CREATE PROCEDURE sp_GetUserByEmail
 	@UserEmail VARCHAR(100)
    AS
@@ -19,6 +27,9 @@ CREATE PROCEDURE sp_GetUserByEmail
    END
 GO
 
+
+DROP PROCEDURE IF EXISTS sp_GetUserById;
+GO
 CREATE PROCEDURE sp_GetUserById
 	@UserId INT
    AS
@@ -27,6 +38,8 @@ CREATE PROCEDURE sp_GetUserById
    END
 GO
 
+DROP PROCEDURE IF EXISTS sp_UpdateUserImageById;
+GO
 CREATE PROCEDURE sp_UpdateUserImageById
 	@UserId VARCHAR(100),
 	@ImageFile varbinary(MAX)
@@ -40,8 +53,29 @@ CREATE PROCEDURE sp_UpdateUserImageById
    END
 GO
 
+DROP PROCEDURE IF EXISTS sp_UpdateUser;
+GO
+CREATE PROCEDURE sp_UpdateUser
+	@UserId VARCHAR(100),
+	@firstname VARCHAR(50),
+	@lastname VARCHAR(50),
+	@password VARCHAR(80)
+   AS
+   BEGIN
+	   BEGIN TRANSACTION
+		   UPDATE [WildPay-1].[dbo].[User] 
+			SET [Firstname] = @firstname,
+			[Lastname] = @lastname,
+			[Password] = @password
+			WHERE Id = @UserId;
+	   COMMIT;
+   END
+GO
+
 
 -- CATEGORY
+DROP PROCEDURE IF EXISTS sp_CreerCategory;
+GO
 CREATE PROCEDURE sp_CreerCategory
 @name VARCHAR(100)
 AS
@@ -51,6 +85,8 @@ BEGIN
 END
 GO
 
+DROP PROCEDURE IF EXISTS sp_SuppressionCategory;
+GO
 CREATE PROCEDURE sp_SuppressionCategory
 @CategoryId INT
 AS
@@ -61,6 +97,8 @@ END
 GO
 
 -- GROUP
+DROP PROCEDURE IF EXISTS sp_CreerGroup;
+GO
 CREATE PROCEDURE sp_CreerGroup
 @name VARCHAR(200)
 AS
@@ -71,13 +109,15 @@ END
 GO
 
 -- EXPENSE
+DROP PROCEDURE IF EXISTS sp_CreerExpense;
+GO
 CREATE PROCEDURE sp_CreerExpense
 @date DATETIME,
 @title VARCHAR(200),
 @value DECIMAL(10,2)
 AS
 BEGIN
-	INSERT INTO [Expense](Date,Title,Value) VALUES
+	INSERT INTO [Expense](CreatedAt,Title,Value) VALUES
 	(@date, @title, @value)
 END
 GO
