@@ -1,0 +1,28 @@
+﻿.Account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Account h2{
+    margin-bottom: 5rem;
+}
+
+.Account .user-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Account .user-image{
+    margin-bottom: 1rem;
+}
+
+    .Account .form-group.submitBtn {
+        margin-top: 2rem;
+        margin-bottom: 6rem;
+    }
+
+    .Account .note {
+        font-weight: bold;
+    }

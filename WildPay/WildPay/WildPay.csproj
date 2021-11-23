@@ -170,6 +170,7 @@
     <Compile Include="Tools\AssetsTools.cs" />
     <Compile Include="Tools\ConverterTools.cs" />
     <Compile Include="Tools\FormatTools.cs" />
+    <Compile Include="Tools\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BDD\FakeDatas.sql" />
@@ -189,6 +190,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\default.png" />
+    <Content Include="Content\_Account.css" />
     <Content Include="Content\_all.css" />
     <Content Include="Content\themeSwitcher.js" />
     <Content Include="Content\_colors.css" />
