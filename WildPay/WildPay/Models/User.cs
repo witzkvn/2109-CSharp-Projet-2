@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -29,10 +30,15 @@ namespace WildPay.Models
         public string Lastname { get; set; }
 
         [Required(ErrorMessage = "Le mot de passe est obligatoire")]
+        [DataType(DataType.Password)]
         [DisplayName("Mot de passe")]
         public string Password { get; set; }
+        [NotMapped]
+        public string loginErrorMessage { get; set; }
 
-        public byte[] Image { get; set; }
+        public byte[] UserImage { get; set; }
+        [NotMapped]
+        public Image UserImageFile { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }
