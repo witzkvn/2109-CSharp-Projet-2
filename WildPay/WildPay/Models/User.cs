@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace WildPay.Models
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
 
         [Required(ErrorMessage = "L'adresse email est obligatoire")]
@@ -22,9 +24,14 @@ namespace WildPay.Models
         public string Lastname { get; set; }
 
         [Required(ErrorMessage = "Le mot de passe est obligatoire")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+        [NotMapped]
+        public string loginErrorMessage { get; set; }
 
-        public byte[] Image { get; set; }
+        public byte[] UserImage { get; set; }
+        [NotMapped]
+        public Image UserImageFile { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }

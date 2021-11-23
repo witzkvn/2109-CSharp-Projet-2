@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WildPay.Models.User
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,20 +9,40 @@
 
 <h2>Bienvenue sur WildPay !</h2>
 
-<form method="post">
-    <fieldset>
-        <legend>Connectez-vous</legend>
-        <p>
-            <label for="Email">Email:</label><br />
-            <input type="text" name="Email" value="@Request.Form["Email"]" />
-        </p>
+<div id="login-div">
+    @using (Html.BeginForm("Authorize", "Connexion", FormMethod.Post))
+    {
+        <form>
+            <fieldset>
+                <legend>Connectez-vous</legend>
+                <p>
+                    @Html.LabelFor(model => model.Email) <br />
+                    @Html.EditorFor(model => model.Email)
+                </p>
 
-        <p>
-            <label for="pwd">Mot de passe:</label><br />
-            <input type="text" name="pwd" value="@Request.Form["pwd"]" />
-        </p>
+                <p>
+                    @Html.ValidationMessageFor(model => model.Email)
+                </p>
 
-        <p><input type="submit" name="buttonSubmit" value="Connexion" /></p>
-        <a class="button" href="https://localhost:44330/Home/About">Pas de compte ? inscription</a>
-    </fieldset>
-</form>
+                <p>
+                    @Html.LabelFor(model => model.Password) <br />
+                    @Html.EditorFor(model => model.Password)
+                </p>
+
+                <p>
+                    @Html.ValidationMessageFor(model => model.Password)
+                </p>
+
+                <p>
+                    <label>@Html.DisplayFor(model => model.loginErrorMessage)</label>
+                </p>
+
+                <p><input type="submit" name="buttonSubmit" value="Connexion" /></p>
+                <a class="button" href="https://localhost:44330/Home/About">Pas de compte ? inscription</a>
+            </fieldset>
+        </form>
+    }
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

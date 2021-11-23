@@ -22,6 +22,7 @@ namespace WildPay.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().Ignore(t => t.UserImageFile);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }

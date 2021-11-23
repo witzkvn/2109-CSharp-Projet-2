@@ -9,6 +9,7 @@ namespace WildPay.Models
 {
     public class Category
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Le nom de la catégorie est obligatoire")]
