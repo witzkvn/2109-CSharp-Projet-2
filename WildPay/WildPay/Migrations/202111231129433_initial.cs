@@ -20,7 +20,7 @@
                 "dbo.Expense",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         CreatedAt = c.DateTime(nullable: false),
                         Title = c.String(nullable: false, maxLength: 50),
                         Value = c.Double(nullable: false),
@@ -40,7 +40,7 @@
                 "dbo.Group",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         CreatedAt = c.DateTime(nullable: false),
                         Name = c.String(nullable: false, maxLength: 50),
                     })
@@ -52,10 +52,10 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Email = c.String(nullable: false),
-                        Firstname = c.String(maxLength: 20),
-                        Lastname = c.String(maxLength: 20),
+                        Firstname = c.String(nullable: false, maxLength: 20),
+                        Lastname = c.String(nullable: false, maxLength: 20),
                         Password = c.String(nullable: false),
-                        Image = c.Binary(),
+                        UserImage = c.Binary(),
                     })
                 .PrimaryKey(t => t.Id);
             

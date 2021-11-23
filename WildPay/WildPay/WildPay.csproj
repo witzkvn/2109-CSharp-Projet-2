@@ -128,14 +128,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConnexionController.cs" />
+    <Compile Include="Controllers\AccountCreationController.cs" />
     <Compile Include="DAL\WildPayContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111041549097_initial.cs" />
-    <Compile Include="Migrations\202111041549097_initial.designer.cs">
-      <DependentUpon>202111041549097_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202111231129433_initial.cs" />
+    <Compile Include="Migrations\202111231129433_initial.designer.cs">
+      <DependentUpon>202111231129433_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Tools\FormatTools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BDD\FakeDatas.sql" />
     <Content Include="BDD\ProcedureStockee.sql" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -184,6 +186,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Connexion\Index.cshtml" />
+    <Content Include="Views\AccountCreation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -202,8 +205,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111041549097_initial.resx">
-      <DependentUpon>202111041549097_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111231129433_initial.resx">
+      <DependentUpon>202111231129433_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

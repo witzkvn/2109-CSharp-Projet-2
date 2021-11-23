@@ -1,8 +1,19 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Connexion/Index");
+    }
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+<h3>Bonjour @{ 
+    if (Session["Firstname"] != null)
+    {
+    <span>@Session["Firstname"].ToString()</span>
+    }
+
+} !</h3>
 
 <address>
     One Microsoft Way<br />
@@ -15,3 +26,7 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+<p>
+    <a href="@Url.Action("LogOut", "Connexion")"> déconnexion </a>
+</p>

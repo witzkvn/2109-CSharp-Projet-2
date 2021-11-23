@@ -1,4 +1,10 @@
-﻿CREATE PROCEDURE sp_CreerUser
+﻿Use [WildPay-1]
+GO
+
+-- USER
+DROP PROCEDURE IF EXISTS sp_CreerUser;
+GO
+CREATE PROCEDURE sp_CreerUser
 @firstname VARCHAR(50),
 @lastname VARCHAR(50),
 @email VARCHAR(80),
@@ -10,6 +16,66 @@ BEGIN
 END
 GO
 
+
+DROP PROCEDURE IF EXISTS sp_GetUserByEmail;
+GO
+CREATE PROCEDURE sp_GetUserByEmail
+	@UserEmail VARCHAR(100)
+   AS
+   BEGIN
+    SELECT * FROM [WildPay-1].[dbo].[User] WHERE Email = @UserEmail;
+   END
+GO
+
+
+DROP PROCEDURE IF EXISTS sp_GetUserById;
+GO
+CREATE PROCEDURE sp_GetUserById
+	@UserId INT
+   AS
+   BEGIN
+    SELECT * FROM [WildPay-1].[dbo].[User] WHERE Id = @UserId;
+   END
+GO
+
+DROP PROCEDURE IF EXISTS sp_UpdateUserImageById;
+GO
+CREATE PROCEDURE sp_UpdateUserImageById
+	@UserId VARCHAR(100),
+	@ImageFile varbinary(MAX)
+   AS
+   BEGIN
+	   BEGIN TRANSACTION
+		   UPDATE [WildPay-1].[dbo].[User] 
+			SET [Image] = @ImageFile
+			WHERE Id = @UserId;
+	   COMMIT;
+   END
+GO
+
+DROP PROCEDURE IF EXISTS sp_UpdateUser;
+GO
+CREATE PROCEDURE sp_UpdateUser
+	@UserId VARCHAR(100),
+	@firstname VARCHAR(50),
+	@lastname VARCHAR(50),
+	@password VARCHAR(80)
+   AS
+   BEGIN
+	   BEGIN TRANSACTION
+		   UPDATE [WildPay-1].[dbo].[User] 
+			SET [Firstname] = @firstname,
+			[Lastname] = @lastname,
+			[Password] = @password
+			WHERE Id = @UserId;
+	   COMMIT;
+   END
+GO
+
+
+-- CATEGORY
+DROP PROCEDURE IF EXISTS sp_CreerCategory;
+GO
 CREATE PROCEDURE sp_CreerCategory
 @name VARCHAR(100),
 @group_Id INT,
@@ -23,6 +89,20 @@ BEGIN
 END
 GO
 
+DROP PROCEDURE IF EXISTS sp_SuppressionCategory;
+GO
+CREATE PROCEDURE sp_SuppressionCategory
+@CategoryId INT
+AS
+BEGIN
+DELETE FROM [Category]
+WHERE Id = @CategoryId
+END
+GO
+
+-- GROUP
+DROP PROCEDURE IF EXISTS sp_CreerGroup;
+GO
 CREATE PROCEDURE sp_CreerGroup
 @name VARCHAR(200)
 AS
@@ -32,6 +112,9 @@ BEGIN
 END
 GO
 
+-- EXPENSE
+DROP PROCEDURE IF EXISTS sp_CreerExpense;
+GO
 CREATE PROCEDURE sp_CreerExpense
 @date DATETIME,
 @title VARCHAR(200),
@@ -46,11 +129,3 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE sp_SuppressionCategory
-@CategoryId INT
-AS
-BEGIN
-DELETE FROM [Category]
-WHERE Id = @CategoryId
-END
-GO
