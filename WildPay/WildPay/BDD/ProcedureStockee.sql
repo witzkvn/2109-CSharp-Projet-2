@@ -77,11 +77,16 @@ GO
 DROP PROCEDURE IF EXISTS sp_CreerCategory;
 GO
 CREATE PROCEDURE sp_CreerCategory
-@name VARCHAR(100)
+@name VARCHAR(100),
+@group_Id INT
 AS
 BEGIN
-	INSERT INTO [Category](Name) VALUES
+	DECLARE @category_Id INT
+	INSERT INTO [Category](Name)
+	OUTPUT INSERTED.Id INTO @category_Id VALUES
 	(@name)
+	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
+	(@group_Id, @category_Id)
 END
 GO
 
@@ -114,11 +119,14 @@ GO
 CREATE PROCEDURE sp_CreerExpense
 @date DATETIME,
 @title VARCHAR(200),
-@value DECIMAL(10,2)
+@value DECIMAL(10,2),
+@user_Id INT,
+@category_Id INT,
+@group_Id INT
 AS
 BEGIN
-	INSERT INTO [Expense](CreatedAt,Title,Value) VALUES
-	(@date, @title, @value)
+	INSERT INTO [Expense](CreatedAt,Title,Value,FkUserId,FkCategoryId,FkGroupId) VALUES
+	(@date, @title, @value, @user_Id, @category_Id, @group_Id)
 END
 GO
 
