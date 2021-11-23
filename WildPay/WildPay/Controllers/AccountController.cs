@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WildPay.BDD;
 using WildPay.DAL;
 using WildPay.Models;
 using WildPay.Tools;
@@ -31,13 +32,14 @@ namespace WildPay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Firstname,Lastname")] User user)
+        public ActionResult Index([Bind(Include = "Id, Firstname, Lastname")] User user)
         {
             if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))
             {
-                db.Entry(user).State = EntityState.Modified;
-                // TODO: call procedure stockée update user ??
-                // db.SaveChanges();
+                using (Entities db = new Entities())
+                {
+                    db.sp_UpdateUser(Session["Id"].ToString(), user.Firstname, user.Lastname);
+                }
                 return RedirectToAction("Index");
             }
             return View(user);

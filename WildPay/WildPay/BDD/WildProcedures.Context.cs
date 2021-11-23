@@ -114,7 +114,7 @@ namespace WildPay.BDD
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SuppressionCategory", categoryIdParameter);
         }
     
-        public virtual int sp_UpdateUser(string userId, string firstname, string lastname, string password)
+        public virtual int sp_UpdateUser(string userId, string firstname, string lastname)
         {
             var userIdParameter = userId != null ?
                 new ObjectParameter("UserId", userId) :
@@ -128,11 +128,7 @@ namespace WildPay.BDD
                 new ObjectParameter("lastname", lastname) :
                 new ObjectParameter("lastname", typeof(string));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateUser", userIdParameter, firstnameParameter, lastnameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateUser", userIdParameter, firstnameParameter, lastnameParameter);
         }
     
         public virtual int sp_UpdateUserImageById(string userId, byte[] imageFile)

@@ -58,15 +58,13 @@ GO
 CREATE PROCEDURE sp_UpdateUser
 	@UserId VARCHAR(100),
 	@firstname VARCHAR(50),
-	@lastname VARCHAR(50),
-	@password VARCHAR(80)
+	@lastname VARCHAR(50)
    AS
    BEGIN
 	   BEGIN TRANSACTION
 		   UPDATE [WildPay-1].[dbo].[User] 
 			SET [Firstname] = @firstname,
-			[Lastname] = @lastname,
-			[Password] = @password
+			[Lastname] = @lastname
 			WHERE Id = @UserId;
 	   COMMIT;
    END
@@ -74,6 +72,7 @@ GO
 
 
 -- CATEGORY
+-- TODO : erreur @category_Id
 DROP PROCEDURE IF EXISTS sp_CreerCategory;
 GO
 CREATE PROCEDURE sp_CreerCategory
@@ -81,7 +80,7 @@ CREATE PROCEDURE sp_CreerCategory
 @group_Id INT
 AS
 BEGIN
-	DECLARE @category_Id INT
+	DECLARE @category_Id INT;
 	INSERT INTO [Category](Name)
 	OUTPUT INSERTED.Id INTO @category_Id VALUES
 	(@name)
