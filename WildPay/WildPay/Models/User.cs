@@ -10,6 +10,7 @@ namespace WildPay.Models
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
 
         [Required(ErrorMessage = "L'adresse email est obligatoire")]
