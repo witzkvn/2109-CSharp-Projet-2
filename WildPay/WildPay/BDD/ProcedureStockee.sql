@@ -47,7 +47,7 @@ CREATE PROCEDURE sp_UpdateUserImageById
    BEGIN
 	   BEGIN TRANSACTION
 		   UPDATE [WildPay-1].[dbo].[User] 
-			SET [Image] = @ImageFile
+			SET [UserImage] = @ImageFile
 			WHERE Id = @UserId;
 	   COMMIT;
    END

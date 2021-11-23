@@ -55,7 +55,7 @@
                         Firstname = c.String(maxLength: 20),
                         Lastname = c.String(maxLength: 20),
                         Password = c.String(nullable: false),
-                        Image = c.Binary(),
+                        UserImage = c.Binary(),
                     })
                 .PrimaryKey(t => t.Id);
             

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Web;
+using WildPay.Tools;
 
 namespace WildPay.Models
 {
@@ -31,7 +33,8 @@ namespace WildPay.Models
         [DisplayName("Mot de passe")]
         public string Password { get; set; }
 
-        public byte[] Image { get; set; }
+        public byte[] UserImage { get; set; }
+        public Image UserImageFile { get; set; } = AssetsTools.GetDefaultUserImageFile();
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }

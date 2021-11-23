@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WildPay.DAL;
 using WildPay.Models;
+using WildPay.Tools;
 
 namespace WildPay.Controllers
 {
@@ -15,71 +16,27 @@ namespace WildPay.Controllers
     {
         private WildPayContext db = new WildPayContext();
 
-        // GET: Account
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
-        }
-
-        // GET: Account/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
+            // userID needs to be stored in Session["userID"] on login
+            //if (Session["userID"] == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //User user = db.Users.Find(Session["userID"]);
+            User user = db.Users.Find(1);
             if (user == null)
             {
                 return HttpNotFound();
             }
+
+            user.UserImageFile = ConverterTools.ByteArrayToImage(user.UserImage);
             return View(user);
         }
 
-        // GET: Account/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Account/Create
-        // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
-        // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Firstname,Lastname,Password,Image")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(user);
-        }
-
-        // GET: Account/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Account/Edit/5
-        // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
-        // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,Firstname,Lastname,Password,Image")] User user)
+        public ActionResult Index([Bind(Include = "Id,Email,Firstname,Lastname,Password,UserImage")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -90,39 +47,13 @@ namespace WildPay.Controllers
             return View(user);
         }
 
-        // GET: Account/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Account/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
