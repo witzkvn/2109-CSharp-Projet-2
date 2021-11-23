@@ -12,6 +12,7 @@ namespace WildPay.Models
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
 
         [Required(ErrorMessage = "L'adresse email est obligatoire")]
@@ -30,11 +31,15 @@ namespace WildPay.Models
         public string Lastname { get; set; }
 
         [Required(ErrorMessage = "Le mot de passe est obligatoire")]
+        [DataType(DataType.Password)]
         [DisplayName("Mot de passe")]
         public string Password { get; set; }
+        [NotMapped]
+        public string loginErrorMessage { get; set; }
 
         public byte[] UserImage { get; set; }
-        public Image UserImageFile { get; set; } = AssetsTools.GetDefaultUserImageFile();
+        [NotMapped]
+        public Image UserImageFile { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }

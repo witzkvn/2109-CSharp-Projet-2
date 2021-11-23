@@ -52,8 +52,8 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Email = c.String(nullable: false),
-                        Firstname = c.String(maxLength: 20),
-                        Lastname = c.String(maxLength: 20),
+                        Firstname = c.String(nullable: false, maxLength: 20),
+                        Lastname = c.String(nullable: false, maxLength: 20),
                         Password = c.String(nullable: false),
                         UserImage = c.Binary(),
                     })
