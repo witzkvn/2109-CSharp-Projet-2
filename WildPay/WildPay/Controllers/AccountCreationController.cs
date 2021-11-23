@@ -26,22 +26,28 @@ namespace WildPay.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (FormatTools.IsPasswordFormatOk(newUser.Password))
+                using (Entities db = new Entities())
                 {
-                    newUser.Password = FormatTools.HashPassword(newUser.Password);
-                    using (Entities db = new Entities())
+                    if (db.sp_GetUserByEmail(newUser.Email) != null)
                     {
-                        db.sp_CreerUser(newUser.Firstname, newUser.Lastname, newUser.Email, newUser.Password);
+                        ViewBag.Message = "Email déjà enregistré ! ";
+                        return View("Index");
                     }
-                    // ajout de l'utilisateur à faire 
-                    // retour à la page d'authentification
-                    //return RedirectToAction("Index", "Home");
-                    return View("../Home/Index");
+
+                    if (FormatTools.IsPasswordFormatOk(newUser.Password))
+                    {
+                        newUser.Password = FormatTools.HashPassword(newUser.Password);
+                        db.sp_CreerUser(newUser.Firstname, newUser.Lastname, newUser.Email, newUser.Password);
+                        
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Format mot de passe incorrect ";
+                    }
+
                 }
-                else
-                {
-                    ViewBag.Message = "Format mot de passe incorrect ";
-                }
+
             }
             return View("Index");
         }
