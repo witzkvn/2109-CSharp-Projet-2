@@ -82,9 +82,9 @@ CREATE PROCEDURE sp_CreerCategory
 AS
 BEGIN
 	DECLARE @category_Id INT
-	INSERT INTO [Category](Name)
-	OUTPUT INSERTED.Id INTO @category_Id VALUES
+	INSERT INTO [Category](Name) VALUES
 	(@name)
+	SELECT @Category_Id = SCOPE_IDENTITY() 
 	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
 	(@group_Id, @category_Id)
 END
