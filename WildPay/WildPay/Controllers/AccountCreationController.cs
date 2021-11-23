@@ -14,7 +14,7 @@ namespace WildPay.Controllers
     {
         public AccountCreationController()
         {
-            ViewBag.Message ="First Action View";
+            ViewBag.Message ="";
         }
         public ActionResult Index()
         {
@@ -28,10 +28,11 @@ namespace WildPay.Controllers
             {
                 using (Entities db = new Entities())
                 {
-                    if (db.sp_GetUserByEmail(newUser.Email) != null)
+                    if (db.sp_GetUserByEmail(newUser.Email).SingleOrDefault() != null)
                     {
                         ViewBag.Message = "Email déjà enregistré ! ";
                         return View("Index");
+
                     }
 
                     if (FormatTools.IsPasswordFormatOk(newUser.Password))
