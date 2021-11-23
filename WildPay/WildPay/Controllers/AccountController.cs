@@ -18,42 +18,34 @@ namespace WildPay.Controllers
 
         public ActionResult Index()
         {
-            // userID needs to be stored in Session["userID"] on login
-            //if (Session["userID"] == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //User user = db.Users.Find(Session["userID"]);
-            User user = db.Users.Find(1);
-            if (user == null)
+            if (Session["Id"] == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Connexion");
             }
+            User user = db.Users.Find(Session["Id"]);
 
-            user.UserImageFile = ConverterTools.ByteArrayToImage(user.UserImage);
+            var base64 = Convert.ToBase64String(user.UserImage);
+            user.UserImageFile = String.Format("data:image/gif;base64,{0}", base64);
             return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Id,Email,Firstname,Lastname,Password,UserImage")] User user)
+        public ActionResult Index([Bind(Include = "Firstname,Lastname")] User user)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))
             {
                 db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                // TODO: call procedure stockée update user ??
+                // db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(user);
         }
 
-        //protected override void Dispose(bool disposing)
+        //public ActionResult Test()
         //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
+        //    return View("Contact", "Home");
         //}
     }
 }

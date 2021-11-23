@@ -7,15 +7,8 @@ using System.Web;
 
 namespace WildPay.Tools
 {
-    public class ConverterTools
+    public static class ConverterTools
     {
-        private static ConverterTools instance = new ConverterTools();
-        private ConverterTools() { }
-
-        public static ConverterTools Instance
-        {
-            get { return instance; }
-        }
         public static Image ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
