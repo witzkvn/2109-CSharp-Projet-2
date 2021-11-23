@@ -47,7 +47,7 @@ CREATE PROCEDURE sp_UpdateUserImageById
    BEGIN
 	   BEGIN TRANSACTION
 		   UPDATE [WildPay-1].[dbo].[User] 
-			SET [Image] = @ImageFile
+			SET [UserImage] = @ImageFile
 			WHERE Id = @UserId;
 	   COMMIT;
    END
@@ -78,11 +78,12 @@ DROP PROCEDURE IF EXISTS sp_CreerCategory;
 GO
 CREATE PROCEDURE sp_CreerCategory
 @name VARCHAR(100),
-@group_Id INT,
-@category_Id INT
+@group_Id INT
 AS
 BEGIN
-	INSERT INTO [Category](Name) VALUES
+	DECLARE @category_Id INT
+	INSERT INTO [Category](Name)
+	OUTPUT INSERTED.Id INTO @category_Id VALUES
 	(@name)
 	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
 	(@group_Id, @category_Id)

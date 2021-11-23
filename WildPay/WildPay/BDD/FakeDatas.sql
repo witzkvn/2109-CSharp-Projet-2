@@ -6,7 +6,7 @@ BEGIN
 	SET @myimg = (SELECT * FROM Openrowset( Bulk 'C:\Users\Witz Kévin\Desktop\user.png' , Single_Blob) as img);
 
 
-	INSERT INTO [User](Email, Firstname, Lastname, Password, Image) VALUES
+	INSERT INTO [User](Email, Firstname, Lastname, Password, UserImage) VALUES
 		('admin@test.com', 'admin', 'ADMIN', 'admin1*', @myimg),
 		('test1@test.com', 'first1', 'LAST1', 'test1*', @myimg),
 		('test2@test.com', 'first2', 'LAST2', 'test2*', null),
