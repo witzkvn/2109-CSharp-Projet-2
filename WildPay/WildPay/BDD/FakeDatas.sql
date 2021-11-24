@@ -105,4 +105,4 @@ END
 --SELECT * FROM [userGroup];
 --SELECT * FROM Expense;
 
---EXECUTE sp_AddFakeDatas;
+EXECUTE sp_AddFakeDatas;

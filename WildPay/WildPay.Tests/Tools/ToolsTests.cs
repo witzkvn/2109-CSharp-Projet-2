@@ -66,27 +66,65 @@ namespace WildPay.Tests.Tools
         }
 
         [TestMethod]
-        public void DateFormatVerification()
+        public void DateFormatIncorrect()
         {
             Assert.IsFalse(FormatTools.IsDateOk("hntnrtnrt"));
+        }
+
+        [TestMethod]
+        public void DateOk()
+        {
             Assert.IsTrue(FormatTools.IsDateOk("02/03/2011"));
             Assert.IsTrue(FormatTools.IsDateOk("28/08/2015"));
+        }
 
+        [TestMethod]
+        public void DateFuture()
+        {
             DateTime nextWeek = DateTime.Today.AddDays(7);
             Assert.IsFalse(FormatTools.IsDateOk(nextWeek.ToString()));
+        }
+
+        [TestMethod]
+        public void DateTooOld()
+        {
             Assert.IsFalse(FormatTools.IsDateOk("28/08/2005"));
         }
 
         [TestMethod]
-        public void PasswordFormatVerification()
+        public void PasswordOk()
         {
             Assert.IsTrue(FormatTools.IsPasswordFormatOk("12lepassword="));
-            Assert.IsFalse(FormatTools.IsPasswordFormatOk("12l="));
-            Assert.IsFalse(FormatTools.IsPasswordFormatOk("blaBlabla"));
-            Assert.IsFalse(FormatTools.IsPasswordFormatOk("=+_-*=+"));
-            Assert.IsFalse(FormatTools.IsPasswordFormatOk("45896571"));
-            Assert.IsFalse(FormatTools.IsPasswordFormatOk("BLABLABLA"));
             Assert.IsTrue(FormatTools.IsPasswordFormatOk("mon4+"));
+        }
+        [TestMethod]
+        public void PasswordTooShort()
+        {
+            Assert.IsFalse(FormatTools.IsPasswordFormatOk("12l="));
+        }
+
+        [TestMethod]
+        public void PasswordOnlyLetters()
+        {
+            Assert.IsFalse(FormatTools.IsPasswordFormatOk("blaBlabla"));
+        }
+
+        [TestMethod]
+        public void PasswordOnlyMaj()
+        {
+            Assert.IsFalse(FormatTools.IsPasswordFormatOk("BLABLABLA"));
+        }
+
+        [TestMethod]
+        public void PasswordOnlySpecial()
+        {
+            Assert.IsFalse(FormatTools.IsPasswordFormatOk("=+_-*=+"));
+        }
+
+        [TestMethod]
+        public void PasswordOnlyDigits()
+        {
+            Assert.IsFalse(FormatTools.IsPasswordFormatOk("45896571"));
         }
     }
 }

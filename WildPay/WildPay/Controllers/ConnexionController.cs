@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WildPay.DAL;
+using WildPay.Models;
+using WildPay.Tools;
 
 namespace WildPay.Controllers
 {
@@ -16,11 +18,12 @@ namespace WildPay.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authorize(WildPay.Models.User userModel)
+        public ActionResult Authorize(User userModel)
         {
             using (WildPayContext db = new WildPayContext())
             {
-                var userDetails = db.Users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
+                string hashPassword = FormatTools.HashPassword(userModel.Password);
+                User userDetails = db.Users.Where(x => x.Email == userModel.Email && x.Password == hashPassword).FirstOrDefault();
                 if(userDetails==null)
                 {
                     userModel.loginErrorMessage = "Email ou mot de passe incorrects.";
@@ -30,7 +33,7 @@ namespace WildPay.Controllers
                 {
                     Session["Id"] = userDetails.Id;
                     Session["Firstname"] = userDetails.Firstname;
-                    return RedirectToAction("Contact", "Home");
+                    return RedirectToAction("Index", "Account");
                 }
             }
         }
