@@ -15,5 +15,19 @@ namespace WildPay.Tools
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
+
+        public static byte[] FileToByteArray(HttpPostedFileBase newImage)
+        {
+            MemoryStream target = new MemoryStream();
+            newImage.InputStream.CopyTo(target);
+            return target.ToArray();
+        }
+
+        public static string ByteArrayToStringImage(byte[] byteImage)
+        {
+            var base64 = Convert.ToBase64String(byteImage);
+            return String.Format("data:image/gif;base64,{0}", base64);
+        }
+        
     }
 }

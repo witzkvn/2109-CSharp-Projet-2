@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WildPay.BDD;
 using WildPay.DAL;
 using WildPay.Models;
 using WildPay.Tools;
@@ -17,7 +18,7 @@ namespace WildPay.Controllers
     {
         private WildPayContext db = new WildPayContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string error = null)
         {
             if (Session["Id"] == null)
             {
@@ -27,30 +28,46 @@ namespace WildPay.Controllers
 
             if(user.UserImage != null)
             {
-                var base64 = Convert.ToBase64String(user.UserImage);
-                user.UserImageFile = String.Format("data:image/gif;base64,{0}", base64);
+                user.UserImageFile = ConverterTools.ByteArrayToStringImage(user.UserImage);
             }
+
+            ViewBag.ImageUploadMessage = error;
             return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Id, Firstname, Lastname")] User user)
+        public ActionResult Index([Bind(Include = "Id, Firstname, Lastname, NewUserImageFile")] User user)
         {
-            if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))
+            string updateMessage = "";
+            using (WildPayContext db = new WildPayContext())
             {
-                using (Entities db = new Entities())
+                if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))
                 {
-                    db.sp_UpdateUser(Session["Id"].ToString(), user.Firstname, user.Lastname);
+                    db.Database.ExecuteSqlCommand("sp_UpdateUser @UserId, @firstname, @lastname",
+                        new SqlParameter("@UserId", Session["Id"]),
+                        new SqlParameter("@firstname", user.Firstname),
+                        new SqlParameter("@lastname", user.Lastname)
+                    );
+                } else
+                {
+                    updateMessage += "Le nom où le prénom ne sont pas valides\n";
                 }
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
 
-        //public ActionResult Test()
-        //{
-        //    return View("Contact", "Home");
-        //}
+                if (user.NewUserImageFile != null && FormatTools.VerifyImageFormatAndSize(user.NewUserImageFile))
+                {
+                    byte[] data = ConverterTools.FileToByteArray(user.NewUserImageFile);
+                    
+                    db.Database.ExecuteSqlCommand("sp_UpdateUserImageById @UserId, @ImageFile",
+                        new SqlParameter("@UserId", Session["Id"]),
+                        new SqlParameter("@ImageFile", data)
+                    );
+                } else if(user.NewUserImageFile != null)
+                {
+                    updateMessage += "Une erreur s'est produite. L'image doit être au format jpg, jpeg ou png, et ne pas dépasser 2 Mo.";
+                }
+            }                
+            return RedirectToAction("Index", "Account", new { error = updateMessage });
+        }
     }
 }

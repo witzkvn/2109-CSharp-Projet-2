@@ -26,7 +26,9 @@ namespace WildPay.Tools
 
         public static string GetNomCompletUser(User user)
         {
-            return $"{user.Lastname.ToUpper()} {GetPremiereLettreMajuscule(user.Firstname)}";
+            if (user != null)
+                return $"{user.Lastname.ToUpper()} {GetPremiereLettreMajuscule(user.Firstname)}";
+            else return "Utilisateur WildPay";
         }
     }
 }
