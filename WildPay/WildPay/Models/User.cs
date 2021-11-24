@@ -40,6 +40,8 @@ namespace WildPay.Models
         public byte[] UserImage { get; set; }
         [NotMapped]
         public string UserImageFile { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase NewUserImageFile { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }

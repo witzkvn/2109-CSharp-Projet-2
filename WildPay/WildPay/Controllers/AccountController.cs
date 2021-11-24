@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -27,30 +28,30 @@ namespace WildPay.Controllers
 
             if(user.UserImage != null)
             {
-                var base64 = Convert.ToBase64String(user.UserImage);
-                user.UserImageFile = String.Format("data:image/gif;base64,{0}", base64);
+                user.UserImageFile = ConverterTools.ByteArrayToStringImage(user.UserImage);
             }
             return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Id, Firstname, Lastname")] User user)
+        public ActionResult Index([Bind(Include = "Id, Firstname, Lastname, NewUserImageFile")] User user)
         {
-            if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))
+            using (Entities db = new Entities())
             {
-                using (Entities db = new Entities())
+                if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))
                 {
                     db.sp_UpdateUser(Session["Id"].ToString(), user.Firstname, user.Lastname);
                 }
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
 
-        //public ActionResult Test()
-        //{
-        //    return View("Contact", "Home");
-        //}
+                if (user.NewUserImageFile != null)
+                {
+                    byte[] data = ConverterTools.FileToByteArray(user.NewUserImageFile);
+                    db.sp_UpdateUserImageById(Session["Id"].ToString(), data);
+                    user.UserImageFile = ConverterTools.ByteArrayToStringImage(data);
+                }
+            }                
+            return View("Index", user);
+        }
     }
 }

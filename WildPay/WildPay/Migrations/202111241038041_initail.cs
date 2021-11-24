@@ -1,9 +1,9 @@
-﻿namespace WildPay.Migrations
+namespace WildPay.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class initail : DbMigration
     {
         public override void Up()
         {
