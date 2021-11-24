@@ -1,9 +1,18 @@
 ﻿.user-image {
-    width: 2rem;
-    height: 2rem;
+
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--grey-dark);
+}
+
+.user-image-sm {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.user-image-xl {
+    width: 10rem;
+    height: 10rem;
 }
 
 .user-image img {

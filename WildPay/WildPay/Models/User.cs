@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Linq;
 using System.Web;
+using WildPay.Tools;
 
 namespace WildPay.Models
 {
@@ -38,14 +39,13 @@ namespace WildPay.Models
 
         public byte[] UserImage { get; set; }
         [NotMapped]
-        public Image UserImageFile { get; set; }
+        public string UserImageFile { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }
 
         public User()
-        {
-
+        {     
         }
     }
 }
