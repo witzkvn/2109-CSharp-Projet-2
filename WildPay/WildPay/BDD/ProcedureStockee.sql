@@ -100,6 +100,33 @@ WHERE Id = @CategoryId
 END
 GO
 
+DROP PROCEDURE IF EXISTS sp_GetCategory;
+GO
+CREATE PROCEDURE sp_GetCategory
+@groupId INT
+AS
+BEGIN
+SELECT * FROM [Category]
+INNER JOIN [GroupCategory] ON Category.Id = GroupCategory.Category_Id
+WHERE Group_Id = @groupId
+END
+GO
+
+DROP PROCEDURE IF EXISTS sp_GetCategoryByName;
+GO
+CREATE PROCEDURE sp_GetCategoryByName
+@name VARCHAR(200),
+@groupId INT
+AS
+BEGIN
+SELECT * FROM [Category]
+INNER JOIN [GroupCategory] ON Category.Id = GroupCategory.Category_Id
+WHERE Group_Id = @groupId AND Category.Name = @name
+END
+GO
+
+
+
 -- GROUP
 DROP PROCEDURE IF EXISTS sp_CreerGroup;
 GO
@@ -111,6 +138,7 @@ BEGIN
 	(@name)
 END
 GO
+
 
 -- EXPENSE
 DROP PROCEDURE IF EXISTS sp_CreerExpense;
