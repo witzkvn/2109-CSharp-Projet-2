@@ -25,8 +25,11 @@ namespace WildPay.Controllers
             }
             User user = db.Users.Find(Session["Id"]);
 
-            var base64 = Convert.ToBase64String(user.UserImage);
-            user.UserImageFile = String.Format("data:image/gif;base64,{0}", base64);
+            if(user.UserImage != null)
+            {
+                var base64 = Convert.ToBase64String(user.UserImage);
+                user.UserImageFile = String.Format("data:image/gif;base64,{0}", base64);
+            }
             return View(user);
         }
 

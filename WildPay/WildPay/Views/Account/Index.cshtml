@@ -11,7 +11,15 @@
 
     <div class="user-header">
         <div class="user-image user-image-xl">
-            <img src="@Model.UserImageFile" alt="Alternate Text" />
+            @if (@Model.UserImageFile != null)
+            {
+                <img src="@Model.UserImageFile" alt="Alternate Text" />
+            }
+            else
+            {
+                <img src="~/Content/Images/default.png" alt="Alternate Text" />
+            }
+
         </div>
         <h4>@nomCompletUser</h4>
     </div>
