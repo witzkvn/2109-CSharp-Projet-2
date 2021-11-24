@@ -37,6 +37,10 @@
         <label class="col-md-4 control-label" for="NewUserImageFile">Photo de profil</label>
         <input class="col-md-8" name="NewUserImageFile" type="file" />
     </div>
+                @if(ViewBag.ImageUploadMessage != null || ViewBag.ImageUploadMessage != "")
+                {
+                    <p>@ViewBag.ImageUploadMessage</p>
+                }
 
     <div class="form-group">
         @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-4" })
