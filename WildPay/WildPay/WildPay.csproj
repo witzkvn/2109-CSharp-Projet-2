@@ -139,6 +139,10 @@
     <Compile Include="Migrations\202111241035437_add-migration initil.designer.cs">
       <DependentUpon>202111241035437_add-migration initil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111241124015_migration.cs" />
+    <Compile Include="Migrations\202111241124015_migration.Designer.cs">
+      <DependentUpon>202111241124015_migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Expense.cs" />
@@ -220,6 +224,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111241035437_add-migration initil.resx">
       <DependentUpon>202111241035437_add-migration initil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111241124015_migration.resx">
+      <DependentUpon>202111241124015_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
