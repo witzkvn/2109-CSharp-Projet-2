@@ -33,7 +33,7 @@ namespace WildPay.Controllers
                 {
                     Session["Id"] = userDetails.Id;
                     Session["Firstname"] = userDetails.Firstname;
-                    return RedirectToAction("Contact", "Home");
+                    return RedirectToAction("Index", "Account");
                 }
             }
         }
