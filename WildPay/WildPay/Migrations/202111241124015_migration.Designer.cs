@@ -7,13 +7,13 @@ namespace WildPay.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class initail : IMigrationMetadata
+    public sealed partial class migration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initail));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(migration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111241038041_initail"; }
+            get { return "202111241124015_migration"; }
         }
         
         string IMigrationMetadata.Source

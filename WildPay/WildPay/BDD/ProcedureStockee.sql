@@ -73,21 +73,21 @@ GO
 
 -- CATEGORY
 -- TODO : erreur @category_Id
---DROP PROCEDURE IF EXISTS sp_CreerCategory;
---GO
---CREATE PROCEDURE sp_CreerCategory
---@name VARCHAR(100),
---@group_Id INT
---AS
---BEGIN
---	DECLARE @category_Id INT;
---	INSERT INTO [Category](Name)
---	OUTPUT INSERTED.Id INTO @category_Id VALUES
---	(@name)
---	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
---	(@group_Id, @category_Id)
---END
---GO
+DROP PROCEDURE IF EXISTS sp_CreerCategory;
+GO
+CREATE PROCEDURE sp_CreerCategory
+@name VARCHAR(100),
+@group_Id INT
+AS
+BEGIN
+	DECLARE @category_Id INT
+	INSERT INTO [Category](Name) VALUES
+	(@name)
+	SELECT @Category_Id = SCOPE_IDENTITY() 
+	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
+	(@group_Id, @category_Id)
+END
+GO
 
 DROP PROCEDURE IF EXISTS sp_SuppressionCategory;
 GO
