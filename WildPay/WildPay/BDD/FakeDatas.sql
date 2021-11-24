@@ -1,9 +1,11 @@
+DROP PROCEDURE IF EXISTS sp_AddFakeDatas;
+GO
 CREATE PROCEDURE sp_AddFakeDatas
 AS
 BEGIN
 	DECLARE @myimg varbinary(MAX); 
 	-- modifier l'url ci-dessous vers le path de l'image sur votre propre PC
-	SET @myimg = (SELECT * FROM Openrowset( Bulk 'C:\Users\Witz Kévin\Desktop\user.png' , Single_Blob) as img);
+	SET @myimg = (SELECT * FROM Openrowset( Bulk 'C:\Users\witzk\Desktop\user.png' , Single_Blob) as img);
 
 
 	INSERT INTO [User](Email, Firstname, Lastname, Password, UserImage) VALUES
