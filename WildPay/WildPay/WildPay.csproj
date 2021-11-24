@@ -128,28 +128,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BDD\sp_GetUserByEmail_Result.cs">
-      <DependentUpon>WildProcedures.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDD\sp_GetUserById_Result.cs">
-      <DependentUpon>WildProcedures.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDD\WildProcedures.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WildProcedures.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDD\WildProcedures.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WildProcedures.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDD\WildProcedures.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WildProcedures.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConnexionController.cs" />
     <Compile Include="Controllers\AccountCreationController.cs" />
     <Compile Include="DAL\WildPayContext.cs" />
@@ -157,9 +135,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111231129433_initial.cs" />
-    <Compile Include="Migrations\202111231129433_initial.designer.cs">
-      <DependentUpon>202111231129433_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202111241035437_add-migration initil.cs" />
+    <Compile Include="Migrations\202111241035437_add-migration initil.designer.cs">
+      <DependentUpon>202111241035437_add-migration initil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111241124015_migration.cs" />
+    <Compile Include="Migrations\202111241124015_migration.Designer.cs">
+      <DependentUpon>202111241124015_migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -175,16 +157,6 @@
   <ItemGroup>
     <Content Include="BDD\FakeDatas.sql" />
     <Content Include="BDD\ProcedureStockee.sql" />
-    <Content Include="BDD\WildProcedures.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WildProcedures.edmx</DependentUpon>
-      <LastGenOutput>WildProcedures.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="BDD\WildProcedures.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WildProcedures.edmx</DependentUpon>
-      <LastGenOutput>WildProcedures.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -201,13 +173,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="BDD\WildProcedures.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WildProcedures.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="BDD\WildProcedures.edmx.diagram">
-      <DependentUpon>WildProcedures.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -254,12 +219,15 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111231129433_initial.resx">
-      <DependentUpon>202111231129433_initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\202111241035437_add-migration initil.resx">
+      <DependentUpon>202111241035437_add-migration initil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111241124015_migration.resx">
+      <DependentUpon>202111241124015_migration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
