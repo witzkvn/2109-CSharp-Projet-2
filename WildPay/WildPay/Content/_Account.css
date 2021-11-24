@@ -22,11 +22,11 @@
     margin-bottom: 1rem;
 }
 
-    .Account .form-group.submitBtn {
-        margin-top: 2rem;
-        margin-bottom: 6rem;
-    }
+.Account .form-group.submitBtn {
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+}
 
-    .Account .note {
-        font-weight: bold;
-    }
+.Account .note {
+    font-weight: bold;
+}

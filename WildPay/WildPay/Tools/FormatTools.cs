@@ -55,5 +55,14 @@ namespace WildPay.Tools
                 return sb.ToString();
             }
         }
+
+        public static bool VerifyImageFormatAndSize(HttpPostedFileBase newImage)
+        {
+            if(newImage.ContentLength < 2000000 && (newImage.ContentType == "image/jpg" || newImage.ContentType == "image/jpeg" || newImage.ContentType == "image/png"))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
