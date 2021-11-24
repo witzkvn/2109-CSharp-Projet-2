@@ -17,7 +17,6 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                ViewBag.Message = "Bonjour !";
                 List<Category> categories = db.Database.SqlQuery<Category>
                     ("sp_GetCategory @p0", "1")
                     .ToList();
