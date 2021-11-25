@@ -95,6 +95,9 @@ CREATE PROCEDURE sp_SuppressionCategory
 @CategoryId INT
 AS
 BEGIN
+UPDATE [WildPay-1].[dbo].[Expense]
+SET [FkCategoryId] = null
+WHERE FkCategoryId = @CategoryId
 DELETE FROM [Category]
 WHERE Id = @CategoryId
 END
@@ -134,8 +137,8 @@ CREATE PROCEDURE sp_CreerGroup
 @name VARCHAR(200)
 AS
 BEGIN
-	INSERT INTO [Group](Name) VALUES
-	(@name)
+	INSERT INTO [Group](Name, CreatedAt) VALUES
+	(@name, GETDATE())
 END
 GO
 

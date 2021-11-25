@@ -145,6 +145,10 @@
     <Compile Include="Migrations\202111241124015_migration.Designer.cs">
       <DependentUpon>202111241124015_migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111250728404_FKCategoryNull.cs" />
+    <Compile Include="Migrations\202111250728404_FKCategoryNull.Designer.cs">
+      <DependentUpon>202111250728404_FKCategoryNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Expense.cs" />
@@ -230,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111241124015_migration.resx">
       <DependentUpon>202111241124015_migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111250728404_FKCategoryNull.resx">
+      <DependentUpon>202111250728404_FKCategoryNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
