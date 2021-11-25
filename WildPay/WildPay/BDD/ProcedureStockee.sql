@@ -1,9 +1,9 @@
 ﻿Use [WildPay-1]
-GO
+ GO 
 
 -- USER
 DROP PROCEDURE IF EXISTS sp_CreerUser;
-GO
+ GO 
 CREATE PROCEDURE sp_CreerUser
 @firstname VARCHAR(50),
 @lastname VARCHAR(50),
@@ -14,32 +14,32 @@ BEGIN
 	INSERT INTO [User](Firstname,Lastname,Email,Password) VALUES
 	(@firstname, @lastname, @email, @password)
 END
-GO
+ GO 
 
 
 DROP PROCEDURE IF EXISTS sp_GetUserByEmail;
-GO
+ GO 
 CREATE PROCEDURE sp_GetUserByEmail
 	@UserEmail VARCHAR(100)
    AS
    BEGIN
     SELECT * FROM [WildPay-1].[dbo].[User] WHERE Email = @UserEmail;
    END
-GO
+ GO 
 
 
 DROP PROCEDURE IF EXISTS sp_GetUserById;
-GO
+ GO 
 CREATE PROCEDURE sp_GetUserById
 	@UserId INT
    AS
    BEGIN
     SELECT * FROM [WildPay-1].[dbo].[User] WHERE Id = @UserId;
    END
-GO
+ GO 
 
 DROP PROCEDURE IF EXISTS sp_UpdateUserImageById;
-GO
+ GO 
 CREATE PROCEDURE sp_UpdateUserImageById
 	@UserId VARCHAR(100),
 	@ImageFile varbinary(MAX)
@@ -51,10 +51,10 @@ CREATE PROCEDURE sp_UpdateUserImageById
 			WHERE Id = @UserId;
 	   COMMIT;
    END
-GO
+ GO 
 
 DROP PROCEDURE IF EXISTS sp_UpdateUser;
-GO
+ GO 
 CREATE PROCEDURE sp_UpdateUser
 	@UserId VARCHAR(100),
 	@firstname VARCHAR(50),
@@ -68,13 +68,12 @@ CREATE PROCEDURE sp_UpdateUser
 			WHERE Id = @UserId;
 	   COMMIT;
    END
-GO
+ GO 
 
 
 -- CATEGORY
--- TODO : erreur @category_Id
 DROP PROCEDURE IF EXISTS sp_CreerCategory;
-GO
+ GO 
 CREATE PROCEDURE sp_CreerCategory
 @name VARCHAR(100),
 @group_Id INT
@@ -87,10 +86,10 @@ BEGIN
 	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
 	(@group_Id, @category_Id)
 END
-GO
+ GO 
 
 DROP PROCEDURE IF EXISTS sp_SuppressionCategory;
-GO
+ GO 
 CREATE PROCEDURE sp_SuppressionCategory
 @CategoryId INT
 AS
@@ -101,10 +100,10 @@ WHERE FkCategoryId = @CategoryId
 DELETE FROM [Category]
 WHERE Id = @CategoryId
 END
-GO
+ GO 
 
 DROP PROCEDURE IF EXISTS sp_GetCategory;
-GO
+ GO 
 CREATE PROCEDURE sp_GetCategory
 @groupId INT
 AS
@@ -113,10 +112,10 @@ SELECT * FROM [Category]
 INNER JOIN [GroupCategory] ON Category.Id = GroupCategory.Category_Id
 WHERE Group_Id = @groupId
 END
-GO
+ GO 
 
 DROP PROCEDURE IF EXISTS sp_GetCategoryByName;
-GO
+ GO 
 CREATE PROCEDURE sp_GetCategoryByName
 @name VARCHAR(200),
 @groupId INT
@@ -126,26 +125,39 @@ SELECT * FROM [Category]
 INNER JOIN [GroupCategory] ON Category.Id = GroupCategory.Category_Id
 WHERE Group_Id = @groupId AND Category.Name = @name
 END
-GO
+ GO 
 
 
 
 -- GROUP
 DROP PROCEDURE IF EXISTS sp_CreerGroup;
-GO
+ GO 
 CREATE PROCEDURE sp_CreerGroup
-@name VARCHAR(200)
+@name VARCHAR(200),
+@GroupID int OUTPUT
 AS
 BEGIN
 	INSERT INTO [Group](Name, CreatedAt) VALUES
 	(@name, GETDATE())
+	SELECT @GroupID = SCOPE_IDENTITY() 
 END
-GO
+ GO 
+
+DROP PROCEDURE IF EXISTS sp_CheckGroupePrincipal;
+ GO 
+CREATE PROCEDURE sp_CheckGroupePrincipal
+	@GroupID int OUTPUT
+AS
+BEGIN
+	SELECT TOP 1 @GroupID = Id FROM [Group]
+	WHERE Name = 'principal';
+END
+ GO 
 
 
 -- EXPENSE
 DROP PROCEDURE IF EXISTS sp_CreerExpense;
-GO
+ GO 
 CREATE PROCEDURE sp_CreerExpense
 @date DATETIME,
 @title VARCHAR(200),
@@ -158,5 +170,5 @@ BEGIN
 	INSERT INTO [Expense](CreatedAt,Title,Value,FkUserId,FkCategoryId,FkGroupId) VALUES
 	(@date, @title, @value, @user_Id, @category_Id, @group_Id)
 END
-GO
+ GO 
 
