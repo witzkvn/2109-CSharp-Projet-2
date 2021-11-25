@@ -53,44 +53,45 @@ namespace WildPay
                         db.Database.ExecuteSqlCommand(item);
                     }
                 }
-                
 
-                //var returnCode = new SqlParameter();
-                //returnCode.ParameterName = "@GroupID ";
-                //returnCode.SqlDbType = SqlDbType.Int;
-                //returnCode.Direction = ParameterDirection.Output;
+                #region Creation groupe principal
+                var returnCode = new SqlParameter();
+                returnCode.ParameterName = "@GroupID ";
+                returnCode.SqlDbType = SqlDbType.Int;
+                returnCode.Direction = ParameterDirection.Output;
 
-                //int groupeDefaut = db.Database.ExecuteSqlCommand("sp_CheckGroupePrincipal @GroupID OUTPUT", returnCode);
+                db.Database.ExecuteSqlCommand("sp_CheckGroupePrincipal @GroupID OUTPUT", returnCode);
 
-                //int idGroupePrincipal = -1;
+                var type = returnCode.Value.GetType().FullName;
 
-                //if (returnCode.SqlValue.GetType().DeclaringType == null)
-                //{
-                //    var newGroupId = new SqlParameter();
-                //    newGroupId.ParameterName = "@GroupID ";
-                //    newGroupId.SqlDbType = SqlDbType.Int;
-                //    newGroupId.Direction = ParameterDirection.Output;
+                if (type == "System.DBNull")
+                {
+                    var newGroupId = new SqlParameter();
+                    newGroupId.ParameterName = "@GroupID ";
+                    newGroupId.SqlDbType = SqlDbType.Int;
+                    newGroupId.Direction = ParameterDirection.Output;
 
-                //    db.Database.ExecuteSqlCommand("sp_CreerGroup @name, @GroupID OUTPUT", 
-                //            newGroupId,
-                //            new SqlParameter("@name", "principal")
-                //            );
+                    db.Database.ExecuteSqlCommand("sp_CreerGroup @name, @GroupID OUTPUT",
+                            newGroupId,
+                            new SqlParameter("@name", "principal")
+                            );
 
-                //    int groupId = (int)newGroupId.SqlValue;
+                    int groupId = (int)newGroupId.Value;
 
-                    //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
-                    //        new SqlParameter("@name", "restaurant"),
-                    //        new SqlParameter("@name", groupId));
-                    //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
-                    //        new SqlParameter("@name", "transport"),
-                    //        new SqlParameter("@name", (int)newGroupId.SqlValue));
-                    //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
-                    //        new SqlParameter("@name", "courses"),
-                    //        new SqlParameter("@name", (int)newGroupId.SqlValue));
-                    //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
-                    //        new SqlParameter("@name", "hebergement"),
-                    //        new SqlParameter("@name", (int)newGroupId.SqlValue));
-                //} 
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@name", "restaurant"),
+                            new SqlParameter("@group_Id", groupId));
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@name", "transport"),
+                            new SqlParameter("@group_Id", groupId));
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@name", "courses"),
+                            new SqlParameter("@group_Id", groupId));
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@name", "hebergement"),
+                            new SqlParameter("@group_Id", groupId));
+                }
+                #endregion
             }
         }
     }
