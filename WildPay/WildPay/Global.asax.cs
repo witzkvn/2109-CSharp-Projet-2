@@ -60,7 +60,7 @@ namespace WildPay
                 returnCode.SqlDbType = SqlDbType.Int;
                 returnCode.Direction = ParameterDirection.Output;
 
-                db.Database.ExecuteSqlCommand("sp_CheckGroupePrincipal @GroupID OUTPUT", returnCode);
+                db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
 
                 var type = returnCode.Value.GetType().FullName;
 

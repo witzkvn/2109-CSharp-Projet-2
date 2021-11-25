@@ -8,11 +8,16 @@ CREATE PROCEDURE sp_CreerUser
 @firstname VARCHAR(50),
 @lastname VARCHAR(50),
 @email VARCHAR(80),
-@password VARCHAR(80)
+@password VARCHAR(80),
+@GroupID int
 AS
 BEGIN
+	DECLARE @NewUserId INT
 	INSERT INTO [User](Firstname,Lastname,Email,Password) VALUES
 	(@firstname, @lastname, @email, @password)
+	SELECT @NewUserId = SCOPE_IDENTITY() 
+	INSERT INTO [UserGroup](User_Id, Group_Id) VALUES
+	(@NewUserId, @GroupID)
 END
  GO 
 
@@ -143,9 +148,9 @@ BEGIN
 END
  GO 
 
-DROP PROCEDURE IF EXISTS sp_CheckGroupePrincipal;
+DROP PROCEDURE IF EXISTS sp_GetGroupePrincipalId;
  GO 
-CREATE PROCEDURE sp_CheckGroupePrincipal
+CREATE PROCEDURE sp_GetGroupePrincipalId
 	@GroupID int OUTPUT
 AS
 BEGIN
