@@ -66,7 +66,8 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                if (categorieToDelete != null)
+                Category selectedCategory = db.Categories.Where(cat => cat.Id == categorieToDelete).FirstOrDefault();
+                if (!selectedCategory.IsBase && selectedCategory != null)
                 {
                     SqlParameter categorieID = new SqlParameter("@CategoryId", categorieToDelete);
                     db.Database.ExecuteSqlCommand("sp_SuppressionCategory @CategoryId", categorieID);
@@ -90,8 +91,10 @@ namespace WildPay.Controllers
             SqlParameter newName = new SqlParameter("@name", newCategory.Name);
             SqlParameter idGroup = new SqlParameter("@group_Id", "1");
             db.Database.ExecuteSqlCommand
-                ("sp_CreerCategory @name, @group_Id",
-                newName, idGroup);
+                ("sp_CreerCategory @name, @group_Id, @IsBase",
+                newName, 
+                idGroup,
+                new SqlParameter("@IsBase", false));
         }
 
     }

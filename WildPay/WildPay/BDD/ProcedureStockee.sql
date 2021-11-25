@@ -81,12 +81,13 @@ DROP PROCEDURE IF EXISTS sp_CreerCategory;
  GO 
 CREATE PROCEDURE sp_CreerCategory
 @name VARCHAR(100),
-@group_Id INT
+@group_Id INT,
+@IsBase BIT
 AS
 BEGIN
 	DECLARE @category_Id INT
-	INSERT INTO [Category](Name) VALUES
-	(@name)
+	INSERT INTO [Category](Name, IsBase) VALUES
+	(@name, @IsBase)
 	SELECT @Category_Id = SCOPE_IDENTITY() 
 	INSERT INTO [GroupCategory](Group_Id, Category_Id) VALUES
 	(@group_Id, @category_Id)
