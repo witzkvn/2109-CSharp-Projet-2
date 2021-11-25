@@ -22,8 +22,8 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                string hashPassword = FormatTools.HashPassword(userModel.Password);
-                User userDetails = db.Users.Where(x => x.Email == userModel.Email && x.Password == hashPassword).FirstOrDefault();
+                string hashPassword = FormatTools.HashPassword(userModel.Password.Trim());
+                User userDetails = db.Users.Where(x => x.Email.ToLower() == userModel.Email.ToLower() && x.Password.Trim() == hashPassword).FirstOrDefault();
                 if(userDetails==null)
                 {
                     userModel.loginErrorMessage = "Email ou mot de passe incorrects.";
