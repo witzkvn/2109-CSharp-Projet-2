@@ -79,7 +79,8 @@ namespace WildPay.Controllers
         private bool CategoryAlreadyExists(WildPayContext db, Category newCategory)
         {
             SqlParameter categoryName = new SqlParameter("@name", newCategory.Name);
-            SqlParameter groupId = new SqlParameter("@group_Id", "1");
+            int principalGroupId = Utilities.GetGroupePrincipalId();
+            SqlParameter groupId = new SqlParameter("@group_Id", principalGroupId);
             return db.Database.SqlQuery<Category>
                 ("sp_GetCategoryByName @name, @group_Id",
                 categoryName, groupId)
@@ -89,7 +90,8 @@ namespace WildPay.Controllers
         private void AddCategory(WildPayContext db, Category newCategory)
         {
             SqlParameter newName = new SqlParameter("@name", newCategory.Name);
-            SqlParameter idGroup = new SqlParameter("@group_Id", "1");
+            int principalGroupId = Utilities.GetGroupePrincipalId();
+            SqlParameter idGroup = new SqlParameter("@group_Id", principalGroupId);
             db.Database.ExecuteSqlCommand
                 ("sp_CreerCategory @name, @group_Id, @IsBase",
                 newName, 
