@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -17,10 +18,24 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                List<Category> categories = db.Database.SqlQuery<Category>
-                    ("sp_GetCategory @p0", "1")
+                var returnCode = new SqlParameter();
+                returnCode.ParameterName = "@GroupID ";
+                returnCode.SqlDbType = SqlDbType.Int;
+                returnCode.Direction = ParameterDirection.Output;
+
+                db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
+
+                var type = returnCode.Value.GetType().FullName;
+
+                if (type != "System.DBNull")
+                { 
+                    int groupId = (int)returnCode.Value;
+                    List<Category> categories = db.Database.SqlQuery<Category>
+                    ("sp_GetCategory @p0", groupId)
                     .ToList();
-                ViewBag.listeCategories = categories;
+                    ViewBag.listeCategories = categories;
+                }
+
             }
             return View();
         }
@@ -51,7 +66,8 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                if (categorieToDelete != null)
+                Category selectedCategory = db.Categories.Where(cat => cat.Id == categorieToDelete).FirstOrDefault();
+                if (!selectedCategory.IsBase && selectedCategory != null)
                 {
                     SqlParameter categorieID = new SqlParameter("@CategoryId", categorieToDelete);
                     db.Database.ExecuteSqlCommand("sp_SuppressionCategory @CategoryId", categorieID);
@@ -63,7 +79,8 @@ namespace WildPay.Controllers
         private bool CategoryAlreadyExists(WildPayContext db, Category newCategory)
         {
             SqlParameter categoryName = new SqlParameter("@name", newCategory.Name);
-            SqlParameter groupId = new SqlParameter("@group_Id", "1");
+            int principalGroupId = Utilities.GetGroupePrincipalId();
+            SqlParameter groupId = new SqlParameter("@group_Id", principalGroupId);
             return db.Database.SqlQuery<Category>
                 ("sp_GetCategoryByName @name, @group_Id",
                 categoryName, groupId)
@@ -73,10 +90,13 @@ namespace WildPay.Controllers
         private void AddCategory(WildPayContext db, Category newCategory)
         {
             SqlParameter newName = new SqlParameter("@name", newCategory.Name);
-            SqlParameter idGroup = new SqlParameter("@group_Id", "1");
+            int principalGroupId = Utilities.GetGroupePrincipalId();
+            SqlParameter idGroup = new SqlParameter("@group_Id", principalGroupId);
             db.Database.ExecuteSqlCommand
-                ("sp_CreerCategory @name, @group_Id",
-                newName, idGroup);
+                ("sp_CreerCategory @name, @group_Id, @IsBase",
+                newName, 
+                idGroup,
+                new SqlParameter("@IsBase", false));
         }
 
     }
