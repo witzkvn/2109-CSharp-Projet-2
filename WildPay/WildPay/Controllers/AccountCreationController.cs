@@ -28,7 +28,7 @@ namespace WildPay.Controllers
             {
                 using (WildPayContext db = new WildPayContext())
                 {
-                    bool userExists = db.Database.SqlQuery<User>("sp_GetUserByEmail @p0", newUser.Email).Any();
+                    bool userExists = db.Database.SqlQuery<User>("sp_GetUserByEmail @p0", newUser.Email.Trim().ToLower()).Any();
 
                     if (userExists)
                     {
@@ -38,11 +38,11 @@ namespace WildPay.Controllers
 
                     if (FormatTools.IsPasswordFormatOk(newUser.Password))
                     {
-                        newUser.Password = FormatTools.HashPassword(newUser.Password);
+                        newUser.Password = FormatTools.HashPassword(newUser.Password.Trim());
                         db.Database.ExecuteSqlCommand("sp_CreerUser @firstname, @lastname, @email, @password",
-                            new SqlParameter("@firstname", newUser.Firstname),
-                            new SqlParameter("@lastname", newUser.Lastname),
-                            new SqlParameter("@email", newUser.Email),
+                            new SqlParameter("@firstname", newUser.Firstname.Trim()),
+                            new SqlParameter("@lastname", newUser.Lastname.Trim()),
+                            new SqlParameter("@email", newUser.Email.Trim().ToLower()),
                             new SqlParameter("@password", newUser.Password));
                         return RedirectToAction("Index", "Home");
                     }
