@@ -27,7 +27,7 @@ namespace WildPay.Models
         [ForeignKey("FkUserId")]
         public User User { get; set; }
 
-        public int FkCategoryId { get; set; }
+        public int? FkCategoryId { get; set; }
         [ForeignKey("FkCategoryId")]
         public Category Category { get; set; }
 

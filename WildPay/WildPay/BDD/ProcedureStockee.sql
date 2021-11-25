@@ -95,6 +95,9 @@ CREATE PROCEDURE sp_SuppressionCategory
 @CategoryId INT
 AS
 BEGIN
+UPDATE [WildPay-1].[dbo].[Expense]
+SET [FkCategoryId] = null
+WHERE FkCategoryId = @CategoryId
 DELETE FROM [Category]
 WHERE Id = @CategoryId
 END
