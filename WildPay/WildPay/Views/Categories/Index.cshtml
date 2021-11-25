@@ -1,16 +1,20 @@
 ﻿@using WildPay.Models
 @model Category
+@{
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Connexion/Index");
+    }
+}
 
 
-
-
-@{ 
+@{
     List<Category> categories = ViewBag.listeCategories;
-    foreach (Category cat in categories )
+    foreach (Category cat in categories)
     {
         <div class="categories">
-        <span class="categorie-name">@cat.Name</span>
-        <span class="categorie-delete"><a href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>X</a> </span>
+            <span class="categorie-name">@cat.Name</span>
+            <span class="categorie-delete"><a href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>X</a> </span>
         </div>
     }
 }
