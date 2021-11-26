@@ -1,0 +1,16 @@
+﻿
+<h2>Dépenses du groupe</h2>
+
+
+@foreach (var expense in ViewBag.listExpenses)
+    {
+        <div class="expenses">
+            <span class="expense-userImage">@expense.UserImage</span>
+            <span class="expense-firstname">@expense.Firstname</span>
+            <span class="expense-lastname">@expense.Lastname</span>
+            <span class="expense-name">@expense.Name</span>
+            <span class="expense-title">@expense.Title</span>
+            <span class="expense-value">@expense.Value</span>
+            <span class="expense-date">@expense.DateCourte</span>
+        </div>
+    }
