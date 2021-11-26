@@ -23,7 +23,7 @@ const getTextColors = () => {
     return [textWhite, textGrey, textBlack]
 }
 
-export const toggleDarkTheme = (theme) => {
+const toggleDarkTheme = (theme) => {
     const [bgWhiteLight, bgWhiteMedium, bgWhiteDark, bgWhiteDarker] = getWhiteColors();
     const [bgBlackLight, bgBlackMedium, bgBlackDark, bgBlackDarker] = getBlackColors();
     const [textWhite, textGrey, textBlack] = getTextColors();
@@ -34,13 +34,22 @@ export const toggleDarkTheme = (theme) => {
         root.style.setProperty("--bg-dark", bgWhiteDark);
         root.style.setProperty("--bg-darker", bgWhiteDarker);
         root.style.setProperty("--text-color", textBlack);
+        localStorage.setItem("theme", "dark");
     } else if (theme && theme === "dark") {
         root.style.setProperty("--bg-light", bgBlackLight);
         root.style.setProperty("--bg-medium", bgBlackMedium);
         root.style.setProperty("--bg-dark", bgBlackDark);
         root.style.setProperty("--bg-darker", bgBlackDarker);
         root.style.setProperty("--text-color", textWhite);
+        localStorage.setItem("theme", "light");
     } else {
         return
     }
 }
+
+if (!localStorage.getItem("theme")) {
+    localStorage.setItem("theme", "light");
+}
+
+let themeBtn = document.getElementById("theme");
+themeBtn.addEventListener("click", () => toggleDarkTheme(localStorage.getItem("theme") || "light"));
