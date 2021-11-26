@@ -20,9 +20,6 @@ namespace WildPay.Models
         public byte[] UserImage { get; set; }
         public string DateCourte { get; set; }
 
-        //public ExpenseCategoryJoin ()
-        //{
-        //    DateCourte = FormatTools.ConvertInShortDate(CreatedAt);
-        //}
+
     }
 }

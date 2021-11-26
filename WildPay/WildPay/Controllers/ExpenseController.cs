@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WildPay.DAL;
 using WildPay.Models;
-
+using WildPay.Tools;
 
 namespace WildPay.Controllers
 {
@@ -30,9 +30,11 @@ namespace WildPay.Controllers
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)
                 .ToList();
-
+            foreach (ExpenseCategoryJoin exp in expenses)
+            {
+                exp.DateCourte = FormatTools.ConvertInShortDate(exp.CreatedAt);
+            }
             ViewBag.listExpenses = expenses;
-
 
             return View();
         }
