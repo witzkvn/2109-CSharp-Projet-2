@@ -50,7 +50,10 @@ namespace WildPay.Controllers
                             new SqlParameter("@email", newUser.Email.Trim().ToLower()),
                             new SqlParameter("@password", newUser.Password),
                             new SqlParameter("@GroupID", principalGroupId));
-                        return RedirectToAction("Index", "Home");
+
+                        return RedirectToAction("Index", "Connexion", new {
+                            creationSuccess = true
+                    });
                     }
                     else
                     {
