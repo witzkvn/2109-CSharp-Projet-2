@@ -24,11 +24,18 @@ textarea {
     max-width: 280px;
 }
 
-.themeBtn{
+.navbar-inverse .navbar-nav > li > a.nav-link {
     display: flex;
     align-items: center;
 }
-.themeBtn p {
+
+.themeBtn {
+    display: flex;
+    align-items: center;
+}
+
+.themeBtn p,
+.nav-link p {
     margin-left: 1rem;
     margin-bottom: 0;
 }
