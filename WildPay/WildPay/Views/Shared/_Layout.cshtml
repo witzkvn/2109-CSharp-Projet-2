@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @{ 
+                    @{
                         if (Session["Id"] == null)
                         {
                             <li>@Html.ActionLink("Connexion", "Index", "Connexion")</li>
@@ -40,11 +40,26 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - WildPay</p>
+            <div class="theme-switcher" id="themeBtn">
+
+                <button id="moonBtn" type="button" class="btn btn-dark themeBtn">
+                    <ion-icon name="moon"></ion-icon>
+                    <p>Thème sombre</p>
+                </button>
+
+                <button id="sunBtn" type="button" class="btn btn-light themeBtn">   
+                    <ion-icon name="sunny"></ion-icon>
+                    <p>Thème clair</p>
+                </button>
+            </div>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="~/Content/themeSwitcher.js"></script>
 </body>
 </html>
