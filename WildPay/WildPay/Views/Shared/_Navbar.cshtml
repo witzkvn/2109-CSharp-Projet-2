@@ -19,7 +19,30 @@
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Deconnexion", "LogOut", "Connexion")</li>
+                        @*<li>
+                    <a href="@Url.Action("","")">
+                        <ion-icon name="pricetags"></ion-icon>
+                        <p>Dépenses</p>
+                    </a>
+                </li>*@
+                        <li>
+                            <a href="@Url.Action("Index","Categories")">
+                                <ion-icon name="filter"></ion-icon>
+                                <p>Catégories</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Account")">
+                                <ion-icon name="exit"></ion-icon>
+                                <p>Compte</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("LogOut","Connexion")">
+                                <ion-icon name="exit"></ion-icon>
+                                <p>Déconnexion</p>
+                            </a>
+                        </li>
                     }
                 }
             </ul>
