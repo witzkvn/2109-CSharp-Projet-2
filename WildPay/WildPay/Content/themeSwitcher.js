@@ -23,7 +23,7 @@ const getTextColors = () => {
     return [textWhite, textGrey, textBlack]
 }
 
-export const toggleDarkTheme = (theme) => {
+const toggleDarkTheme = (theme) => {
     const [bgWhiteLight, bgWhiteMedium, bgWhiteDark, bgWhiteDarker] = getWhiteColors();
     const [bgBlackLight, bgBlackMedium, bgBlackDark, bgBlackDarker] = getBlackColors();
     const [textWhite, textGrey, textBlack] = getTextColors();
@@ -40,7 +40,45 @@ export const toggleDarkTheme = (theme) => {
         root.style.setProperty("--bg-dark", bgBlackDark);
         root.style.setProperty("--bg-darker", bgBlackDarker);
         root.style.setProperty("--text-color", textWhite);
+
     } else {
         return
     }
 }
+
+let moonBtn = document.getElementById("moonBtn");
+let sunBtn = document.getElementById("sunBtn");
+
+const handleThemeSwitch = () => {
+    const theme = localStorage.getItem("theme") || "light";
+    if (theme == "light") {
+        localStorage.setItem("theme", "dark");
+        moonBtn.style.display = "none";
+        sunBtn.style.display = "flex";
+        toggleDarkTheme("dark");
+    } else {
+        localStorage.setItem("theme", "light");
+        moonBtn.style.display = "flex";
+        sunBtn.style.display = "none";
+        toggleDarkTheme("light");
+    }
+}
+
+// init
+if (localStorage.getItem("theme")) {
+    let theme = localStorage.getItem("theme");
+    if (theme == "dark") {
+        toggleDarkTheme("dark");
+        moonBtn.style.display = "none";
+    } else {
+        toggleDarkTheme("light");
+        sunBtn.style.display = "none";
+    }
+} else {
+    localStorage.setItem("theme", "light");
+    sunBtn.style.display = "none";
+}
+
+
+let themeBtn = document.getElementById("themeBtn");
+themeBtn.addEventListener("click", handleThemeSwitch);
