@@ -177,3 +177,16 @@ BEGIN
 END
  GO 
 
+ DROP PROCEDURE IF EXISTS sp_GetExpense;
+ GO 
+CREATE PROCEDURE sp_GetExpense
+@groupId INT
+AS
+BEGIN
+SELECT CreatedAt, Title, Value, FkUserId, FkCategoryId, FkGroupId, Category.Name, [User].Firstname, [User].Lastname, [User].UserImage FROM [Expense]
+INNER JOIN [User] ON [User].Id = FkUserId
+INNER JOIN [Category] ON Category.Id = FkCategoryId
+WHERE FkGroupId = @groupId
+ORDER BY CreatedAt DESC
+END
+ GO 
