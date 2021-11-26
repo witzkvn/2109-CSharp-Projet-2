@@ -22,7 +22,8 @@ namespace WildPay.Models
 
         public Category()
         {
-
+            this.Expenses = new List<Expense>();
+            this.Groups = new List<Group>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-color);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -22,3 +23,32 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.themeBtn{
+    display: flex;
+    align-items: center;
+}
+.themeBtn p {
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+
+.themeBtn.btn-dark {
+    color: var(--text-white);
+    background-color: var(--bg-black-medium);
+}
+
+.themeBtn.btn-light {
+    color: var(--text-black);
+    background-color: var(--bg-white-medium);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10rem;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--bg-medium);
+}
+
