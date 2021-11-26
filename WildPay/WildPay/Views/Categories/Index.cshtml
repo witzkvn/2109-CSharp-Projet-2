@@ -1,0 +1,47 @@
+﻿@using WildPay.Models
+@model Category
+@{
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Connexion/Index");
+    }
+}
+
+
+@{
+    List<Category> categories = ViewBag.listeCategories;
+    foreach (Category cat in categories)
+    {
+        <div class="categories">
+            <span class="categorie-name">@cat.Name</span>
+            @if(cat.IsBase == false) { 
+                <span class="categorie-delete"><a href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>X</a> </span>
+            }
+        </div>
+    }
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Nouvelle categorie</legend>
+        <div class="editor-label">
+            @Html.LabelFor(Model => Model.Name)
+
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(Model => Model.Name)
+            @Html.ValidationMessageFor(Model => Model.Name)
+        </div>
+
+
+        <input type="submit" value="Valider" />
+        <input type="reset" value="Annuler" />
+
+    </fieldset>
+
+}

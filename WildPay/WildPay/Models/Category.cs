@@ -9,11 +9,13 @@ namespace WildPay.Models
 {
     public class Category
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Le nom de la catégorie est obligatoire")]
         [MaxLength(20, ErrorMessage = "Le nom doit faire 20 caractères au maximum"), MinLength(0)]
         public string Name { get; set; }
+        public bool IsBase { get; set; } = false;
 
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Expense> Expenses { get; set; }

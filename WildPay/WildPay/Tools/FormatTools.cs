@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace WildPay.Tools
@@ -10,19 +11,29 @@ namespace WildPay.Tools
     {
         public static bool IsPasswordFormatOk(string userPassword)
         {
-            // a implémenter 
-            // regex ? 
-            // au moins 1 chiffre
-            // au moins un caractère spécial
+            // au moins 1 chiffre 
+            // au moins 1 caractère special 
             // au moins 5 caractères de long
-            return true;
+            Regex hasNumber = new Regex(@"[0-9]+");
+            Regex specialChars = new Regex("[^A-Za-z0-9]");
+
+            return
+                hasNumber.IsMatch(userPassword) &&
+                userPassword.Length >= 5 &&
+                specialChars.IsMatch(userPassword);
         }
 
         public static bool IsDateOk(string date)
         {
-            // Verifie format de date 
-            // utilisé pour entrer une dépense
-            return true;
+            DateTime dateResult;
+            if (DateTime.TryParse(date, out dateResult))
+            {
+                if (dateResult > DateTime.Now)
+                    return false;
+                else if (dateResult.Year < DateTime.Now.Year - 10)
+                    return false;
+            }
+            return false;
         }
 
 
@@ -43,6 +54,15 @@ namespace WildPay.Tools
                 Console.WriteLine("hash : " + sb.ToString());
                 return sb.ToString();
             }
+        }
+
+        public static bool VerifyImageFormatAndSize(HttpPostedFileBase newImage)
+        {
+            if(newImage.ContentLength < 2000000 && (newImage.ContentType == "image/jpg" || newImage.ContentType == "image/jpeg" || newImage.ContentType == "image/png"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

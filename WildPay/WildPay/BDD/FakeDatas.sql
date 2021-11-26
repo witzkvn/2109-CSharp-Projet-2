@@ -1,26 +1,29 @@
+DROP PROCEDURE IF EXISTS sp_AddFakeDatas;
+GO
 CREATE PROCEDURE sp_AddFakeDatas
 AS
 BEGIN
 	DECLARE @myimg varbinary(MAX); 
+	-- modifier l'url ci-dessous vers le path de l'image sur votre propre PC
 	SET @myimg = (SELECT * FROM Openrowset( Bulk 'C:\Users\Witz Kévin\Desktop\user.png' , Single_Blob) as img);
 
 
-	INSERT INTO [User](Email, Firstname, Lastname, Password, Image) VALUES
+	INSERT INTO [User](Email, Firstname, Lastname, Password, UserImage) VALUES
 		('admin@test.com', 'admin', 'ADMIN', 'admin1*', @myimg),
 		('test1@test.com', 'first1', 'LAST1', 'test1*', @myimg),
 		('test2@test.com', 'first2', 'LAST2', 'test2*', null),
 		('test3@test.com', 'first3', 'LAST3', 'test3*', null),
 		('test4@test.com', 'first4', 'LAST4', 'test4*', @myimg),
-		('test5@test.com', 'first5', 'LAST5', 'test5*', null)
+		('test5@test.com', 'first5', 'LAST5', 'test5*', null);
 
 	INSERT INTO [Category](Name) VALUES
 		('Cat1'),
 		('Cat2'),
-		('Cat3')
+		('Cat3');
 
-	INSERT INTO [Group](Id, Name, CreatedAt) VALUES
-		((SELECT Id FROM [User] WHERE Email = 'admin@test.com'),'G1', GETDATE()),
-		((SELECT Id FROM [User] WHERE Email = 'test1@test.com'), 'G2', GETDATE())
+	INSERT INTO [Group](Name, CreatedAt) VALUES
+		('G1', GETDATE()),
+		('G2', GETDATE());
 
 	INSERT INTO [UserGroup](User_Id,Group_Id) VALUES
 		((SELECT Id FROM [User] WHERE Email = 'test1@test.com'),(SELECT Id FROM [Group] WHERE Name = 'G1')),
@@ -29,14 +32,14 @@ BEGIN
 		((SELECT Id FROM [User] WHERE Email = 'test3@test.com'), (SELECT Id FROM [Group] WHERE Name = 'G1')),
 		((SELECT Id FROM [User] WHERE Email = 'test4@test.com'), (SELECT Id FROM [Group] WHERE Name = 'G1')),
 		((SELECT Id FROM [User] WHERE Email = 'test4@test.com'), (SELECT Id FROM [Group] WHERE Name = 'G2')),
-		((SELECT Id FROM [User] WHERE Email = 'test5@test.com'), (SELECT Id FROM [Group] WHERE Name = 'G2'))
+		((SELECT Id FROM [User] WHERE Email = 'test5@test.com'), (SELECT Id FROM [Group] WHERE Name = 'G2'));
 
 	INSERT INTO [GroupCategory](Category_Id,Group_Id) VALUES
 		((SELECT Id FROM [Category] WHERE Name = 'Cat1'),(SELECT Id FROM [Group] WHERE Name = 'G1')),
 		((SELECT Id FROM [Category] WHERE Name = 'Cat2'),(SELECT Id FROM [Group] WHERE Name = 'G1')),
 		((SELECT Id FROM [Category] WHERE Name = 'Cat3'),(SELECT Id FROM [Group] WHERE Name = 'G1')),
 		((SELECT Id FROM [Category] WHERE Name = 'Cat1'),(SELECT Id FROM [Group] WHERE Name = 'G2')),
-		((SELECT Id FROM [Category] WHERE Name = 'Cat2'),(SELECT Id FROM [Group] WHERE Name = 'G2'))
+		((SELECT Id FROM [Category] WHERE Name = 'Cat2'),(SELECT Id FROM [Group] WHERE Name = 'G2'));
 
 	INSERT INTO [Expense](CreatedAt, Title, Value, FkCategoryId, FkGroupId, FkUserId) VALUES
 		(
@@ -94,7 +97,7 @@ BEGIN
 			(SELECT Id FROM [Category] WHERE Name = 'Cat1'),
 			(SELECT Id FROM [Group] WHERE Name = 'G2'),
 			(SELECT Id FROM [User] WHERE Email = 'test3@test.com')
-		)
+		);
 END
 
 --SELECT * FROM [User];
@@ -103,3 +106,5 @@ END
 --SELECT * FROM [GroupCategory];
 --SELECT * FROM [userGroup];
 --SELECT * FROM Expense;
+
+EXECUTE sp_AddFakeDatas;
