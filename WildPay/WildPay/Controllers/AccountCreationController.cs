@@ -41,14 +41,7 @@ namespace WildPay.Controllers
                     {
                         newUser.Password = FormatTools.HashPassword(newUser.Password.Trim());
 
-                        var returnCode = new SqlParameter();
-                        returnCode.ParameterName = "@GroupID ";
-                        returnCode.SqlDbType = SqlDbType.Int;
-                        returnCode.Direction = ParameterDirection.Output;
-
-                        db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
-
-                        int principalGroupId = (int)returnCode.Value;
+                        int principalGroupId = Utilities.GetGroupePrincipalId();
 
 
                         db.Database.ExecuteSqlCommand("sp_CreerUser @firstname, @lastname, @email, @password, @GroupID",
@@ -57,7 +50,10 @@ namespace WildPay.Controllers
                             new SqlParameter("@email", newUser.Email.Trim().ToLower()),
                             new SqlParameter("@password", newUser.Password),
                             new SqlParameter("@GroupID", principalGroupId));
-                        return RedirectToAction("Index", "Home");
+
+                        return RedirectToAction("Index", "Connexion", new {
+                            creationSuccess = true
+                    });
                     }
                     else
                     {

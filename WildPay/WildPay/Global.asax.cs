@@ -78,18 +78,22 @@ namespace WildPay
 
                     int groupId = (int)newGroupId.Value;
 
-                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
                             new SqlParameter("@name", "restaurant"),
-                            new SqlParameter("@group_Id", groupId));
-                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@group_Id", groupId),
+                            new SqlParameter("@IsBase", true));
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
                             new SqlParameter("@name", "transport"),
-                            new SqlParameter("@group_Id", groupId));
-                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@group_Id", groupId),
+                            new SqlParameter("@IsBase", true));
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
                             new SqlParameter("@name", "courses"),
-                            new SqlParameter("@group_Id", groupId));
-                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id",
+                            new SqlParameter("@group_Id", groupId),
+                            new SqlParameter("@IsBase", true));
+                    db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
                             new SqlParameter("@name", "hebergement"),
-                            new SqlParameter("@group_Id", groupId));
+                            new SqlParameter("@group_Id", groupId),
+                            new SqlParameter("@IsBase", true));
                 }
                 #endregion
             }

@@ -10,6 +10,11 @@
 <h2>Bienvenue sur WildPay !</h2>
 
 <div id="login-div">
+    @if (@ViewBag.ConfirmationCreationCompte == true)
+    {
+        <p class="success">Compte créé avec succès ! Connectez-vous dès maintenant</p>
+    }
+
     @using (Html.BeginForm("Authorize", "Connexion", FormMethod.Post))
     {
         <form>

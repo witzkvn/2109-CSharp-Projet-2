@@ -14,7 +14,9 @@
     {
         <div class="categories">
             <span class="categorie-name">@cat.Name</span>
-            <span class="categorie-delete"><a href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>X</a> </span>
+            @if(cat.IsBase == false) { 
+                <span class="categorie-delete"><a href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>X</a> </span>
+            }
         </div>
     }
 }
