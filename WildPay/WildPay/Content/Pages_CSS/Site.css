@@ -58,6 +58,7 @@ h4, h5, h6 {
 .container.body-content{
     padding: 2rem;
     width: 70%;
+    max-width: 1000px;
     margin: 0 auto;
 }
 

@@ -24,9 +24,13 @@
     cursor: pointer;
 }
 
-.btn.btn-primary{
+.btn.btn-primary {
     background-color: var(--primary-medium);
-    color: var(--text-white);
-    border: 1px solid var(--primary-dark);
+    color: white;
+    border: 2px solid var(--primary-dark);
     transition: all .2s ease;
 }
+
+    .btn.btn-primary:hover{
+        background-color: var(--primary-light);
+    }
