@@ -1,0 +1,32 @@
+﻿.themeBtn {
+    display: flex;
+    align-items: center;
+}
+
+.themeBtn p {
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+
+.themeBtn.btn-dark {
+    color: var(--text-white);
+    background-color: var(--bg-black-medium);
+}
+
+.themeBtn.btn-light {
+    color: var(--text-black);
+    background-color: var(--bg-white-medium);
+}
+
+.btn{
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+}
+
+.btn.btn-primary{
+    background-color: var(--primary-medium);
+    color: var(--text-white);
+    border: 1px solid var(--primary-dark);
+    transition: all .2s ease;
+}

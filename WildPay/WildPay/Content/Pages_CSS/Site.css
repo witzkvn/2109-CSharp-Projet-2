@@ -1,0 +1,82 @@
+﻿*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+button{
+    outline: none;
+    border: none;
+}
+
+a, a:visited, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+ol, ul{
+    list-style: none;
+}
+
+html{
+    font-size: 67.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    min-height: 100vh;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1{
+    margin-bottom: 3rem;
+    font-size: 5rem;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-size: 3.5rem;
+}
+h3 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+h4, h5, h6 {
+    margin-bottom: 0.5rem;
+}
+
+
+.container.body-content{
+    padding: 2rem;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.section{
+    margin-bottom: 18rem;
+}
+
+footer {
+    font-size: 1.2rem;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding: 2rem;
+    border-top: 1px solid var(--bg-medium);
+}
+
+footer button.themeBtn{
+    margin-left: 4rem;
+}
+

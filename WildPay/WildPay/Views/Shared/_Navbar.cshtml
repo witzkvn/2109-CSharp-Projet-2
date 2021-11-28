@@ -1,51 +1,43 @@
 ﻿
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
+<div class="navbar">
+    <div class="navbar-logo">
             @Html.ActionLink("WildPay", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                @{
-                    if (Session["Id"] == null)
-                    {
-                        <li>@Html.ActionLink("Connexion", "Index", "Connexion")</li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a href="@Url.Action("Index","Expense")" class="nav-link">
-                                <ion-icon name="pricetags"></ion-icon>
-                                <p>Dépenses</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Categories")" class="nav-link">
-                                <ion-icon name="filter"></ion-icon>
-                                <p>Catégories</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Account")" class="nav-link">
-                                <ion-icon name="person-circle"></ion-icon>
-                                <p>Compte</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("LogOut","Connexion")" class="nav-link">
-                                <ion-icon name="exit"></ion-icon>
-                                <p>Déconnexion</p>
-                            </a>
-                        </li>
-                    }
-                }
-            </ul>
-        </div>
+    </div>
+    <div class="navbar-links">
+        @{
+            if (Session["Id"] == null)
+            {
+                <a class="navbar-link" href="@Url.Action("Index", "Connexion")">Connexion</a>
+                <a class="navbar-link btn btn-primary" href="@Url.Action("Index", "AccountCreation")">Inscription</a>
+
+            }
+            else
+            {
+
+                <a href="@Url.Action("Index","Expense")" class="navbar-link">
+                    <ion-icon name="pricetags"></ion-icon>
+                    <p>Dépenses</p>
+                </a>
+
+
+                <a href="@Url.Action("Index","Categories")" class="navbar-link">
+                    <ion-icon name="filter"></ion-icon>
+                    <p>Catégories</p>
+                </a>
+
+
+                <a href="@Url.Action("Index","Account")" class="navbar-link">
+                    <ion-icon name="person-circle"></ion-icon>
+                    <p>Compte</p>
+                </a>
+
+
+                <a href="@Url.Action("LogOut","Connexion")" class="navbar-link">
+                    <ion-icon name="exit"></ion-icon>
+                    <p>Déconnexion</p>
+                </a>
+
+            }
+        }
     </div>
 </div>

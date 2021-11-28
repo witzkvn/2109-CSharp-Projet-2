@@ -2,8 +2,75 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<header class="header section">
+    <div class="header-left">
     <h1>WildPay</h1>
-    <p class="lead">les bon compte font les bon amis</p>
-    <p><a>@Html.ActionLink("Inscription", "Index", "AccountCreation", null, new { @class = "btn btn-primary btn-lg" })</a></p>
-</div>
+    <p class="moto-main">Les bon compte font les bon amis</p>
+    <p class="moto-second">Simplifiez-vous la vie avec WildPay, le calculateur de balance de dépense pour tous vos projets de groupes</p>
+    <a class="btn btn-primary" href="@Url.Action("Index", "AccountCreation")">Commencer</a>
+    </div>
+    <div class="header-right">
+        <img src="~/Content/Images/header.png" alt="Header money sharing" />
+    </div>
+</header>
+
+<main>
+    <section class="section features">
+        <h2>Fonctionnalités</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-item-top">
+                    <ion-icon name="calculator"></ion-icon>
+                </div>
+                <h3>Automatisation</h3>
+                <p>Les calculs sont automatisés pour un budget à l'équilibre en un coup d'oeil</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-item-top">
+                    <ion-icon name="people"></ion-icon>
+                </div>
+                <h3>Regroupement</h3>
+                <p>Retrouvez vos amis et toutes les dépenses dans votre groupe</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-item-top">
+                    <ion-icon name="options"></ion-icon>
+                </div>
+                <h3>Customisation</h3>
+                <p>Ajoutez vos propres catégories de dépenses selon vos besoins</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="whoarewe section">
+        <h2>Qui sommes-nous ?</h2>
+        <p>Ce projet fait partie de notre cursus de formation à la Wild Code School de Strasbourg, promotion 2021.</p>
+        <div class="whoarewe-item">
+            <div class="whoarewe-image user-image">
+                <img src="https://github.com/CleaH.png" class="user-image" alt="Cléa HEMMENDINGER" />
+            </div>
+            <div class="whoarewe-text">
+                <h4>Cléa HEMMENDINGER</h4>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias impedit tenetur quibusdam! Facere, esse maiores!</p>
+            </div>
+        </div>
+        <div class="whoarewe-item">
+            <div class="whoarewe-image user-image">
+                <img src="https://github.com/sebastien-david.png" class="user-image" alt="Sébastien DAVID" />
+            </div>
+            <div class="whoarewe-text">
+                <h4>Sébastien DAVID</h4>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias impedit tenetur quibusdam! Facere, esse maiores!</p>
+            </div>
+        </div>
+        <div class="whoarewe-item">
+            <div class="whoarewe-image user-image">
+                <img src="https://github.com/witzkvn.png" class="user-image" alt="Kévin WITZ" />
+            </div>
+            <div class="whoarewe-text">
+                <h4>Kévin WITZ</h4>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias impedit tenetur quibusdam! Facere, esse maiores!</p>
+            </div>
+        </div>
+    </section>
+</main>

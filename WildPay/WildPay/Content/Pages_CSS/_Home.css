@@ -1,0 +1,99 @@
+﻿.header {
+    padding: 3rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+}
+.header-left{
+    display: flex;
+    flex-direction: column;
+}
+.header-left h1 {
+    margin: auto 0 6rem 0;
+    font-size: 6rem;
+}
+
+    .header-left .moto-main{
+        font-size: 2.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+        .header-left .moto-second{
+            text-align: justify;
+        }
+
+.header-right{
+    display: flex;
+    align-items: flex-end;
+}
+.header-right img {
+    width: 100%;
+}
+
+.header-left .btn.btn-primary{
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    width: min-content;
+}
+
+.features{
+    text-align: center;
+}
+
+.features-grid{
+    margin: 6rem auto;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, minmax(15rem, 25rem));
+    gap: 6rem;
+}
+
+.feature-item {
+    border-radius: 10px;
+    background-color: var(--bg-medium);
+    padding: 2rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.feature-item-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background-color: var(--secondary-medium);
+    color: white;
+    margin: 0 auto 2rem auto;
+}
+
+.feature-item-top ion-icon{
+    font-size: 4rem;
+}
+
+.whoarewe{
+    text-align: center;
+}
+
+.whoarewe > p{
+    margin-bottom: 6rem;
+}
+
+.whoarewe-item{
+    display: flex;
+    width: 75%;
+    margin: 0 auto 6rem auto;
+    text-align: left;
+}
+
+.whoarewe-image{
+    margin-right: 2rem;
+    flex-shrink: 0;
+}
+
+.whoarewe-text{
+    flex-shrink: 1;
+}

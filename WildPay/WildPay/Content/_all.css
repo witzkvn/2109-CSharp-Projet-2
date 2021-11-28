@@ -1,3 +1,8 @@
-﻿@import "./_colors.css";
+﻿@import "./Pages_CSS/Site.css";
+@import "./_colors.css";
 @import "./_utilities.css";
-@import "./_Account.css";
+@import "./Pages_CSS/_fonts.css";
+@import "./Pages_CSS/_Components.css";
+@import "./Pages_CSS/_Account.css";
+@import "./Pages_CSS/_Navbar.css";
+@import "./Pages_CSS/_Home.css";
