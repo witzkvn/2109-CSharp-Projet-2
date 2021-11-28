@@ -18,14 +18,16 @@ namespace WildPay.Controllers
         public ActionResult Index()
         {
 
-            var returnCode = new SqlParameter();
-            returnCode.ParameterName = "@GroupID ";
-            returnCode.SqlDbType = SqlDbType.Int;
-            returnCode.Direction = ParameterDirection.Output;
+            //var returnCode = new SqlParameter();
+            //returnCode.ParameterName = "@GroupID ";
+            //returnCode.SqlDbType = SqlDbType.Int;
+            //returnCode.Direction = ParameterDirection.Output;
 
-            db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
+            //db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
 
-            int GroupId = (int)returnCode.Value;
+            //int GroupId = (int)returnCode.Value;
+
+            int GroupId = Utilities.GetGroupePrincipalId();
 
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)
