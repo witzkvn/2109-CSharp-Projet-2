@@ -16,12 +16,22 @@
 .navbar-link {
     display: flex;
     align-items: center;
+    transition: all 0.2s ease;
 }
-    .navbar-link p{
-           margin-left: 0.5rem;
-    }
+
+.navbar-link:hover{
+    color: var(--primary-medium);
+}
+
+.navbar-link:last-of-type:hover {
+    color: var(--secondary-medium);
+}
+
+.navbar-link p {
+    margin-left: 0.5rem;
+}
 
 
-    .navbar-link:not(:first-child) {
-        margin-left: 3rem;
-    }
+.navbar-link:not(:first-child) {
+    margin-left: 3rem;
+}
