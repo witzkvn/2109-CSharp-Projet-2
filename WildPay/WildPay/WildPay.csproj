@@ -133,6 +133,7 @@
     <Compile Include="Controllers\ConnexionController.cs" />
     <Compile Include="Controllers\AccountCreationController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\ExpenseEditionController.cs" />
     <Compile Include="DAL\WildPayContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -226,6 +227,7 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Expense\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\ExpenseEdition\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

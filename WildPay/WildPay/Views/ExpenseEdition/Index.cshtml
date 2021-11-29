@@ -1,0 +1,45 @@
+﻿@using WildPay.Tools
+@model WildPay.Models.Expense
+
+@{
+    ViewBag.Title = "Nouvelle dépense";
+}
+
+<div class="Expense">
+    <h2>Ajouter une dépense</h2>
+
+    @using (Html.BeginForm())
+    {
+
+<div>
+    <hr />
+    @Html.ValidationSummary(true)
+
+
+    <div class="editor-label">
+        @Html.LabelFor(Model => Model.Title)
+
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(Model => Model.Title)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(Model => Model.CreatedAt)
+
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(Model => Model.CreatedAt)
+    </div>
+
+    @*<input type="date" asp-for="CreatedAt" asp-format="{0:dd/MM/yyyy}" class="form-control" name="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />*@
+
+    <div class="form-group submitBtn">
+        <input type="submit" value="Mettre à jour" class="btn btn-primary" />
+    </div>
+
+</div>
+    }
+</div>
+
+
