@@ -18,6 +18,7 @@ namespace WildPay.Models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public byte[] UserImage { get; set; }
+        public string UserImageFile { get; set; }
         public string DateCourte { get; set; }
 
 
