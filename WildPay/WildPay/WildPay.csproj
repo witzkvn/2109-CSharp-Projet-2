@@ -187,6 +187,7 @@
     <Content Include="Content\_all.css" />
     <Content Include="Content\themeSwitcher.js" />
     <Content Include="Content\_colors.css" />
+    <Content Include="Content\nav_toggle.js" />
     <Content Include="Content\_utilities.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
