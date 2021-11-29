@@ -1,0 +1,37 @@
+﻿.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    background-color: var(--bg-medium);
+    height: auto;
+}
+
+.navbar-links{
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-link {
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.navbar-link:hover{
+    color: var(--primary-medium);
+}
+
+.navbar-link:last-of-type:hover {
+    color: var(--secondary-medium);
+}
+
+.navbar-link p {
+    margin-left: 0.5rem;
+}
+
+
+.navbar-link:not(:first-child) {
+    margin-left: 3rem;
+}

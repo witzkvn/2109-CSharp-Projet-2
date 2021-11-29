@@ -1,8 +1,12 @@
 ﻿.user-image {
-
+    width: 6rem;
+    height: 6rem;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--grey-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-image-sm {
@@ -10,7 +14,7 @@
     height: 2.5rem;
 }
 
-.user-image-xl {
+.user-image.user-image-xl {
     width: 10rem;
     height: 10rem;
 }
