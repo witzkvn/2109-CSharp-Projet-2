@@ -6,36 +6,36 @@
 }*@
 
 
-<div class="container">
-    <div style="display: flex" class="row">
-        <div style="flex:1">
-            <h2 style="text-align:center">Dépenses du groupe</h2>
-            <a style="outline:none; border:none; display:block; text-align:center" class="button" href="@Url.Action("Index", "Expense")"> ⊕ Ajouter une dépense</a>
-            <ul style="border-right: 1px solid black" class="list-group">
+<div class="expense">
+    <div class="row">
+        <div class="flex">
+            <h2>Dépenses du groupe</h2>
+            <a class="button" href="@Url.Action("Index", "Expense")"> ⊕ Ajouter une dépense</a>
+            <ul class="list-group">
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
-                    <li style="margin: 30px 10px; border-radius: 10px; border-color: black; border-style: solid " class="list-group-item">
+                    <li class="list-group-item">
                         @if (expense.UserImageFile != null)
                         {
-                            <img style="float: right; width: 10%; height: auto; margin-right: 3px" class="user-image" src="@expense.UserImageFile" />
+                            <img class="user-image" src="@expense.UserImageFile" />
                         }
                         else
                         {
-                            <img style="float: right; width: 10%; height: auto; margin-right: 3px" class="user-image" src="~/Content/Images/default.png" />
+                            <img class="user-image" src="~/Content/Images/default.png" />
                         }
-                        <h3 style="margin-left: 3px" class="expense-name">@expense.Name</h3>
-                        <h4 style="margin-left: 3px" class="expense-title">@expense.Title</h4>
-                        <h3 style="float:right; margin-right: 3px" class="expense-value">@expense.Value €</h3>
-                        <p style="margin-left: 3px" class="expense-userDetail">Payé par @expense.Firstname @expense.Lastname au groupe</p>
-                        <small style="margin-left: 3px" class="expense-date">@expense.DateCourte</small>
+                        <h3>@expense.Name</h3>
+                        <h4>@expense.Title</h4>
+                        <h3 class="expense-value">@expense.Value €</h3>
+                        <p class="espace">Payé par @expense.Firstname @expense.Lastname au groupe</p>
+                        <small>@expense.DateCourte</small>
                     </li>
                 }
             </ul>
         </div>
-        <div style="flex:1">
-            <h2 style="text-align:center">Bilan du groupe</h2>
-            <p style="margin: 30px 30px; text-align: center">toto</p>
+        <div class="flex">
+            <h2>Bilan du groupe</h2>
+            <p class="expense-bilan">toto</p>
         </div>
     </div>
 </div>
