@@ -15,20 +15,20 @@
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
-                    <li style="margin: 30px 30px; border-radius: 10px; border-color: black; border-style: solid " class="list-group-item">
+                    <li style="margin: 30px 10px; border-radius: 10px; border-color: black; border-style: solid " class="list-group-item">
                         @if (expense.UserImageFile != null)
                         {
-                            <img style="float:right; width:8%" class="user-image" src="@expense.UserImageFile" />
+                            <img style="float: right; width: 10%; height: auto; margin-right: 3px" class="user-image" src="@expense.UserImageFile" />
                         }
                         else
                         {
-                            <img style="float:right; width:8%" class="user-image" src="~/Content/Images/default.png" />
+                            <img style="float: right; width: 10%; height: auto; margin-right: 3px" class="user-image" src="~/Content/Images/default.png" />
                         }
-                        <h3 class="expense-name">@expense.Name</h3>
-                        <h4 class="expense-title">@expense.Title</h4>
-                        <h3 style="float:right" class="expense-value">@expense.Value €</h3>
-                        <p class="expense-userDetail">Payé par @expense.Firstname @expense.Lastname au groupe</p>
-                        <small class="expense-date">@expense.DateCourte</small>
+                        <h3 style="margin-left: 3px" class="expense-name">@expense.Name</h3>
+                        <h4 style="margin-left: 3px" class="expense-title">@expense.Title</h4>
+                        <h3 style="float:right; margin-right: 3px" class="expense-value">@expense.Value €</h3>
+                        <p style="margin-left: 3px" class="expense-userDetail">Payé par @expense.Firstname @expense.Lastname au groupe</p>
+                        <small style="margin-left: 3px" class="expense-date">@expense.DateCourte</small>
                     </li>
                 }
             </ul>
