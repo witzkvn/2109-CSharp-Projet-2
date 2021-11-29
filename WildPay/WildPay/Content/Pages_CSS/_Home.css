@@ -13,15 +13,15 @@
     font-size: 6rem;
 }
 
-    .header-left .moto-main{
-        font-size: 2.2rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-    }
+.header-left .moto-main{
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 
-        .header-left .moto-second{
-            text-align: justify;
-        }
+.header-left .moto-second{
+    text-align: justify;
+}
 
 .header-right{
     display: flex;
