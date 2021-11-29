@@ -54,6 +54,34 @@ h4, h5, h6 {
     margin-bottom: 0.5rem;
 }
 
+input {
+    border: 1px solid var(--grey-medium);
+    border-bottom: 2px solid var(--grey-medium);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    outline: none;
+}
+
+    input:focus-visible{
+        outline: 1px solid var(--grey-medium);
+    }
+
+    .error {
+        color: var(--error);
+    }
+
+.success {
+    color: var(--success);
+}
+
+input:focus:invalid{
+    border-bottom: 2px solid var(--error);
+}
+
+input:focus:valid{
+    border-bottom: 2px solid var(--success);
+}
+
 
 .container.body-content{
     padding: 2rem;
