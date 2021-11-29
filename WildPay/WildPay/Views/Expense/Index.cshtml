@@ -10,6 +10,7 @@
     <div style="display: flex" class="row">
         <div style="flex:1">
             <h2 style="text-align:center">Dépenses du groupe</h2>
+            <a style="outline:none; border:none; display:block; text-align:center" class="button" href="@Url.Action("Index", "Expense")"> ⊕ Ajouter une dépense</a>
             <ul style="border-right: 1px solid black" class="list-group">
 
                 @foreach (var expense in ViewBag.listExpenses)
@@ -21,7 +22,7 @@
                         }
                         else
                         {
-                            <img style="float:right; width:8%" class="user-image" src="~/Content/Images/default.png"/>
+                            <img style="float:right; width:8%" class="user-image" src="~/Content/Images/default.png" />
                         }
                         <h3 class="expense-name">@expense.Name</h3>
                         <h4 class="expense-title">@expense.Title</h4>
