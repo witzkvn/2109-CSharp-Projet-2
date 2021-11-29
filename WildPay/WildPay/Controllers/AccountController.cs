@@ -51,7 +51,7 @@ namespace WildPay.Controllers
                     );
                 } else
                 {
-                    updateMessage += "Le nom où le prénom ne sont pas valides\n";
+                    updateMessage += "Le nom ou le prénom ne sont pas valides\n";
                 }
 
                 if (user.NewUserImageFile != null && FormatTools.VerifyImageFormatAndSize(user.NewUserImageFile))

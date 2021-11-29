@@ -1,45 +1,74 @@
-﻿@using WildPay.Tools
+﻿
 @model WildPay.Models.Expense
 
+
 @{
-    ViewBag.Title = "Nouvelle dépense";
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
 }
 
-<div class="Expense">
-    <h2>Ajouter une dépense</h2>
 
-    @using (Html.BeginForm())
+<div class="login-page">
+    <h2>Bienvenue sur WildPay !</h2>
+
+    @using (Html.BeginForm("Validate", "ExpenseEdition"))
     {
+        @Html.ValidationSummary(true)
 
-<div>
-    <hr />
-    @Html.ValidationSummary(true)
+<div id="login-wrapper">
+    <h3>Ajouter une dépense</h3>
 
-
-    <div class="editor-label">
+    <div class="login-form-group">
         @Html.LabelFor(Model => Model.Title)
-
-    </div>
-    <div class="editor-field">
         @Html.EditorFor(Model => Model.Title)
+        <p class="error">
+            @Html.ValidationMessageFor(Model => Model.Title)
+        </p>
     </div>
 
-    <div class="editor-label">
+    <div class="login-form-group">
         @Html.LabelFor(Model => Model.CreatedAt)
-
-    </div>
-    <div class="editor-field">
         @Html.EditorFor(Model => Model.CreatedAt)
+        <p class="error">
+            @Html.ValidationMessageFor(Model => Model.CreatedAt)
+        </p>
     </div>
 
-    @*<input type="date" asp-for="CreatedAt" asp-format="{0:dd/MM/yyyy}" class="form-control" name="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />*@
-
-    <div class="form-group submitBtn">
-        <input type="submit" value="Mettre à jour" class="btn btn-primary" />
+    <div class="login-form-group">
+        <label for="categorie-select">Catégorie : </label>
+        <select name="categorieId" id="categorieId">
+            <option value="">Choisir une catégorie</option>
+            @{
+                foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
+                {
+                    <option value="@cat.Id">@cat.Name</option>
+                }
+            }
+        </select>
     </div>
+
+    <div class="login-form-group">
+        @Html.LabelFor(Model => Model.Value)
+        @Html.EditorFor(Model => Model.Value)
+        <p class="error">
+            @Html.ValidationMessageFor(Model => Model.Value)
+        </p>
+    </div>
+
+
+    <p class="error">
+        @ViewBag.Message
+    </p>
+
+    <button class="btn btn-primary" type="submit">
+        Inscription
+    </button>
 
 </div>
     }
-</div>
 
+
+</div>
 
