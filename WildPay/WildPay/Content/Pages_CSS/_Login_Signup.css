@@ -1,0 +1,61 @@
+﻿.login-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .login-page h2{
+        margin-bottom: 6rem;
+    }
+
+    #login-wrapper {
+        padding: 2rem;
+        border-radius: 10px;
+        min-width: 35rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid var(--bg-medium);
+    }
+
+#login-wrapper .confirmMsg{
+    margin-bottom: 3rem;
+}
+
+.login-page form {
+    text-align: center;
+}
+
+.login-page form h3{
+    margin-bottom: 3rem;
+}
+
+.login-page form button {
+    display: block;
+    margin: 4rem auto 2rem auto;
+}
+
+    .login-page form a {
+        font-size: 1.2rem;
+        transition: all .2s ease;
+    }
+
+    .login-page form a:hover {
+        color: var(--primary-medium);
+    }
+
+    .login-form-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.2rem 2rem;
+        margin-bottom: 3rem;
+    }
+
+.login-form-group label{
+    text-align: right;
+}
+
+.login-form-group p {
+    grid-column: span 2;
+}

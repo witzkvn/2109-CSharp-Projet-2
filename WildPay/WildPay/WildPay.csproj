@@ -182,6 +182,7 @@
     <Content Include="Content\Pages_CSS\_Components.css" />
     <Content Include="Content\Pages_CSS\_fonts.css" />
     <Content Include="Content\Pages_CSS\_Home.css" />
+    <Content Include="Content\Pages_CSS\_Login_Signup.css" />
     <Content Include="Content\Pages_CSS\_Navbar.css" />
     <Content Include="Content\_all.css" />
     <Content Include="Content\themeSwitcher.js" />

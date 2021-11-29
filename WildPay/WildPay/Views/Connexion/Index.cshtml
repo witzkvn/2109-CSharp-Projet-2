@@ -7,46 +7,51 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Bienvenue sur WildPay !</h2>
+<div class="login-page">
+    <h2>Heureux de vous revoir sur WildPay !</h2>
 
-<div id="login-div">
-    @if (@ViewBag.ConfirmationCreationCompte == true)
-    {
-        <p class="success">Compte créé avec succès ! Connectez-vous dès maintenant</p>
-    }
+    <div id="login-wrapper">
+        @if (@ViewBag.ConfirmationCreationCompte == true)
+        {
+            <p class="success confirmMsg">Compte créé avec succès ! Connectez-vous dès maintenant</p>
+        }
 
-    @using (Html.BeginForm("Authorize", "Connexion", FormMethod.Post))
-    {
-        <form>
-            <fieldset>
-                <legend>Connectez-vous</legend>
-                <p>
-                    @Html.LabelFor(model => model.Email) <br />
-                    @Html.EditorFor(model => model.Email)
-                </p>
+        @using (Html.BeginForm("Authorize", "Connexion", FormMethod.Post))
+        {
+            <form>
+            
+                    <h3>Se connecter</h3>
+                    <div class="login-form-group">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.EditorFor(model => model.Email)
+                        <p class="error">
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </p>
+                    </div>
 
-                <p>
-                    @Html.ValidationMessageFor(model => model.Email)
-                </p>
 
-                <p>
-                    @Html.LabelFor(model => model.Password) <br />
-                    @Html.EditorFor(model => model.Password)
-                </p>
+                    <div class="login-form-group">
+                        @Html.LabelFor(model => model.Password)
+                        @Html.EditorFor(model => model.Password)
+                        <p class="error">
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </p>
+                    </div>
 
-                <p>
-                    @Html.ValidationMessageFor(model => model.Password)
-                </p>
 
-                <p>
-                    <label>@Html.DisplayFor(model => model.loginErrorMessage)</label>
-                </p>
+                    <p class="error">
+                        <label>@Html.DisplayFor(model => model.loginErrorMessage)</label>
+                    </p>
 
-                <p><input type="submit" name="buttonSubmit" value="Connexion" /></p>
-                <a class="button" href="@Url.Action("Index", "AccountCreation")">Pas de compte ? inscription</a>
-            </fieldset>
-        </form>
-    }
+                    <button class="btn btn-primary" type="submit">
+                        Connexion
+                    </button>
+                    <a href="@Url.Action("Index", "AccountCreation")">Pas de compte ? Inscription</a>
+            
+            </form>
+        }
+    </div>
+
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
