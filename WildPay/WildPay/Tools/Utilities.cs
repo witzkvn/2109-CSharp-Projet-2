@@ -50,5 +50,40 @@ namespace WildPay.Tools
             }
             return principalGroupId;
         }
+
+        public static Expense GetExpenseById(int idExpense)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                SqlParameter idExpenseSQL = new SqlParameter("@expenseId", idExpense);
+                return db.Database.SqlQuery<Expense>("sp_GetExpenseById @expenseId", idExpenseSQL).FirstOrDefault();
+            }
+        }
+
+
+        public static List<User> GetUsersForGroup()
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                var returnCode = new SqlParameter();
+                returnCode.ParameterName = "@GroupID ";
+                returnCode.SqlDbType = SqlDbType.Int;
+                returnCode.Direction = ParameterDirection.Output;
+
+                db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
+
+                var type = returnCode.Value.GetType().FullName;
+
+                if (type != "System.DBNull")
+                {
+                    int groupId = (int)returnCode.Value;
+                    List<User> users = db.Database.SqlQuery<User>
+                    ("sp_GetUsersForGroup @p0", groupId)
+                    .ToList();
+                    return users;
+                }
+                return null;
+            }
+        }
     }
 }

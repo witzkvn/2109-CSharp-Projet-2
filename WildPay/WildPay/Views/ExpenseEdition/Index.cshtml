@@ -2,12 +2,12 @@
 @model WildPay.Models.Expense
 
 
-@{
+@*@{
     if (Session["Id"] == null)
     {
         Response.Redirect("~/Home/Index");
     }
-}
+}*@
 
 
 <div class="login-page">
@@ -18,7 +18,7 @@
         @Html.ValidationSummary(true)
 
 <div id="login-wrapper">
-    <h3>Ajouter une dépense</h3>
+    <h3>@ViewBag.title</h3>
 
     <div class="form-group">
         @Html.LabelFor(Model => Model.Title)
@@ -43,7 +43,14 @@
             @{
                 foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
                 {
-                    <option value="@cat.Id">@cat.Name</option>
+                    if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
+                    {
+                        <option selected value="@cat.Id">@cat.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
                 }
             }
         </select>
@@ -52,11 +59,18 @@
     <div class="form-group">
         <label for="auteur-select">Auteur : </label>
         <select name="auteurId" id="auteurId">
-            <option value="">Choisir une catégorie</option>
+            <option value="">Payé par ?</option>
             @{
                 foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
                 {
-                    <option value="@auteur.Id">@auteur.Firstname</option>
+                    if (Model.FkUserId == auteur.Id)
+                    {
+                        <option selected value="@auteur.Id">@auteur.Firstname</option>
+                    }
+                    else
+                    {
+                        <option value="@auteur.Id">@auteur.Firstname</option>
+                    }
                 }
             }
         </select>
@@ -66,7 +80,7 @@
 
     <div class="form-group">
         @Html.LabelFor(Model => Model.Value)
-        @Html.EditorFor(Model => Model.Value)
+        @Html.TextBoxFor(Model => Model.Value, new {type="number", min="0.5", max="100000", step="0.5"})
         <p class="error">
             @Html.ValidationMessageFor(Model => Model.Value)
         </p>

@@ -199,10 +199,21 @@ CREATE PROCEDURE sp_GetExpense
 @groupId INT
 AS
 BEGIN
-SELECT CreatedAt, Title, Value, FkUserId, FkCategoryId, FkGroupId, Category.Name, [User].Firstname, [User].Lastname, [User].UserImage FROM [Expense]
+SELECT Expense.Id, CreatedAt, Title, Value, FkUserId, FkCategoryId, FkGroupId ,Category.Name, [User].Firstname, [User].Lastname, [User].UserImage FROM [Expense]
 INNER JOIN [User] ON [User].Id = FkUserId
 INNER JOIN [Category] ON Category.Id = FkCategoryId
 WHERE FkGroupId = @groupId
 ORDER BY CreatedAt DESC
 END
+ GO 
+
+ DROP PROCEDURE IF EXISTS sp_GetExpenseById;
+ GO 
+ CREATE PROCEDURE sp_GetExpenseById
+ @expenseId INT
+ AS
+ BEGIN
+ SELECT * from [Expense]
+ WHERE [Expense].Id = @expenseId
+ END
  GO 

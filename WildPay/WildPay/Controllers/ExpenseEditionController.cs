@@ -18,10 +18,9 @@ namespace WildPay.Controllers
         {
             Expense newExpense = new Expense();
             newExpense.CreatedAt = DateTime.Now;
+            ViewBag.title = "Ajouter une dépense";
             ViewBag.listeCategories = CategoryTools.GetCategoriesForDefaultGroup();
-            ViewBag.listeUsers = GetUsersForGroup(Utilities.GetGroupePrincipalId());
-
-
+            ViewBag.listeUsers = Utilities.GetUsersForGroup();
             return View(newExpense);
         }
 
@@ -43,7 +42,6 @@ namespace WildPay.Controllers
                         new SqlParameter("@user_Id", auteurId),
                         categoryId,
                         new SqlParameter("@GroupId", groupId));
-
                     return RedirectToAction("Index", "Expense");
 
                 }
@@ -52,35 +50,17 @@ namespace WildPay.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult EditExpense(Expense expenseToEdit)
+        public ActionResult EditExpense(int idExpense)
         {
-            return View();
+            Expense expenseToEdit = Utilities.GetExpenseById(idExpense);
+            ViewBag.title = "Editer une dépense";
+            ViewBag.listeCategories = CategoryTools.GetCategoriesForDefaultGroup();
+            ViewBag.listeUsers = Utilities.GetUsersForGroup();
+            return View("Index", expenseToEdit);
         }
 
 
-        public List<User> GetUsersForGroup(int idGroup)
-        {
-            using (WildPayContext db = new WildPayContext())
-            {
-                var returnCode = new SqlParameter();
-                returnCode.ParameterName = "@GroupID ";
-                returnCode.SqlDbType = SqlDbType.Int;
-                returnCode.Direction = ParameterDirection.Output;
 
-                db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
 
-                var type = returnCode.Value.GetType().FullName;
-
-                if (type != "System.DBNull")
-                {
-                    int groupId = (int)returnCode.Value;
-                    List<User> users = db.Database.SqlQuery<User>
-                    ("sp_GetUsersForGroup @p0", groupId)
-                    .ToList();
-                    return users;
-                }
-                return null;
-            }
-        }
     }
 }
