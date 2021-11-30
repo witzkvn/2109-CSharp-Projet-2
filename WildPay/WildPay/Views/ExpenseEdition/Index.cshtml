@@ -50,6 +50,21 @@
     </div>
 
     <div class="login-form-group">
+        <label for="auteur-select">Auteur : </label>
+        <select name="auteurId" id="auteurId">
+            <option value="">Choisir une catégorie</option>
+            @{
+                foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
+                {
+                    <option value="@auteur.Id">@auteur.Firstname</option>
+                }
+            }
+        </select>
+    </div>
+
+
+
+    <div class="login-form-group">
         @Html.LabelFor(Model => Model.Value)
         @Html.EditorFor(Model => Model.Value)
         <p class="error">
@@ -63,7 +78,7 @@
     </p>
 
     <button class="btn btn-primary" type="submit">
-        Inscription
+        Valider
     </button>
 
 </div>

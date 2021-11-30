@@ -43,6 +43,21 @@ CREATE PROCEDURE sp_GetUserById
    END
  GO 
 
+ DROP PROCEDURE IF EXISTS sp_GetUsersForGroup;
+ GO 
+CREATE PROCEDURE sp_GetUsersForGroup
+	@groupId INT
+   AS
+   BEGIN
+    SELECT * FROM [WildPay-1].[dbo].[User] 
+	INNER JOIN [WildPay-1].[dbo].[UserGroup]
+	ON [User].Id = [UserGroup].User_Id
+	WHERE Group_Id = @groupId;
+   END
+ GO 
+
+
+
 DROP PROCEDURE IF EXISTS sp_UpdateUserImageById;
  GO 
 CREATE PROCEDURE sp_UpdateUserImageById
