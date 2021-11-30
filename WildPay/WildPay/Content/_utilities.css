@@ -10,8 +10,8 @@
 }
 
 .user-image-sm {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.2rem;
+    height: 3.2rem;
 }
 
 .user-image.user-image-xl {
@@ -31,4 +31,10 @@
     padding: 2rem;
     border-radius: 10px;
     border: 1px solid var(--bg-medium);
+}
+
+.text-no-overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
