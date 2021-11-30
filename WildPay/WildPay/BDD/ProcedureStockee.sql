@@ -193,6 +193,32 @@ BEGIN
 END
  GO 
 
+
+ DROP PROCEDURE IF EXISTS sp_UpdateExpense;
+ GO 
+CREATE PROCEDURE sp_UpdateExpense
+@date DATETIME,
+@title VARCHAR(200),
+@value DECIMAL(10,2),
+@user_Id INT,
+@category_Id INT,
+@expense_Id INT
+AS
+BEGIN
+	UPDATE [Expense]
+	SET
+	CreatedAt = @date,
+	Title = @title,
+	FkUserId = @user_Id,
+	FkCategoryId = @category_Id,
+	Value = @value
+	WHERE @expense_id = [Expense].Id
+END
+ GO 
+
+
+
+
  DROP PROCEDURE IF EXISTS sp_GetExpense;
  GO 
 CREATE PROCEDURE sp_GetExpense
