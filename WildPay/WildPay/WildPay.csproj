@@ -163,7 +163,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\AssetsTools.cs" />
-    <Compile Include="Tools\CategoryTools.cs" />
+    <Compile Include="Tools\DatabaseTools.cs" />
     <Compile Include="Tools\ConverterTools.cs" />
     <Compile Include="Tools\FormatTools.cs" />
     <Compile Include="Tools\Utilities.cs" />

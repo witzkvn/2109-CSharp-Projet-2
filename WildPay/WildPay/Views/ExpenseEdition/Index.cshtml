@@ -32,7 +32,9 @@
 
     <div class="form-group">
         @Html.LabelFor(Model => Model.CreatedAt)
-        @Html.TextBoxFor(Model => Model.CreatedAt, new { type = "date", min = "2020-01-01", name="CreatedAt" })
+
+        <input type="date" value="@ViewBag.date", name="newDate"/>
+        @*@Html.TextBoxFor(Model => Model.CreatedAt, new { type = "date", min = "2020-01-01", name="CreatedAt", value= DateTime.Today.ToString("yyyy-MM-dd") })*@
         <p class="error">
             @Html.ValidationMessageFor(Model => Model.CreatedAt)
         </p>
@@ -61,7 +63,7 @@
     <div class="form-group">
         <label for="auteur-select">Auteur : </label>
         <select name="auteurId" id="auteurId">
-            <option value="">Payé par ?</option>
+
             @{
                 foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
                 {
@@ -96,6 +98,15 @@
     <button class="btn btn-primary" type="submit">
         Valider
     </button>
+
+    @{ 
+        if (Model.Title != null)
+            {
+                <a href="@Url.Action("DeleteExpense", "ExpenseEdition", new { expenseId = Model.Id })">
+                    <input type="button" class="btn btn-danger" value="Supprimer"/>
+                </a>
+            }
+    }
 
 </div>
     }

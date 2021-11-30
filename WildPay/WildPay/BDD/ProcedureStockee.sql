@@ -197,12 +197,13 @@ END
  DROP PROCEDURE IF EXISTS sp_UpdateExpense;
  GO 
 CREATE PROCEDURE sp_UpdateExpense
+@expense_Id INT,
 @date DATETIME,
 @title VARCHAR(200),
 @value DECIMAL(10,2),
 @user_Id INT,
-@category_Id INT,
-@expense_Id INT
+@category_Id INT
+
 AS
 BEGIN
 	UPDATE [Expense]
@@ -211,12 +212,10 @@ BEGIN
 	Title = @title,
 	FkUserId = @user_Id,
 	FkCategoryId = @category_Id,
-	Value = @value
+	[Value] = @value
 	WHERE @expense_id = [Expense].Id
 END
  GO 
-
-
 
 
  DROP PROCEDURE IF EXISTS sp_GetExpense;
@@ -227,9 +226,22 @@ AS
 BEGIN
 SELECT Expense.Id, CreatedAt, Title, Value, FkUserId, FkCategoryId, FkGroupId ,Category.Name, [User].Firstname, [User].Lastname, [User].UserImage FROM [Expense]
 INNER JOIN [User] ON [User].Id = FkUserId
-INNER JOIN [Category] ON Category.Id = FkCategoryId
+LEFT OUTER JOIN [Category] ON Category.Id = FkCategoryId
 WHERE FkGroupId = @groupId
 ORDER BY CreatedAt DESC
+END
+ GO 
+
+
+
+ DROP PROCEDURE IF EXISTS sp_DeleteExpense;
+ GO 
+CREATE PROCEDURE sp_DeleteExpense
+@expense_Id INT
+AS
+BEGIN
+DELETE FROM [Expense]
+WHERE [Expense].Id = @expense_Id
 END
  GO 
 

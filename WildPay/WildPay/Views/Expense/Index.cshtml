@@ -18,7 +18,7 @@
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
-                    <a href="@Url.Action("EditExpense", "ExpenseEdition", new { idExpense = expense.Id })" class="list-group-item box">
+                    <a href="@Url.Action("EditExpense", "ExpenseEdition", new { expenseId = expense.Id })" class="list-group-item box">
                         <h3 class="text-no-overflow">@expense.Title</h3>
                         @if (expense.UserImageFile != null)
                         {

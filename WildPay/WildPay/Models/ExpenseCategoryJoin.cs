@@ -13,7 +13,7 @@ namespace WildPay.Models
         public string Title { get; set; }
         public double Value { get; set; }
         public int FkUserId { get; set; }
-        public int FkCategoryId { get; set; }
+        public int? FkCategoryId { get; set; }
         public int FkGroupId { get; set; }
         public string Name { get; set; }
         public string Firstname { get; set; }
