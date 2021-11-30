@@ -20,7 +20,7 @@
 <div id="login-wrapper">
     <h3>Ajouter une dépense</h3>
 
-    <div class="login-form-group">
+    <div class="form-group">
         @Html.LabelFor(Model => Model.Title)
         @Html.EditorFor(Model => Model.Title)
         <p class="error">
@@ -28,7 +28,7 @@
         </p>
     </div>
 
-    <div class="login-form-group">
+    <div class="form-group">
         @Html.LabelFor(Model => Model.CreatedAt)
         @Html.EditorFor(Model => Model.CreatedAt)
         <p class="error">
@@ -36,7 +36,7 @@
         </p>
     </div>
 
-    <div class="login-form-group">
+    <div class="form-group">
         <label for="categorie-select">Catégorie : </label>
         <select name="categorieId" id="categorieId">
             <option value="">Choisir une catégorie</option>
@@ -49,7 +49,7 @@
         </select>
     </div>
 
-    <div class="login-form-group">
+    <div class="form-group">
         <label for="auteur-select">Auteur : </label>
         <select name="auteurId" id="auteurId">
             <option value="">Choisir une catégorie</option>
@@ -64,7 +64,7 @@
 
 
 
-    <div class="login-form-group">
+    <div class="form-group">
         @Html.LabelFor(Model => Model.Value)
         @Html.EditorFor(Model => Model.Value)
         <p class="error">
