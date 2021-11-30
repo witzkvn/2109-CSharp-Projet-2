@@ -1,47 +1,79 @@
 ﻿.expense .row{
-    display:flex
-}
-
-.expense .flex{
-    flex:1
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4rem;
 }
 
 .expense h2 {
-    text-align: center
+    text-align: center;
 }
 
-.expense a {
-    display: block;
-    text-align:center
+.expense .list-group-item:not(:last-of-type) {
+    margin-bottom: 2rem;
 }
 
-.expense ul{
-    border-right: 1px solid black
+.expense .list-group-item {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 0 1.5rem;
+    cursor: pointer;
+    transition: all .2s ease;
 }
 
-.expense li {
-    margin: 20px 10px;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border-color: black;
-    border-style: solid
+.expense .list-group-item:hover {
+    transform: translateY(-2px);
+}
+
+.expense .list-group-item:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+
+.expense .button {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
+}
+
+.expense .button:hover{
+    color: var(--primary-medium);
+}
+
+.expense .button ion-icon {
+    margin-right: 1rem;
+    font-size: 2rem;
 }
 
 .expense img {
-    float: right;
-    width: 10%;
-    height: auto;
+    margin-left: auto;
 }
 
-.expense .espace{
-    line-height: 2em
+.expense .espace {
+    font-size: 1.2rem;
+}
+
+.expense .category{
+    margin-bottom: 3rem;
+}
+
+.expense .date {
+    font-size: 1rem;
+    margin-top: auto;
 }
 
 .expense .expense-value {
-    float: right;
+    font-weight: bold;
+    font-size: 2.3rem;
 }
 
 .expense .expense-bilan {
-    margin: 30px 30px;
+    margin: 3rem 3rem;
     text-align: center
+}
+
+.expense .span2{
+    grid-column: span 2;
 }
