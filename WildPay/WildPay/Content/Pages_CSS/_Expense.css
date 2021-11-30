@@ -1,43 +1,48 @@
 ﻿.expense .row{
-    display:flex;
-}
-
-.expense .flex{
-    flex:1;
-}
-
-.expense .flex:first-of-type {
-    margin-right: 4rem;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4rem;
 }
 
 .expense h2 {
     text-align: center;
 }
 
-.expense a {
-    display: block;
-    text-align:center;
-}
-
-
-.expense li:not(:last-of-type) {
+.expense .list-group-item:not(:last-of-type) {
     margin-bottom: 2rem;
 }
 
-.expense li {
+.expense .list-group-item {
     display: grid;
     grid-template-columns: 1fr max-content;
     gap: 0 1.5rem;
+    cursor: pointer;
+    transition: all .2s ease;
 }
 
-.expense .button{
+.expense .list-group-item:hover {
+    transform: translateY(-2px);
+}
+
+.expense .list-group-item:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+
+.expense .button {
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all .2s ease;
 }
 
-.expense .button ion-icon{
+.expense .button:hover{
+    color: var(--primary-medium);
+}
+
+.expense .button ion-icon {
     margin-right: 1rem;
     font-size: 2rem;
 }
@@ -61,7 +66,7 @@
 
 .expense .expense-value {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 2.3rem;
 }
 
 .expense .expense-bilan {

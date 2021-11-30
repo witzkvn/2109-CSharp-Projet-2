@@ -18,8 +18,8 @@
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
-                    <li class="list-group-item box">
-                        <h3>@expense.Title</h3>
+                    <a href="#" class="list-group-item box">
+                        <h3 class="text-no-overflow">@expense.Title</h3>
                         @if (expense.UserImageFile != null)
                         {
                             <img class="user-image user-image-sm" src="@expense.UserImageFile" />
@@ -28,11 +28,11 @@
                         {
                             <img class="user-image user-image-sm" src="~/Content/Images/default.png" />
                         }
-                        <p class="category span2">@expense.Name</p>
-                        <p class="espace span2">Payé par @expense.Firstname @expense.Lastname au groupe</p>
+                        <p class="category span2 text-no-overflow">@expense.Name</p>
+                        <p class="espace span2 text-no-overflow">Payé par @expense.Firstname @expense.Lastname au groupe</p>
                         <p class="date">@expense.DateCourte</p>
                         <p class="expense-value">@expense.Value €</p>
-                    </li>
+                    </a>
                 }
             </div>
         </div>

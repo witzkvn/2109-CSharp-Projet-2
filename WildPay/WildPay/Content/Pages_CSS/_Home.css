@@ -90,8 +90,10 @@
 .whoarewe-item:hover{
     transform: translateY(-2px);
 }
+
 .whoarewe-item:active {
     transform: translateY(1px);
+    box-shadow: none;
 }
 
 .whoarewe-image {

@@ -32,3 +32,9 @@
     border-radius: 10px;
     border: 1px solid var(--bg-medium);
 }
+
+.text-no-overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
