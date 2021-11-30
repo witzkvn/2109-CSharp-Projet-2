@@ -1,16 +1,41 @@
-﻿
-<h2>Dépenses du groupe</h2>
-
-
-@foreach (var expense in ViewBag.listExpenses)
+﻿@*@{
+    if (Session["Id"] == null)
     {
-        <div class="expenses">
-            <span class="expense-userImage">@expense.UserImage</span>
-            <span class="expense-firstname">@expense.Firstname</span>
-            <span class="expense-lastname">@expense.Lastname</span>
-            <span class="expense-name">@expense.Name</span>
-            <span class="expense-title">@expense.Title</span>
-            <span class="expense-value">@expense.Value</span>
-            <span class="expense-date">@expense.DateCourte</span>
-        </div>
+        Response.Redirect("~/Connexion/Index");
     }
+}*@
+
+
+<div class="expense">
+    <div class="row">
+        <div class="flex">
+            <h2>Dépenses du groupe</h2>
+            <a class="button" href="@Url.Action("Index", "Expense")"> ⊕ Ajouter une dépense</a>
+            <ul class="list-group">
+
+                @foreach (var expense in ViewBag.listExpenses)
+                {
+                    <li class="list-group-item">
+                        @if (expense.UserImageFile != null)
+                        {
+                            <img class="user-image" src="@expense.UserImageFile" />
+                        }
+                        else
+                        {
+                            <img class="user-image" src="~/Content/Images/default.png" />
+                        }
+                        <h3>@expense.Name</h3>
+                        <h4>@expense.Title</h4>
+                        <h3 class="expense-value">@expense.Value €</h3>
+                        <p class="espace">Payé par @expense.Firstname @expense.Lastname au groupe</p>
+                        <small>@expense.DateCourte</small>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="flex">
+            <h2>Bilan du groupe</h2>
+            <p class="expense-bilan">toto</p>
+        </div>
+    </div>
+</div>

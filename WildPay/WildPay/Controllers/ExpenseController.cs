@@ -17,15 +17,7 @@ namespace WildPay.Controllers
         // GET: Expense
         public ActionResult Index()
         {
-
-            var returnCode = new SqlParameter();
-            returnCode.ParameterName = "@GroupID ";
-            returnCode.SqlDbType = SqlDbType.Int;
-            returnCode.Direction = ParameterDirection.Output;
-
-            db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
-
-            int GroupId = (int)returnCode.Value;
+            int GroupId = Utilities.GetGroupePrincipalId();
 
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)
@@ -33,6 +25,10 @@ namespace WildPay.Controllers
             foreach (ExpenseCategoryJoin exp in expenses)
             {
                 exp.DateCourte = FormatTools.ConvertInShortDate(exp.CreatedAt);
+                if (exp.UserImage != null)
+                {
+                    exp.UserImageFile = ConverterTools.ByteArrayToStringImage(exp.UserImage);
+                }
             }
             ViewBag.listExpenses = expenses;
 
