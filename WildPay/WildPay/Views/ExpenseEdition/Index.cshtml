@@ -30,7 +30,7 @@
 
     <div class="form-group">
         @Html.LabelFor(Model => Model.CreatedAt)
-        @Html.EditorFor(Model => Model.CreatedAt)
+        @Html.TextBoxFor(Model => Model.CreatedAt, new { type = "date", min = "2020-01-01", name="CreatedAt", value="2016-06-06" })
         <p class="error">
             @Html.ValidationMessageFor(Model => Model.CreatedAt)
         </p>
