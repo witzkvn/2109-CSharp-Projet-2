@@ -48,8 +48,9 @@
 
 
 .form-group {
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     gap: 0.2rem 2rem;
     margin-bottom: 3rem;
 }
