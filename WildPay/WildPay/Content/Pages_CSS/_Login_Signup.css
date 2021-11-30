@@ -36,26 +36,11 @@
     margin: 4rem auto 2rem auto;
 }
 
-    .login-page form a {
-        font-size: 1.2rem;
-        transition: all .2s ease;
-    }
-
-    .login-page form a:hover {
-        color: var(--primary-medium);
-    }
-
-    .login-form-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.2rem 2rem;
-        margin-bottom: 3rem;
-    }
-
-.login-form-group label{
-    text-align: right;
+.login-page form a {
+    font-size: 1.2rem;
+    transition: all .2s ease;
 }
 
-.login-form-group p {
-    grid-column: span 2;
+.login-page form a:hover {
+    color: var(--primary-medium);
 }

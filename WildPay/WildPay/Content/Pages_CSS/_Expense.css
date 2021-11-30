@@ -1,0 +1,47 @@
+﻿.expense .row{
+    display:flex
+}
+
+.expense .flex{
+    flex:1
+}
+
+.expense h2 {
+    text-align: center
+}
+
+.expense a {
+    display: block;
+    text-align:center
+}
+
+.expense ul{
+    border-right: 1px solid black
+}
+
+.expense li {
+    margin: 20px 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid
+}
+
+.expense img {
+    float: right;
+    width: 10%;
+    height: auto;
+}
+
+.expense .espace{
+    line-height: 2em
+}
+
+.expense .expense-value {
+    float: right;
+}
+
+.expense .expense-bilan {
+    margin: 30px 30px;
+    text-align: center
+}
