@@ -1,2 +1,70 @@
-﻿body {
+﻿.categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.categories h2 {
+    text-align: center;
+}
+
+.categories-wrapper {
+    min-width: 35rem;
+    max-width: 60rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categories-wrapper form {
+    margin: 0 auto 6rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categories-wrapper form h3{
+    margin-bottom: 3rem;
+}
+
+.categories-wrapper h4,
+.categories-wrapper p.error {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.categories-list{
+    width: max-content;
+    margin: 0 auto;
+}
+
+.categorie-name {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.categories-delete {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: var(--secondary-medium);
+    transition: all .2s ease;
+}
+
+.categories-delete.disabled {
+    background-color: var(--grey-dark);
+}
+
+.categories-delete:not(.disabled):hover {
+    transform: translateY(-2px);
+    background-color: var(--error);
+}
+
