@@ -45,3 +45,19 @@
 .btn.btn-secondary:hover {
     background-color: var(--secondary-light);
 }
+
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.form-group label {
+    text-align: right;
+}
+
+.form-group p {
+    grid-column: span 2;
+}
