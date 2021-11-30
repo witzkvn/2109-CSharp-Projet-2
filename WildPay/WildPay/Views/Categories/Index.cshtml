@@ -1,4 +1,6 @@
 ﻿@using WildPay.Models
+@using WildPay.Tools
+
 @model Category
 @{
     if (Session["Id"] == null)
@@ -7,41 +9,62 @@
     }
 }
 
+<div class="categories">
+    <h2>Catégories des dépenses du groupe</h2>
 
-@{
-    List<Category> categories = ViewBag.listeCategories;
-    foreach (Category cat in categories)
-    {
-        <div class="categories">
-            <span class="categorie-name">@cat.Name</span>
-            @if(cat.IsBase == false) { 
-                <span class="categorie-delete"><a href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>X</a> </span>
+
+
+    <div class="categories-wrapper box">
+        @using (Html.BeginForm())
+        {
+            <h3>Créer une nouvelle catégorie</h3>
+
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Name)
+                @Html.EditorFor(Model => Model.Name)
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Name)
+                    @ViewBag.Message
+                </p>
+            </div>
+            @Html.ValidationSummary(true)
+
+            <div class="categories-btn">
+                <input type="reset" value="Annuler" />
+                <input class="btn btn-primary" type="submit" value="Valider" />
+            </div>
+
+        }
+
+        <h4>Catégories existantes :</h4>
+        <p class="error">ATTENTION : la suppression d'une catégorie est définitive et les catégories des dépenses associées devront être à nouveau saisies manuellement.</p>
+
+        <div class="categories-list">
+
+            @{
+                List<Category> categories = ViewBag.listeCategories;
+                foreach (Category cat in categories)
+                {
+                    <div class="categorie-name">
+                        @if (cat.IsBase == false)
+                        {
+                            <a class="categories-delete" href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>
+                                <ion-icon name="trash"></ion-icon>
+                            </a>
+                        } else
+                        {
+                            <div class="categories-delete disabled">
+                                <ion-icon name="trash"></ion-icon>
+                            </div>
+                        }
+                        @Utilities.GetPremiereLettreMajuscule(cat.Name)
+                    </div>
+
+                }
             }
-        </div>
-    }
-}
-
-
-
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Nouvelle categorie</legend>
-        <div class="editor-label">
-            @Html.LabelFor(Model => Model.Name)
 
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(Model => Model.Name)
-            @Html.ValidationMessageFor(Model => Model.Name)
-        </div>
 
+    </div>
 
-        <input type="submit" value="Valider" />
-        <input type="reset" value="Annuler" />
-
-    </fieldset>
-
-}
+</div>
