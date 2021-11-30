@@ -43,6 +43,18 @@ CREATE PROCEDURE sp_GetUserById
    END
  GO 
 
+ DROP PROCEDURE IF EXISTS sp_GetUser;
+ GO 
+CREATE PROCEDURE sp_GetUser
+@groupId INT
+AS
+BEGIN
+SELECT Id, Firstname, Lastname FROM [User]
+INNER JOIN [UserGroup] ON [User].Id = UserGroup.User_Id
+WHERE Group_Id = @groupId
+END
+ GO 
+
 DROP PROCEDURE IF EXISTS sp_UpdateUserImageById;
  GO 
 CREATE PROCEDURE sp_UpdateUserImageById
@@ -190,4 +202,34 @@ INNER JOIN [Category] ON Category.Id = FkCategoryId
 WHERE FkGroupId = @groupId
 ORDER BY CreatedAt DESC
 END
+ GO 
+
+ DROP PROCEDURE IF EXISTS sp_GetSommeDue;
+ GO 
+CREATE PROCEDURE sp_GetSommeDue
+	@UserId INT,
+	@groupId INT,
+	@sommeDue MONEY OUTPUT
+   AS
+   BEGIN
+    SELECT @sommeDue=(
+	((SELECT SUM(value) FROM Expense WHERE FkGroupId = @groupId)
+	/(SELECT COUNT(*) FROM [UserGroup] WHERE Group_Id = @groupId))
+	-(SELECT SUM(value) FROM Expense WHERE FkGroupId = @groupId AND FkUserId = @UserId)
+	)
+   END
+ GO 
+
+  DROP PROCEDURE IF EXISTS sp_GetSommeDueSiNull;
+ GO 
+CREATE PROCEDURE sp_GetSommeDueSiNull
+	@groupId INT,
+	@sommeDue MONEY OUTPUT
+   AS
+   BEGIN
+    SELECT @sommeDue=(
+	((SELECT SUM(value) FROM Expense WHERE FkGroupId = @groupId)
+	/(SELECT COUNT(*) FROM [UserGroup] WHERE Group_Id = @groupId))
+	)
+   END
  GO 
