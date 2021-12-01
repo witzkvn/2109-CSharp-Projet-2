@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WildPay.DAL;
 using WildPay.Models;
 using WildPay.Tools;
@@ -31,6 +32,9 @@ namespace WildPay.Controllers
                 }
             }
             ViewBag.listExpenses = expenses;
+
+            ViewBag.expLabels = new List<string>() { "Clea", "Seb", "Kevin" };
+            ViewBag.expValues = new List<double>() { 25.5, 58.2, 16.3 };
 
             return View();
         }

@@ -77,3 +77,14 @@
 .expense .span2{
     grid-column: span 2;
 }
+
+.expense .expense-graph{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.expense .flex.fixed {
+    height: max-content;
+    position: sticky;
+    top: 2rem;
+}
