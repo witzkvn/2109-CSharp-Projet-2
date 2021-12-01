@@ -34,6 +34,13 @@ namespace WildPay.Tools
             else return "Utilisateur WildPay";
         }
 
+        public static string GetNomCompletUser(ListUser user)
+        {
+            if (user != null)
+                return $"{user.Lastname.ToUpper()} {GetPremiereLettreMajuscule(user.Firstname)}";
+            else return "Utilisateur WildPay";
+        }
+
         public static int GetGroupePrincipalId()
         {
             int principalGroupId = 0;

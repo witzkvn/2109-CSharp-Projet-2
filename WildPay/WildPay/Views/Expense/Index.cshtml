@@ -1,4 +1,7 @@
-﻿@{
+﻿@using WildPay.Tools
+
+@{
+
     if (Session["Id"] == null)
     {
         Response.Redirect("~/Connexion/Index");
@@ -43,7 +46,7 @@
                 {
                     if (@ViewBag.SommesDues[user.Id] > 0)
                     {
-                        <h4>@user.Firstname @user.Lastname doit @ViewBag.SommesDues[user.Id] € au groupe</h4>
+                        <h4>@Utilities.GetNomCompletUser(user) doit <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
                     }
                 }
 
@@ -51,7 +54,7 @@
                 {
                     if (@ViewBag.SommesDues[user.Id] < 0)
                     {
-                        <h4>Le groupe doit @(ViewBag.SommesDues[user.Id]*-1) € à @user.Firstname @user.Lastname</h4>
+                        <h4>Le groupe doit <span class="text-primary">@(ViewBag.SommesDues[user.Id]*-1) €</span> à @Utilities.GetNomCompletUser(user)</h4>
                     }
                 }
 
