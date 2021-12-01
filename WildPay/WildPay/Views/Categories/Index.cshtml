@@ -24,16 +24,25 @@
                 @Html.EditorFor(Model => Model.Name)
                 <input class="btn btn-primary" type="submit" value="Valider" />
 
-                <p class="message error">
-                    @Html.ValidationMessageFor(Model => Model.Name)
-                    @ViewBag.Message
-                </p>
+                @if (ViewBag.Confirm != "")
+                {
+                    <p class="message success">
+                        @Html.ValidationMessageFor(Model => Model.Name)
+                        @ViewBag.Confirm
+                    </p>
+                } else if(ViewBag.Error != "")
+                {
+                    <p class="message error">
+                        @Html.ValidationMessageFor(Model => Model.Name)
+                        @ViewBag.Error
+                    </p>
+                }
             </div>
             @Html.ValidationSummary(true)
         }
 
         <h4>Catégories existantes :</h4>
-        <p class="error">ATTENTION : la suppression d'une catégorie est définitive et les catégories des dépenses associées devront être à nouveau saisies manuellement.</p>
+        <p class="error warning">ATTENTION : la suppression d'une catégorie est définitive et les catégories des dépenses associées devront être à nouveau saisies manuellement.</p>
 
         <div class="categories-list">
 
