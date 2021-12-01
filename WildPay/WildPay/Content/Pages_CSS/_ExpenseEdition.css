@@ -13,3 +13,7 @@
 .expense-edition-buttons button:first-of-type{
     margin-right: 2rem;
 }
+
+.expense-edition-page p.error{
+    margin-top: 1rem;
+}
