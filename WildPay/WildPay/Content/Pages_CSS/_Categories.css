@@ -28,13 +28,17 @@
     margin-bottom: 3rem;
 }
 
-.categories-wrapper h4,
-.categories-wrapper p.error {
+.categories-wrapper h4 {
     margin-bottom: 2rem;
     text-align: center;
 }
 
-.categories-list{
+.categories-wrapper p.error{
+    margin-top : 0.5rem;
+    text-align: center;
+}
+
+.categories-list {
     width: max-content;
     margin: 0 auto;
 }
