@@ -41,16 +41,12 @@
         </div>
         <div class="flex fixed">
             <h2>Bilan du groupe</h2>
-            <p class="expense-bilan">toto</p>
-            <div class="expense-graph">
-                <canvas id="myChart"></canvas>
-            </div>
-            <div class="somme-due">
+            <div class="expense-bilan">
                 @foreach (var user in ViewBag.listeUsers)
                 {
                     if (@ViewBag.SommesDues[user.Id] > 0)
                     {
-                        <h3>@user.Firstname @user.Lastname doit @ViewBag.SommesDues[user.Id] € au groupe</h3>
+                        <h4>@user.Firstname @user.Lastname doit @ViewBag.SommesDues[user.Id] € au groupe</h4>
                     }
                 }
 
@@ -58,11 +54,16 @@
                 {
                     if (@ViewBag.SommesDues[user.Id] < 0)
                     {
-                        <h3>Le groupe doit @(ViewBag.SommesDues[user.Id]*-1) € à @user.Firstname @user.Lastname</h3>
+                        <h4>Le groupe doit @(ViewBag.SommesDues[user.Id]*-1) € à @user.Firstname @user.Lastname</h4>
                     }
                 }
-  
+
             </div>
+
+            <div class="expense-graph">
+                <canvas id="myChart"></canvas>
+            </div>
+
         </div>
     </div>
 </div>

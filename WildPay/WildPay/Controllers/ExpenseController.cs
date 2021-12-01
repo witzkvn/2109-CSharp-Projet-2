@@ -32,15 +32,15 @@ namespace WildPay.Controllers
             }
             ViewBag.listExpenses = expenses;
 
-            ViewBag.expLabels = new List<string>() { "Clea", "Seb", "Kevin" };
-            ViewBag.expValues = new List<double>() { 25.5, 58.2, 16.3 };
-
             List<ListUser> user = db.Database.SqlQuery<ListUser>
                     ("sp_GetUser @p0", GroupId)
                     .ToList();
 
             ViewBag.listeUsers = user;
             ViewBag.SommesDues = SommesDues(ViewBag.listeUsers);
+
+            ViewBag.expLabels = new List<string>() { "Clea", "Seb", "Kevin" };
+            ViewBag.expValues = new List<double>() { 25.5, 58.2, 16.3 };
 
             return View();
         }
