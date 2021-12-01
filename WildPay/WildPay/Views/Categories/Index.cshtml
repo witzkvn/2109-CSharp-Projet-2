@@ -22,18 +22,14 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Name)
                 @Html.EditorFor(Model => Model.Name)
-                <p class="error">
+                <input class="btn btn-primary" type="submit" value="Valider" />
+
+                <p class="message error">
                     @Html.ValidationMessageFor(Model => Model.Name)
                     @ViewBag.Message
                 </p>
             </div>
             @Html.ValidationSummary(true)
-
-            <div class="categories-btn">
-                <input type="reset" value="Annuler" />
-                <input class="btn btn-primary" type="submit" value="Valider" />
-            </div>
-
         }
 
         <h4>Catégories existantes :</h4>

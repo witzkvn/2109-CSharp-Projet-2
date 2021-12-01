@@ -58,6 +58,11 @@ namespace WildPay.Controllers
                 returnSomme.SqlDbType = SqlDbType.Money;
                 returnSomme.Direction = ParameterDirection.Output;
 
+                var returnSomme2 = new SqlParameter();
+                returnSomme2.ParameterName = "@sommeDue ";
+                returnSomme2.SqlDbType = SqlDbType.Money;
+                returnSomme2.Direction = ParameterDirection.Output;
+
                 db.Database.ExecuteSqlCommand("sp_GetSommeDue @UserId, @groupId, @sommeDue OUTPUT",
                     new SqlParameter("@UserId", user.Id),
                     new SqlParameter("@groupId", GroupId),
@@ -74,8 +79,8 @@ namespace WildPay.Controllers
                 {
                     db.Database.ExecuteSqlCommand("sp_GetSommeDueSiNull @groupId, @sommeDue OUTPUT",
                     new SqlParameter("@groupId", GroupId),
-                    returnSomme);
-                    string returnSommeToStringSiNull = returnSomme.Value.ToString();
+                    returnSomme2);
+                    string returnSommeToStringSiNull = returnSomme2.Value.ToString();
                     sommeDueParUser = Convert.ToDouble(returnSommeToStringSiNull);
                     sommeDueParUserShort = FormatTools.ConvertinShortDouble(sommeDueParUser);
                 }
