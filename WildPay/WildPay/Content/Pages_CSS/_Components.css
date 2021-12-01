@@ -1,0 +1,64 @@
+﻿.themeBtn {
+    display: flex;
+    align-items: center;
+}
+
+.themeBtn p {
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+
+.themeBtn.btn-dark {
+    color: var(--text-white);
+    background-color: var(--bg-black-medium);
+}
+
+.themeBtn.btn-light {
+    color: var(--text-black);
+    background-color: var(--bg-white-medium);
+}
+
+.btn{
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+}
+
+.btn.btn-primary {
+    background-color: var(--primary-medium);
+    color: white;
+    border: 2px solid var(--primary-dark);
+    transition: all .2s ease;
+}
+
+.btn.btn-primary:hover{
+    background-color: var(--primary-light);
+}
+
+.btn.btn-secondary {
+    background-color: var(--secondary-medium);
+    color: white;
+    border: 2px solid var(--secondary-dark);
+    transition: all .2s ease;
+}
+
+.btn.btn-secondary:hover {
+    background-color: var(--secondary-light);
+}
+
+
+.form-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.2rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.form-group label {
+    text-align: right;
+}
+
+.form-group p {
+    grid-column: span 2;
+}

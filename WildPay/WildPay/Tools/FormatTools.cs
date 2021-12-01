@@ -36,6 +36,11 @@ namespace WildPay.Tools
             return false;
         }
 
+        public static string ConvertInShortDate(DateTime date)
+        { 
+            return date.ToString("dd/MM/yyyy"); ;
+        }
+
 
 
         public static string HashPassword(string passwordToHash)
@@ -63,6 +68,11 @@ namespace WildPay.Tools
                 return true;
             }
             return false;
+        }
+
+        public static double ConvertinShortDouble(double shortDouble)
+        {
+            return Math.Round(shortDouble, 2);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace WildPay.Models
 
         [Required(ErrorMessage = "Le nom de la catégorie est obligatoire")]
         [MaxLength(20, ErrorMessage = "Le nom doit faire 20 caractères au maximum"), MinLength(0)]
+        [DisplayName("Nom")]
         public string Name { get; set; }
         public bool IsBase { get; set; } = false;
 
@@ -22,7 +24,8 @@ namespace WildPay.Models
 
         public Category()
         {
-
+            this.Expenses = new List<Expense>();
+            this.Groups = new List<Group>();
         }
     }
 }

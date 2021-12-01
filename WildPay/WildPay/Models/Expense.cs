@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,14 +14,18 @@ namespace WildPay.Models
         public int Id { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayName("Date")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Required(ErrorMessage = "Le titre de la dépense est obligatoire")]
-        [MaxLength(50, ErrorMessage = "Le nom doit faire 50 caractères au maximum"), MinLength(0)]
+        [MaxLength(50, ErrorMessage = "Le nom doit faire 50 caractères au maximum"), MinLength(4)]
+        [DisplayName("Titre")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "La valeur de la dépense est obligatoire")]
         [Range(0, Double.PositiveInfinity)]
+        [DisplayName("Montant")]
         public double Value { get; set; }
 
         public int FkUserId { get; set; }

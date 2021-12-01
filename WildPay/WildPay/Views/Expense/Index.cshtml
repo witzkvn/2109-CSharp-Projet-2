@@ -1,0 +1,105 @@
+﻿@{
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Connexion/Index");
+    }
+}
+
+
+<div class="expense">
+    <div class="row">
+        <div class="flex">
+            <h2>Dépenses du groupe</h2>
+            <a class="button" href="@Url.Action("Index", "ExpenseEdition")">
+                <ion-icon name="add-circle"></ion-icon>
+                Ajouter une dépense
+            </a>
+            <div class="list-group">
+
+                @foreach (var expense in ViewBag.listExpenses)
+                {
+                    <a href="@Url.Action("EditExpense", "ExpenseEdition", new { expenseId = expense.Id })" class="list-group-item box">
+                        <h3 class="text-no-overflow">@expense.Title</h3>
+                        @if (expense.UserImageFile != null)
+                        {
+                            <img class="user-image user-image-sm" src="@expense.UserImageFile" />
+                        }
+                        else
+                        {
+                            <img class="user-image user-image-sm" src="~/Content/Images/default.png" />
+                        }
+                        <p class="category span2 text-no-overflow">@expense.Name</p>
+                        <p class="espace span2 text-no-overflow">Payé par @expense.Firstname @expense.Lastname au groupe</p>
+                        <p class="date">@expense.DateCourte</p>
+                        <p class="expense-value">@expense.Value €</p>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="flex fixed">
+            <h2>Bilan du groupe</h2>
+            <div class="expense-bilan">
+                @foreach (var user in ViewBag.listeUsers)
+                {
+                    if (@ViewBag.SommesDues[user.Id] > 0)
+                    {
+                        <h4>@user.Firstname @user.Lastname doit @ViewBag.SommesDues[user.Id] € au groupe</h4>
+                    }
+                }
+
+                @foreach (var user in ViewBag.listeUsers)
+                {
+                    if (@ViewBag.SommesDues[user.Id] < 0)
+                    {
+                        <h4>Le groupe doit @(ViewBag.SommesDues[user.Id]*-1) € à @user.Firstname @user.Lastname</h4>
+                    }
+                }
+
+            </div>
+
+            <div class="expense-graph">
+                <canvas id="myChart"></canvas>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let labelsValues = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expLabels))');
+    let expValues = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expValues))');
+
+    let getColorsArray = (itemsNb) => {
+        let colorsArray = [];
+        for (let i = 0; i < itemsNb; i++) {
+            let newColor = Math.floor(Math.random() * 16777215).toString(16);
+            console.log(newColor)
+            colorsArray.push(`#${newColor}`);
+
+        }
+        return colorsArray;
+    }
+
+    const data = {
+        labels: labelsValues,
+        datasets: [{
+            label: 'My First Dataset',
+            data: expValues,
+            backgroundColor: [...getColorsArray(expValues?.length)],
+            hoverOffset: 1
+        }]
+    };
+
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
+</script>

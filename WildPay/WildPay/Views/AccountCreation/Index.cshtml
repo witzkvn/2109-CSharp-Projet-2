@@ -3,60 +3,65 @@
 @{
     if (Session["Id"] != null)
     {
-        Response.Redirect("~/Home/Index");
+        Response.Redirect("~/Expense/Index");
     }
 }
 
 
-<h2>@ViewBag.Message</h2>
+<div class="login-page">
+    <h2>Bienvenue sur WildPay !</h2>
 
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
+        <div id="login-wrapper" class="box">
+            <h3>Créer un nouveau compte</h3>
 
-    <fieldset>
-        <legend>Nouvel utilisateur</legend>
-        <div class="editor-label">
-            @Html.LabelFor(Model => Model.Lastname)
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Lastname)
+                @Html.EditorFor(Model => Model.Lastname)
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Lastname)
+                </p>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Firstname)
+                @Html.EditorFor(Model => Model.Firstname)
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Firstname)
+                </p>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Email)
+                @Html.EditorFor(Model => Model.Email)
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Email)
+                </p>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Password)
+                @Html.EditorFor(Model => Model.Password)
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Password)
+                </p>
+            </div>
+
+            <p class="error">
+                @ViewBag.Message
+            </p>
+
+            <button class="btn btn-primary" type="submit">
+                Inscription
+            </button>
+            <a href="@Url.Action("Index", "Connexion")">Déjà un compte ? Connexion</a>
 
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(Model => Model.Lastname)
-            @Html.ValidationMessageFor(Model => Model.Lastname)
-        </div>
+    }
 
 
-        <div class="editor-label">
-            @Html.LabelFor(Model => Model.Firstname)
+</div>
 
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(Model => Model.Firstname)
-            @Html.ValidationMessageFor(Model => Model.Firstname)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(Model => Model.Email)
-
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(Model => Model.Email)
-            @Html.ValidationMessageFor(Model => Model.Email)
-        </div>
-
-
-        <div class="editor-label">
-            @Html.LabelFor(Model => Model.Password)
-
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(Model => Model.Password)
-            @Html.ValidationMessageFor(Model => Model.Password)
-        </div>
-
-        <input type="submit" value="CreateUser" />
-
-    </fieldset>
-
-}

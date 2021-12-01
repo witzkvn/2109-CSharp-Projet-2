@@ -1,0 +1,19 @@
+﻿.expense-edition-page
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.expense-edition-buttons{
+    display: flex;
+    align-items: center;
+}
+
+.expense-edition-buttons button:first-of-type{
+    margin-right: 2rem;
+}
+
+.expense-edition-page p.error{
+    margin-top: 1rem;
+}

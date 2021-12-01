@@ -4,8 +4,13 @@
     align-items: center;
 }
 
-.Account .form-horizontal{
-    
+.Account hr {
+    margin: 3rem 0;
+}
+
+.Account .account-form {
+    width: 60%;
+    margin: 0 auto;
 }
 
 .Account h2{
@@ -29,4 +34,13 @@
 
 .Account .note {
     font-weight: bold;
+}
+
+.Account button.btn.btn-primary{
+    margin: 2rem auto 4rem auto;
+    display: block;
+}
+
+.Account p:last-of-type{
+    text-align: center;
 }

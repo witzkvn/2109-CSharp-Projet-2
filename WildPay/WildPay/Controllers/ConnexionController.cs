@@ -12,8 +12,9 @@ namespace WildPay.Controllers
     public class ConnexionController : Controller
     {
         // GET: Connexion
-        public ActionResult Index()
+        public ActionResult Index(bool creationSuccess = false)
         {
+            ViewBag.ConfirmationCreationCompte = creationSuccess;
             return View();
         }
 
@@ -33,7 +34,7 @@ namespace WildPay.Controllers
                 {
                     Session["Id"] = userDetails.Id;
                     Session["Firstname"] = userDetails.Firstname;
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Expense");
                 }
             }
         }

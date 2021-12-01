@@ -126,5 +126,12 @@ namespace WildPay.Tests.Tools
         {
             Assert.IsFalse(FormatTools.IsPasswordFormatOk("45896571"));
         }
+
+        [TestMethod]
+        public void DateTimeShortFormatConvert()
+        {
+            DateTime date = new DateTime(2020, 2, 15); // 15 fevrier 2020
+            Assert.AreEqual("15/02/2020",FormatTools.ConvertInShortDate(date));
+        }
     }
 }
