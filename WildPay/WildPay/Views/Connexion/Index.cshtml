@@ -1,4 +1,12 @@
 ﻿@model WildPay.Models.User
+
+@{
+    if (Session["Id"] != null)
+    {
+        Response.Redirect("~/Expense/Index");
+    }
+}
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,35 +27,35 @@
         @using (Html.BeginForm("Authorize", "Connexion", FormMethod.Post))
         {
             <form>
-            
-                    <h3>Se connecter</h3>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Email)
-                        @Html.EditorFor(model => model.Email)
-                        <p class="error">
-                            @Html.ValidationMessageFor(model => model.Email)
-                        </p>
-                    </div>
 
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Password)
-                        @Html.EditorFor(model => model.Password)
-                        <p class="error">
-                            @Html.ValidationMessageFor(model => model.Password)
-                        </p>
-                    </div>
-
-
+                <h3>Se connecter</h3>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email)
                     <p class="error">
-                        <label>@Html.DisplayFor(model => model.loginErrorMessage)</label>
+                        @Html.ValidationMessageFor(model => model.Email)
                     </p>
+                </div>
 
-                    <button class="btn btn-primary" type="submit">
-                        Connexion
-                    </button>
-                    <a href="@Url.Action("Index", "AccountCreation")">Pas de compte ? Inscription</a>
-            
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password)
+                    @Html.EditorFor(model => model.Password)
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </p>
+                </div>
+
+
+                <p class="error">
+                    <label>@Html.DisplayFor(model => model.loginErrorMessage)</label>
+                </p>
+
+                <button class="btn btn-primary" type="submit">
+                    Connexion
+                </button>
+                <a href="@Url.Action("Index", "AccountCreation")">Pas de compte ? Inscription</a>
+
             </form>
         }
     </div>

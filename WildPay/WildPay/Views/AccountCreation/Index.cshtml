@@ -1,9 +1,9 @@
 ﻿@model WildPay.Models.User
 
 @{
-    if (Session["Id"] != null)
+    if (Session["Id"] == null)
     {
-        Response.Redirect("~/Home/Index");
+        Response.Redirect("~/Expense/Index");
     }
 }
 

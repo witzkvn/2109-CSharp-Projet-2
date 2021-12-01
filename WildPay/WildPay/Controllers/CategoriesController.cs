@@ -40,7 +40,9 @@ namespace WildPay.Controllers
             }
             else ViewBag.Message = "Categorie incorrecte";
 
-            return RedirectToAction("Index", "Categories");
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
+
+            return View("Index");
         }
 
         public ActionResult DeleteCategorie(int categorieToDelete)

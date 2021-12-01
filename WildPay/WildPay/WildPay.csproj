@@ -184,6 +184,7 @@
     <Content Include="Content\Pages_CSS\_Categories.css" />
     <Content Include="Content\Pages_CSS\_Components.css" />
     <Content Include="Content\Pages_CSS\_Expense.css" />
+    <Content Include="Content\Pages_CSS\_ExpenseEdition.css" />
     <Content Include="Content\Pages_CSS\_fonts.css" />
     <Content Include="Content\Pages_CSS\_Home.css" />
     <Content Include="Content\Pages_CSS\_Login_Signup.css" />
@@ -224,8 +225,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Connexion\Index.cshtml" />
     <Content Include="Views\AccountCreation\Index.cshtml" />
