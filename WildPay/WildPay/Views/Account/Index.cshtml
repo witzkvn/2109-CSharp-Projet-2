@@ -33,7 +33,7 @@
 
     @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @*@Html.AntiForgeryToken()*@
+        @Html.AntiForgeryToken()
 
         <div class="account-form">
             <hr />
