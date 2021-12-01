@@ -69,5 +69,10 @@ namespace WildPay.Tools
             }
             return false;
         }
+
+        public static double ConvertinShortDouble(double shortDouble)
+        {
+            return Math.Round(shortDouble, 2);
+        }
     }
 }
