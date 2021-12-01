@@ -69,5 +69,10 @@ namespace WildPay.Controllers
             }                
             return RedirectToAction("Index", "Account", new { error = updateMessage });
         }
+
+        public ActionResult Error()
+        {
+            return RedirectToAction("Index", "Account", new { error = "Fichier trop volumineux. Le fichier ne doit pas dépasser 2 Mo." });
+        }
     }
 }
