@@ -30,15 +30,20 @@ namespace WildPay.Controllers
                     if (!CategoryAlreadyExists(db, newCategory))
                     {
                         AddCategory(db, newCategory);
-                        ViewBag.Message = "Categorie ajoutée ";
+                        ViewBag.Confirm = "Categorie ajoutée ";
+                        ViewBag.Error = "";
                     }
                     else
                     {
-                        ViewBag.Message = "La categorie existe déjà ";
+                        ViewBag.Confirm = "";
+                        ViewBag.Error = "La categorie existe déjà ";
                     }
                 }
             }
-            else ViewBag.Message = "Categorie incorrecte";
+            else {
+                ViewBag.Confirm = "";
+                ViewBag.Error = "Categorie incorrecte";
+            } 
 
             ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
 

@@ -62,13 +62,13 @@ input {
     outline: none;
 }
 
-    input:focus-visible{
-        outline: 1px solid var(--grey-medium);
-    }
+input:focus-visible{
+    outline: 1px solid var(--grey-medium);
+}
 
-    .error {
-        color: var(--error);
-    }
+.error {
+    color: var(--error);
+}
 
 .success {
     color: var(--success);

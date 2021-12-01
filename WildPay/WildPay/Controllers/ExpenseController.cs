@@ -40,8 +40,19 @@ namespace WildPay.Controllers
             ViewBag.SommesDues = SommesDues(ViewBag.listeUsers);
             ViewBag.userID = Convert.ToInt32(Session["Id"]);
 
-            ViewBag.expLabels = new List<string>() { "Clea", "Seb", "Kevin" };
-            ViewBag.expValues = new List<double>() { 25.5, 58.2, 16.3 };
+            Dictionary<string, double> nameSumByUser = new Dictionary<string, double>();
+            nameSumByUser = db.Database.SqlQuery<SommeParUser>
+                    ("sp_SommeParUser @p0", GroupId)
+                    .ToDictionary(k => k.PrenomNom, v => v.Somme);
+
+            List<string> prenomNom = new List<string>();
+            prenomNom = nameSumByUser.Select(kvp => kvp.Key).ToList();
+
+            List<double> somme = new List<double>();
+            somme = nameSumByUser.Select(kvp => kvp.Value).ToList();
+
+            ViewBag.expLabels = prenomNom;
+            ViewBag.expValues = somme;
 
             return View();
         }
