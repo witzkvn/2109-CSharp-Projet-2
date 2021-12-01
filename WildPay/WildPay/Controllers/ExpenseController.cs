@@ -38,6 +38,7 @@ namespace WildPay.Controllers
 
             ViewBag.listeUsers = user;
             ViewBag.SommesDues = SommesDues(ViewBag.listeUsers);
+            ViewBag.userID = Convert.ToInt32(Session["Id"]);
 
             ViewBag.expLabels = new List<string>() { "Clea", "Seb", "Kevin" };
             ViewBag.expValues = new List<double>() { 25.5, 58.2, 16.3 };

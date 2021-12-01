@@ -8,7 +8,6 @@
     }
 }
 
-
 <div class="expense">
     <div class="row">
         <div class="flex">
@@ -42,9 +41,22 @@
         <div class="flex fixed">
             <h2>Bilan du groupe</h2>
             <div class="expense-bilan">
+
                 @foreach (var user in ViewBag.listeUsers)
                 {
-                    if (@ViewBag.SommesDues[user.Id] > 0)
+                    if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] > 0)
+                    {
+                        <h4 class="user-bilan">Vous devez <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
+                    }
+                    else if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] < 0)
+                    {
+                        <h4 class="user-bilan">Le groupe vous doit <span class="text-primary">@(ViewBag.SommesDues[user.Id]*-1) €</span></h4>
+                    }
+                }
+
+                @foreach (var user in ViewBag.listeUsers)
+                {
+                    if (@ViewBag.SommesDues[user.Id] > 0 && user.Id != ViewBag.userID)
                     {
                         <h4>@Utilities.GetNomCompletUser(user) doit <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
                     }
@@ -52,7 +64,7 @@
 
                 @foreach (var user in ViewBag.listeUsers)
                 {
-                    if (@ViewBag.SommesDues[user.Id] < 0)
+                    if (@ViewBag.SommesDues[user.Id] < 0 && user.Id != ViewBag.userID)
                     {
                         <h4>Le groupe doit <span class="text-primary">@(ViewBag.SommesDues[user.Id]*-1) €</span> à @Utilities.GetNomCompletUser(user)</h4>
                     }
@@ -104,5 +116,4 @@
         document.getElementById('myChart'),
         config
     );
-</script>
 </script>
