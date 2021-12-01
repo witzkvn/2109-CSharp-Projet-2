@@ -16,27 +16,7 @@ namespace WildPay.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            using (WildPayContext db = new WildPayContext())
-            {
-                var returnCode = new SqlParameter();
-                returnCode.ParameterName = "@GroupID ";
-                returnCode.SqlDbType = SqlDbType.Int;
-                returnCode.Direction = ParameterDirection.Output;
-
-                db.Database.ExecuteSqlCommand("sp_GetGroupePrincipalId @GroupID OUTPUT", returnCode);
-
-                var type = returnCode.Value.GetType().FullName;
-
-                if (type != "System.DBNull")
-                { 
-                    int groupId = (int)returnCode.Value;
-                    List<Category> categories = db.Database.SqlQuery<Category>
-                    ("sp_GetCategory @p0", groupId)
-                    .ToList();
-                    ViewBag.listeCategories = categories;
-                }
-
-            }
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
             return View();
         }
 
@@ -59,6 +39,7 @@ namespace WildPay.Controllers
                 }
             }
             else ViewBag.Message = "Categorie incorrecte";
+
             return RedirectToAction("Index", "Categories");
         }
 

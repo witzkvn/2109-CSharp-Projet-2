@@ -1,0 +1,115 @@
+﻿
+@model WildPay.Models.Expense
+
+
+@*@{
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}*@
+
+
+<div class="login-page">
+    <h2>Bienvenue sur WildPay !</h2>
+
+    @using (Html.BeginForm("Validate", "ExpenseEdition"))
+    {
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(Model=> Model.Id)
+
+<div id="login-wrapper">
+    <h3>@ViewBag.title</h3>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Title)
+        @Html.EditorFor(Model => Model.Title)
+        <p class="error">
+            @Html.ValidationMessageFor(Model => Model.Title)
+        </p>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.CreatedAt)
+
+        <input type="date" value="@ViewBag.date", name="newDate"/>
+        <p class="error">
+            @Html.ValidationMessageFor(Model => Model.CreatedAt)
+        </p>
+    </div>
+
+    <div class="form-group">
+        <label for="categorie-select">Catégorie : </label>
+        <select name="categorieId" id="categorieId">
+            <option value="">Choisir une catégorie</option>
+            @{
+                foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
+                {
+                    if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
+                    {
+                        <option selected value="@cat.Id">@cat.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="auteur-select">Auteur : </label>
+        <select name="auteurId" id="auteurId">
+
+            @{
+                foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
+                {
+                    if (Model.FkUserId == auteur.Id)
+                    {
+                        <option selected value="@auteur.Id">@auteur.Firstname</option>
+                    }
+                    else
+                    {
+                        <option value="@auteur.Id">@auteur.Firstname</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Value)
+        @Html.TextBoxFor(Model => Model.Value, new {type="number", min="0.5", max="100000", step="0.5"})
+        <p class="error">
+            @Html.ValidationMessageFor(Model => Model.Value)
+        </p>
+    </div>
+
+
+    <p class="error">
+        @ViewBag.Message
+    </p>
+
+    <button class="btn btn-primary" type="submit">
+        Valider
+    </button>
+
+    @{ 
+        if (Model.Id != null && Model.Id != 0)
+            {
+                <a href="@Url.Action("DeleteExpense", "ExpenseEdition", new { expenseId = Model.Id })">
+                    <input type="button" class="btn btn-danger" value="Supprimer"/>
+                </a>
+            }
+    }
+
+</div>
+    }
+
+
+</div>
+

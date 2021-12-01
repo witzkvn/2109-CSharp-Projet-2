@@ -8,11 +8,12 @@ namespace WildPay.Models
 {
     public class ExpenseCategoryJoin
     {
+        public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Title { get; set; }
         public double Value { get; set; }
         public int FkUserId { get; set; }
-        public int FkCategoryId { get; set; }
+        public int? FkCategoryId { get; set; }
         public int FkGroupId { get; set; }
         public string Name { get; set; }
         public string Firstname { get; set; }
