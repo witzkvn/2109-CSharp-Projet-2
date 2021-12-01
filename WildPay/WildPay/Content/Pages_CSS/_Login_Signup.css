@@ -4,20 +4,16 @@
     align-items: center;
 }
 
-    .login-page h2{
-        margin-bottom: 6rem;
-    }
+.login-page h2{
+    margin-bottom: 6rem;
+}
 
-    #login-wrapper {
-        padding: 2rem;
-        border-radius: 10px;
-        min-width: 35rem;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid var(--bg-medium);
-    }
+#login-wrapper {
+    min-width: 35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 #login-wrapper .confirmMsg{
     margin-bottom: 3rem;

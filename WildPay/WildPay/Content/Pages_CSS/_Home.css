@@ -51,10 +51,7 @@
 }
 
 .feature-item {
-    border-radius: 10px;
     background-color: var(--bg-medium);
-    padding: 2rem;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .feature-item-top {
@@ -86,24 +83,23 @@
     display: flex;
     margin: 0 auto 6rem auto;
     text-align: left;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border-radius: 10px;
-    padding: 2rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-    .whoarewe-item:hover{
-        transform: translateY(-2px);
-    }
-    .whoarewe-item:active {
-        transform: translateY(1px);
-    }
+.whoarewe-item:hover{
+    transform: translateY(-2px);
+}
 
-    .whoarewe-image {
-        margin-right: 2rem;
-        flex-shrink: 0;
-    }
+.whoarewe-item:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.whoarewe-image {
+    margin-right: 2rem;
+    flex-shrink: 0;
+}
 
 .whoarewe-text{
     flex-shrink: 1;

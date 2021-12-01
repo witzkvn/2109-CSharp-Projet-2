@@ -179,6 +179,7 @@
     <Content Include="Content\Images\default.png" />
     <Content Include="Content\Images\header.png" />
     <Content Include="Content\Pages_CSS\_Account.css" />
+    <Content Include="Content\Pages_CSS\_Categories.css" />
     <Content Include="Content\Pages_CSS\_Components.css" />
     <Content Include="Content\Pages_CSS\_Expense.css" />
     <Content Include="Content\Pages_CSS\_fonts.css" />
