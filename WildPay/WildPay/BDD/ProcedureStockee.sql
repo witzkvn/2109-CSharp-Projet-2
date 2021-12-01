@@ -43,6 +43,21 @@ CREATE PROCEDURE sp_GetUserById
    END
  GO 
 
+ DROP PROCEDURE IF EXISTS sp_GetUsersForGroup;
+ GO 
+CREATE PROCEDURE sp_GetUsersForGroup
+	@groupId INT
+   AS
+   BEGIN
+    SELECT * FROM [WildPay-1].[dbo].[User] 
+	INNER JOIN [WildPay-1].[dbo].[UserGroup]
+	ON [User].Id = [UserGroup].User_Id
+	WHERE Group_Id = @groupId;
+   END
+ GO 
+
+
+
  DROP PROCEDURE IF EXISTS sp_GetUser;
  GO 
 CREATE PROCEDURE sp_GetUser
@@ -190,18 +205,67 @@ BEGIN
 END
  GO 
 
+
+ DROP PROCEDURE IF EXISTS sp_UpdateExpense;
+ GO 
+CREATE PROCEDURE sp_UpdateExpense
+@expense_Id INT,
+@date DATETIME,
+@title VARCHAR(200),
+@value DECIMAL(10,2),
+@user_Id INT,
+@category_Id INT
+
+AS
+BEGIN
+	UPDATE [Expense]
+	SET
+	CreatedAt = @date,
+	Title = @title,
+	FkUserId = @user_Id,
+	FkCategoryId = @category_Id,
+	[Value] = @value
+	WHERE @expense_id = [Expense].Id
+END
+ GO 
+
+
  DROP PROCEDURE IF EXISTS sp_GetExpense;
  GO 
 CREATE PROCEDURE sp_GetExpense
 @groupId INT
 AS
 BEGIN
-SELECT CreatedAt, Title, Value, FkUserId, FkCategoryId, FkGroupId, Category.Name, [User].Firstname, [User].Lastname, [User].UserImage FROM [Expense]
+SELECT Expense.Id, CreatedAt, Title, Value, FkUserId, FkCategoryId, FkGroupId ,Category.Name, [User].Firstname, [User].Lastname, [User].UserImage FROM [Expense]
 INNER JOIN [User] ON [User].Id = FkUserId
-INNER JOIN [Category] ON Category.Id = FkCategoryId
+LEFT OUTER JOIN [Category] ON Category.Id = FkCategoryId
 WHERE FkGroupId = @groupId
 ORDER BY CreatedAt DESC
 END
+ GO 
+
+
+
+ DROP PROCEDURE IF EXISTS sp_DeleteExpense;
+ GO 
+CREATE PROCEDURE sp_DeleteExpense
+@expense_Id INT
+AS
+BEGIN
+DELETE FROM [Expense]
+WHERE [Expense].Id = @expense_Id
+END
+ GO 
+
+ DROP PROCEDURE IF EXISTS sp_GetExpenseById;
+ GO 
+ CREATE PROCEDURE sp_GetExpenseById
+ @expenseId INT
+ AS
+ BEGIN
+ SELECT * from [Expense]
+ WHERE [Expense].Id = @expenseId
+ END
  GO 
 
  DROP PROCEDURE IF EXISTS sp_GetSommeDue;
