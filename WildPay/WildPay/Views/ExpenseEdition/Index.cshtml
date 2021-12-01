@@ -34,7 +34,6 @@
         @Html.LabelFor(Model => Model.CreatedAt)
 
         <input type="date" value="@ViewBag.date", name="newDate"/>
-        @*@Html.TextBoxFor(Model => Model.CreatedAt, new { type = "date", min = "2020-01-01", name="CreatedAt", value= DateTime.Today.ToString("yyyy-MM-dd") })*@
         <p class="error">
             @Html.ValidationMessageFor(Model => Model.CreatedAt)
         </p>
