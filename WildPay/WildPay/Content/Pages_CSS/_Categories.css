@@ -38,7 +38,7 @@
     margin-bottom: 0;
 }
 
-.categories-wrapper p.error {
+.categories-wrapper p.message {
     grid-column: span 3;
     margin-top: 0.5rem;
     margin-bottom: 2rem;
@@ -48,6 +48,11 @@
 .categories-list {
     width: max-content;
     margin: 0 auto;
+}
+
+.categories-wrapper p.error.warning {
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .categorie-name {
