@@ -297,3 +297,16 @@ CREATE PROCEDURE sp_GetSommeDueSiNull
 	)
    END
  GO 
+ 
+   DROP PROCEDURE IF EXISTS sp_SommeParUser;
+ GO 
+CREATE PROCEDURE sp_SommeParUser
+	@groupId INT
+   AS
+   BEGIN
+	SELECT (CONCAT (Firstname, ' ', Lastname)) AS PrenomNom, SUM(value) AS Somme FROM [Expense]
+	INNER JOIN [User] ON [Expense].FkUserId = [User].Id
+	WHERE FkGroupId = @groupId
+	GROUP BY Firstname, Lastname
+   END
+ GO 
