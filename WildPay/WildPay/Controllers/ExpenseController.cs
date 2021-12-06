@@ -38,6 +38,7 @@ namespace WildPay.Controllers
 
             ViewBag.listeUsers = user;
             ViewBag.SommesDues = SommesDues(ViewBag.listeUsers);
+            ViewBag.userID = Convert.ToInt32(Session["Id"]);
 
             Dictionary<string, double> nameSumByUser = new Dictionary<string, double>();
             nameSumByUser = db.Database.SqlQuery<SommeParUser>

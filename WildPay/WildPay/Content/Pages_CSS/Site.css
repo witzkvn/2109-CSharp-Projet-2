@@ -109,3 +109,10 @@ footer button.themeBtn{
     margin-left: 4rem;
 }
 
+.text-primary{
+    color: var(--primary-medium);
+}
+
+.text-secondary{
+    color: var(--secondary-medium);
+}
