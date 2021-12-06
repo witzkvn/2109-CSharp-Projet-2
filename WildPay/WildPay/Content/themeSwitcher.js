@@ -48,16 +48,19 @@ const toggleDarkTheme = (theme) => {
 
 let moonBtn = document.getElementById("moonBtn");
 let sunBtn = document.getElementById("sunBtn");
+let bodyEl = document.getElementsByTagName("body")[0];
 
 const handleThemeSwitch = () => {
     const theme = localStorage.getItem("theme") || "light";
     if (theme == "light") {
         localStorage.setItem("theme", "dark");
+        bodyEl.classList.add("dark");
         moonBtn.style.display = "none";
         sunBtn.style.display = "flex";
         toggleDarkTheme("dark");
     } else {
         localStorage.setItem("theme", "light");
+        bodyEl.classList.remove("dark");
         moonBtn.style.display = "flex";
         sunBtn.style.display = "none";
         toggleDarkTheme("light");
@@ -68,9 +71,11 @@ const handleThemeSwitch = () => {
 if (localStorage.getItem("theme")) {
     let theme = localStorage.getItem("theme");
     if (theme == "dark") {
+        bodyEl.classList.add("dark");
         toggleDarkTheme("dark");
         moonBtn.style.display = "none";
     } else {
+        bodyEl.classList.remove("dark");
         toggleDarkTheme("light");
         sunBtn.style.display = "none";
     }
