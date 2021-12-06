@@ -1,0 +1,12 @@
+﻿@model WildPay.Models.Category
+
+<div class="modal">
+    <div class="box modal-inner">
+        <h2>Suppression de dépense</h2>
+        <p>Voulez-vous vraiment supprimer la dépense @Model.Name ?</p>
+        <div class="modal-buttons">
+            <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+            <a class="btn btn-warning" href="@Url.Action("ConfirmDeleteCategorie", "Categories", new { idCategory = Model.Id})">Supprimer</a>
+        </div>
+    </div>
+</div>

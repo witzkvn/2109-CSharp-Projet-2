@@ -61,9 +61,20 @@ namespace WildPay.Controllers
 
         public ActionResult DeleteExpense(int expenseId)
         {
+            Expense expenseToEdit = DatabaseTools.GetExpenseById(expenseId);
+            ViewBag.title = "Editer une dépense";
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
+            ViewBag.listeUsers = DatabaseTools.GetUsersForGroup();
+            ViewBag.date = expenseToEdit.CreatedAt.ToString("yyyy-MM-dd");
+            ViewBag.expenseToDelete = expenseToEdit;
+            return View("Index", expenseToEdit);
+        }
+
+        public ActionResult ConfirmDeleteExpense(int idExpense)
+        {
             using (WildPayContext db = new WildPayContext())
             {
-                SqlParameter expenseSql = new SqlParameter("@expense_Id", expenseId);
+                SqlParameter expenseSql = new SqlParameter("@expense_Id", idExpense);
                 db.Database.ExecuteSqlCommand("sp_DeleteExpense @expense_Id", expenseSql);
             }
             return RedirectToAction("Index", "Expense");

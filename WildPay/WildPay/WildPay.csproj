@@ -238,6 +238,8 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\ExpenseEdition\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Categories\_DeleteConfirmation.cshtml" />
+    <Content Include="Views\ExpenseEdition\_DeleteConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
