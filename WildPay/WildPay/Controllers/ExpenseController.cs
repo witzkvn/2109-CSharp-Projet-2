@@ -17,7 +17,7 @@ namespace WildPay.Controllers
         WildPayContext db = new WildPayContext();
         int GroupId = Utilities.GetGroupePrincipalId();
         // GET: Expense
-        public ActionResult Index()
+        public ActionResult Index(string confirmationMessage = null)
         {
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)
@@ -53,7 +53,7 @@ namespace WildPay.Controllers
 
             ViewBag.expLabels = prenomNom;
             ViewBag.expValues = somme;
-
+            ViewBag.Confirm = confirmationMessage;
             return View();
         }
 

@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
-                @Html.EditorFor(Model => Model.Lastname)
+                @Html.TextBoxFor(Model => Model.Lastname, new { @class = "form-control", type = "text", minlength = 2, maxlength = 20 })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Lastname)
                 </p>
@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Firstname)
-                @Html.EditorFor(Model => Model.Firstname)
+                @Html.TextBoxFor(Model => Model.Firstname, new { @class = "form-control", type = "text", minlength = 2, maxlength = 20 })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Firstname)
                 </p>
@@ -44,10 +44,14 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Password)
-                @Html.EditorFor(Model => Model.Password)
+                @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", type = "password", minlength = 5, maxlength = 30,
+               pattern= "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{5,}", 
+               title="Le mot de passe doit comporter au moins un chiffre, une lettre majuscule, une minuscule et faire au moins cinq caractères"})
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Password)
                 </p>
+
+
             </div>
 
             <p class="error">

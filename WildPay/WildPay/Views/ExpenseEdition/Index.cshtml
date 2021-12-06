@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Title)
-                @Html.EditorFor(Model => Model.Title)
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text", minlength=4, maxlength=50 })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Title)
                 </p>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.CreatedAt)
 
-                <input type="date" value="@ViewBag.date" , name="newDate" />
+                <input type="date" value="@ViewBag.date" , name="newDate" required />
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.CreatedAt)
                 </p>

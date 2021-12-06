@@ -16,7 +16,15 @@
                 <ion-icon name="add-circle"></ion-icon>
                 Ajouter une dépense
             </a>
+
+
             <div class="list-group">
+            @if (ViewBag.Confirm != "")
+            {
+                <p class="message success">
+                    @ViewBag.Confirm
+                </p>
+            }
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
