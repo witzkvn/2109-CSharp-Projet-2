@@ -6,73 +6,71 @@
     {
         Response.Redirect("~/Connexion/Index");
     }
-}
-
-@{
-    ViewBag.Title = "Edit";
     string nomCompletUser = Utilities.GetNomCompletUser(Model);
 }
 
-<div class="Account">
+<div class="account">
     <h2>Vos informations de compte</h2>
 
-    <div class="user-header">
-        <div class="user-image user-image-xl">
-            @if (@Model.UserImageFile != null)
-            {
-                <img src="@Model.UserImageFile" alt="Alternate Text" />
-            }
-            else
-            {
-                <img src="~/Content/Images/default.png" alt="Alternate Text" />
-            }
+    <div class="box">
+        <div class="user-header">
+            <div class="user-image user-image-xl">
+                @if (@Model.UserImageFile != null)
+                {
+                    <img src="@Model.UserImageFile" alt="Alternate Text" />
+                }
+                else
+                {
+                    <img src="~/Content/Images/default.png" alt="Alternate Text" />
+                }
 
+            </div>
+            <h4>@nomCompletUser</h4>
         </div>
-        <h4>@nomCompletUser</h4>
+
+        @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="account-form">
+                <hr />
+
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    <label for="NewUserImageFile">Photo de profil</label>
+                    <input name="NewUserImageFile" type="file" />
+                    @if (ViewBag.ImageUploadMessage != null || ViewBag.ImageUploadMessage != "")
+                    {
+                        <p class="error">@ViewBag.ImageUploadMessage</p>
+                    }
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    Mettre à jour
+                </button>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p><span class="note">Note :</span> Pour changer votre Email ou votre mot de passe, veuillez contacter le service client.</p>
+            </div>
+        }
     </div>
-
-    @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="account-form">
-            <hr />
-
-            @Html.HiddenFor(model => model.Id)
-
-            <div class="form-group">
-                <label for="NewUserImageFile">Photo de profil</label>
-                <input name="NewUserImageFile" type="file" />
-            </div>
-            @if (ViewBag.ImageUploadMessage != null || ViewBag.ImageUploadMessage != "")
-            {
-                <p>@ViewBag.ImageUploadMessage</p>
-            }
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-4" })
-                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
-                <p class="error">
-                    @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
-                </p>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-4" })
-                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
-                <p class="error">
-                    @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
-                </p>
-            </div>
-
-            <button class="btn btn-primary" type="submit">
-                Mettre à jour
-            </button>
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <p><span class="note">Note :</span> Pour changer votre Email ou votre mot de passe, veuillez contacter le service client.</p>
-        </div>
-    }
 </div>
 
 

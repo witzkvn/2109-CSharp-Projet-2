@@ -181,10 +181,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\default.png" />
+    <Content Include="Content\Images\error.png" />
     <Content Include="Content\Images\header.png" />
     <Content Include="Content\Pages_CSS\_Account.css" />
     <Content Include="Content\Pages_CSS\_Categories.css" />
     <Content Include="Content\Pages_CSS\_Components.css" />
+    <Content Include="Content\Pages_CSS\_Error.css" />
     <Content Include="Content\Pages_CSS\_Expense.css" />
     <Content Include="Content\Pages_CSS\_ExpenseEdition.css" />
     <Content Include="Content\Pages_CSS\_fonts.css" />
@@ -235,6 +237,7 @@
     <Content Include="Views\Expense\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\ExpenseEdition\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
