@@ -30,7 +30,8 @@
                         @Html.ValidationMessageFor(Model => Model.Name)
                         @ViewBag.Confirm
                     </p>
-                } else if(ViewBag.Error != "")
+                }
+                else if (ViewBag.Error != "")
                 {
                     <p class="message error">
                         @Html.ValidationMessageFor(Model => Model.Name)
@@ -53,16 +54,17 @@
                     <div class="categorie-name">
                         @if (cat.IsBase == false)
                         {
-                            <a class="categories-delete" href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>
+                            <a class="categories-delete" href='@Url.Action("DeleteCategorie", "Categories", new { categorieIDToDelete = cat.Id})'>
                                 <ion-icon name="trash"></ion-icon>
                             </a>
-                        } else
+                        }
+                        else
                         {
                             <div class="categories-delete disabled">
                                 <ion-icon name="trash"></ion-icon>
                             </div>
                         }
-                    <p class="text-no-overflow">@Utilities.GetPremiereLettreMajuscule(cat.Name)</p>
+                        <p class="text-no-overflow">@Utilities.GetPremiereLettreMajuscule(cat.Name)</p>
                     </div>
 
                 }
@@ -70,6 +72,14 @@
 
         </div>
 
+
     </div>
 
 </div>
+
+
+@if (ViewBag.categoryASupprimer != null)
+{
+    Category catASupp = ViewBag.categoryASupprimer;
+    @Html.Partial("_DeleteConfirmation", catASupp);
+}
