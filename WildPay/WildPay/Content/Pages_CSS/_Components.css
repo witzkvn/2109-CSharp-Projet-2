@@ -117,3 +117,18 @@
 .modal-buttons > .btn:first-child {
     margin-right: 1.5rem;
 }
+
+@media screen and (max-width: 900px) {
+    .form-group {
+        grid-template-columns: 1fr;
+        gap:  0.5rem 0;
+    }
+
+    .form-group * {
+        grid-column: 1/2;
+    }
+
+    .form-group label{
+        text-align: left;
+    }
+}
