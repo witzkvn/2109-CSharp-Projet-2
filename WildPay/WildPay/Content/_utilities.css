@@ -43,3 +43,15 @@ body.dark .box {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 900px) {
+    .box{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .box {
+        width: 100%;
+    }
+}

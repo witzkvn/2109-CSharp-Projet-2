@@ -116,3 +116,47 @@ footer button.themeBtn{
 .text-secondary{
     color: var(--secondary-medium);
 }
+
+
+@media screen and (max-width: 1200px) {
+    .container.body-content{
+        width: 100%;
+        max-width: 100%;
+        padding: 2rem 6rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    body{
+        font-size: 1.3rem;
+    }
+
+    h1 {
+        margin-bottom: 3rem;
+        font-size: 3rem;
+    }
+
+    h2 {
+        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+    }
+
+    h3 {
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+
+    h4, h5, h6 {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .container.body-content {
+        padding: 2rem;
+    }
+}

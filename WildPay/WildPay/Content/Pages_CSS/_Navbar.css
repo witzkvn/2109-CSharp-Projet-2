@@ -68,11 +68,15 @@
         transform: translateX(100%);
         display: flex;
         flex-direction: column;
+        min-height: 100vh;
+        z-index: 100;
+        transition: all .2s ease;
     }
 
     .nav-content {
         display: grid;
         grid-template-columns: 1fr max-content 1fr;
+        margin-top: 4rem;
     }
 
     #nav-menu.active {

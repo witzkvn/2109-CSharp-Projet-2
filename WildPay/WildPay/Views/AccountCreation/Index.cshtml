@@ -11,11 +11,11 @@
 <div class="login-page">
     <h2>Bienvenue sur WildPay !</h2>
 
+        <div class="box login-wrapper">
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
 
-        <div id="login-wrapper" class="box">
             <h3>Créer un nouveau compte</h3>
 
             <div class="form-group">
@@ -59,9 +59,9 @@
             </button>
             <a href="@Url.Action("Index", "Connexion")">Déjà un compte ? Connexion</a>
 
-        </div>
     }
 
+        </div>
 
 </div>
 
