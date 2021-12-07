@@ -304,7 +304,7 @@ CREATE PROCEDURE sp_SommeParUser
 	@groupId INT
    AS
    BEGIN
-	SELECT (CONCAT (Firstname, ' ', Lastname)) AS PrenomNom, SUM(value) AS Somme FROM [Expense]
+	SELECT (CONCAT ((UPPER(Lastname)), ' ', (UPPER(left(Firstname,1)) + LOWER(SUBSTRING(Firstname,2,LEN(Firstname)))))) AS PrenomNOM, SUM(value) AS Somme FROM [Expense]
 	INNER JOIN [User] ON [Expense].FkUserId = [User].Id
 	WHERE FkGroupId = @groupId
 	GROUP BY Firstname, Lastname
