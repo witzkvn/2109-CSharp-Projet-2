@@ -116,3 +116,18 @@ footer button.themeBtn{
 .text-secondary{
     color: var(--secondary-medium);
 }
+
+
+@media screen and (max-width: 1200px) {
+    .container.body-content{
+        width: 100%;
+        max-width: 100%;
+        padding: 2rem 6rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .container.body-content {
+        padding: 2rem;
+    }
+}
