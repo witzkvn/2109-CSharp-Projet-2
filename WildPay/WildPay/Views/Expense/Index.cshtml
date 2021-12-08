@@ -79,10 +79,10 @@
                 }
 
             </div>
-
+            <button class="btn btn-transparent" id="expense-toggle-graph">Voir les graphiques</button>
             @if (ViewBag.listeUsers.Count > 1)
             {
-                <div class="expense-graph">
+                <div class="expense-graph" id="expense-graph">
                     <canvas id="myChart"></canvas>
                 </div>
             }
@@ -130,4 +130,10 @@
         document.getElementById('myChart'),
         config
     );
+
+
+    let toggleGraphBtn = document.getElementById("expense-toggle-graph");
+    toggleGraphBtn.addEventListener("click", (e) => {
+        e.target.classList.toggle("active");
+    });
 </script>
