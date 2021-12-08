@@ -22,6 +22,7 @@
                 @Html.LabelFor(Model => Model.Firstname)
                 <input type="text" id="firstNameInput" class="form-control"
                        minlength="2" maxlength="20" name="Firstname"
+                       pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
                        required />
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Firstname)
@@ -31,6 +32,7 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
                 <input type="text" id="lastnameInput" class="form-control" 
+                       pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$" 
                        minlength="2" maxlength="20" name="Lastname" 
                        required/>
 

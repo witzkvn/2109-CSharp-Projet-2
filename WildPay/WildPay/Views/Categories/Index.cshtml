@@ -21,7 +21,10 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Name)
-                @Html.TextBoxFor(Model => Model.Name, new { type = "text", minlength = 3, maxlength = 20, required="required" })
+                <input type="text" id="name" class="form-control"
+                       minlength="2" maxlength="20" name="Name"
+                       pattern="^[0-9A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][0-9a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[0-9A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
+                       required />         
                 <input class="btn btn-primary" type="submit" value="Valider" />
 
                 @if (ViewBag.Confirm != "")

@@ -100,7 +100,7 @@
                 <div class="expense-edition-buttons">
 
                     @{
-                        if (Model.Id != null && Model.Id != 0)
+                        if (Model.Id != 0)
                         {
                             <a href="@Url.Action("DeleteExpense", "ExpenseEdition", new { expenseId = Model.Id })">
                                 <input type="button" class="btn btn-warning" value="Supprimer" />
