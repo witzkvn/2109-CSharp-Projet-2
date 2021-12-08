@@ -93,6 +93,7 @@ namespace WildPay.Controllers
                     new SqlParameter("@groupId", GroupId),
                     returnSomme2);
                     string returnSommeToStringSiNull = returnSomme2.Value.ToString();
+                    if (returnSommeToStringSiNull == "") returnSommeToStringSiNull = "0";
                     sommeDueParUser = Convert.ToDouble(returnSommeToStringSiNull);
                     sommeDueParUserShort = FormatTools.ConvertinShortDouble(sommeDueParUser);
                 }
