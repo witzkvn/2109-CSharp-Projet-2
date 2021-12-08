@@ -14,7 +14,8 @@ namespace WildPay.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Le nom de la catégorie est obligatoire")]
-        [MaxLength(20, ErrorMessage = "Le nom doit faire 20 caractères au maximum"), MinLength(2)]
+        [MaxLength(20, ErrorMessage = "Le nom doit faire 20 caractères au maximum")]
+        [MinLength(2, ErrorMessage = "Le nom doit faire 2 caractères au minimum")]
         [DisplayName("Nom")]
         public string Name { get; set; }
         public bool IsBase { get; set; } = false;
