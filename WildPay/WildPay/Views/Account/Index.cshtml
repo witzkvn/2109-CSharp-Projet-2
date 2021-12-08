@@ -48,8 +48,9 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <input type="text" id="firstNameInput" class="form-control"
+                    <input type="text" id="firstNameInput" class="form-control regexText"
                            minlength="2" maxlength="20" name="FirstName" value="@Model.Firstname"
+                           pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
                            required />
                     <p class="error">
                         @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
@@ -60,6 +61,7 @@
                     @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-4" })
                     <input type="text" id="lastnameInput" class="form-control"
                            minlength="2" maxlength="20" name="Lastname" value="@Model.Lastname"
+                           pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
                            required />
                     <p class="error">
                         @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
