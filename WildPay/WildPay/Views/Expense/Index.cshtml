@@ -52,7 +52,7 @@
 
                 @foreach (var user in ViewBag.listeUsers)
                 {
-                    if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] > 0)
+                    if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] >= 0)
                     {
                         <h4 class="user-bilan">Vous devez <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
                     }
@@ -80,9 +80,13 @@
 
             </div>
 
-            <div class="expense-graph">
-                <canvas id="myChart"></canvas>
-            </div>
+            @if (ViewBag.listeUsers.Count > 1)
+            {
+                <div class="expense-graph">
+                    <canvas id="myChart"></canvas>
+                </div>
+            }
+
 
         </div>
     </div>

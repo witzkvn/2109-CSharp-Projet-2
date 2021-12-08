@@ -55,6 +55,7 @@
                                 else
                                 {
                                     <option value="@cat.Id">@cat.Name</option>
+                                    }
                                 }
                                 
                             }
@@ -97,9 +98,6 @@
                 </p>
 
                 <div class="expense-edition-buttons">
-                    <button class="btn btn-primary" type="submit">
-                        Valider
-                    </button>
 
                     @{
                         if (Model.Id != null && Model.Id != 0)
@@ -109,6 +107,10 @@
                             </a>
                         }
                     }
+
+                    <button class="btn btn-primary" type="submit">
+                        Valider
+                    </button>
                 </div>
 
             </div>

@@ -92,3 +92,39 @@
 .expense .user-bilan{
     margin-bottom: 2.5rem;
 }
+
+.expense .message.success{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+    .expense .row{
+        grid-template-columns: 1fr;
+    }
+
+    .expense .flex.fixed{
+        position: relative;
+        order: -1;
+        margin-bottom : 10rem;
+    }
+
+    .expense .flex a.button{
+        position: sticky;
+        z-index: 15;
+        top: 0;
+        padding: 1.5rem 3rem;
+        background-color: var(--bg-medium);
+        width: 100%;
+        text-align: center;
+        margin: 0 auto 2rem auto;
+    }
+
+    .expense .expense-graph {
+        width: 50%;
+    }
+
+    .expense .list-group-item h3{
+        text-align: left;
+    }
+}
