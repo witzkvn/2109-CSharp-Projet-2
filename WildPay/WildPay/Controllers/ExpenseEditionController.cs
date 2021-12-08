@@ -13,7 +13,6 @@ namespace WildPay.Controllers
 {
     public class ExpenseEditionController : Controller
     {
-        // GET: ExpenseEdition
         public ActionResult Index()
         {
             Expense newExpense = new Expense();
@@ -35,7 +34,7 @@ namespace WildPay.Controllers
             if (ModelState.IsValid)
             {
                 DatabaseTools.CreateOrUpdateExpense(newExpense);
-                return RedirectToAction("Index", "Expense");
+                return RedirectToAction("Index", "Expense", new { confirmationMessage = "La dépense a bien été ajoutée" });
             }
             else
             {

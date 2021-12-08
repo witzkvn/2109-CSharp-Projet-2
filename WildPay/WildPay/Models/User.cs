@@ -21,12 +21,12 @@ namespace WildPay.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Le prénom est obligatoire")]
-        [MaxLength(20, ErrorMessage = "Le prénom doit faire 20 caractères au maximum"), MinLength(0)]
+        [MaxLength(20, ErrorMessage = "Le prénom doit faire entre 2 et 20 caractères"), MinLength(2)]
         [DisplayName("Prénom")]
         public string Firstname { get; set; }
 
         [Required(ErrorMessage = "Le nom de famille est obligatoire")]
-        [MaxLength(20, ErrorMessage = "Le nom doit faire 20 caractères au maximum"), MinLength(0)]
+        [MaxLength(20, ErrorMessage = "Le nom doit faire entre 2 et 20 caractères"), MinLength(2)]
         [DisplayName("Nom")]
         public string Lastname { get; set; }
 

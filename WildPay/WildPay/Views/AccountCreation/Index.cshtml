@@ -20,7 +20,12 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
-                @Html.EditorFor(Model => Model.Lastname)
+                <input type="text" id="lastNameInput" class="form-control" 
+                       minlength="2" maxlength="20" name="LastName" 
+                       pattern = "[a-z A-ZéèçàÉÀÈÇ\\-]+$" 
+                       required/>
+
+
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Lastname)
                 </p>
@@ -28,7 +33,10 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Firstname)
-                @Html.EditorFor(Model => Model.Firstname)
+                <input type="text" id="firstNameInput" class="form-control"
+                       minlength="2" maxlength="20" name="Firstname"
+                       pattern="[a-z A-ZéèçàÉÀÈÇ\\-]+$"
+                       required />
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Firstname)
                 </p>
@@ -44,10 +52,15 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Password)
-                @Html.EditorFor(Model => Model.Password)
+
+                <input class="input-validation-error form-control" data-val="true" data-val-required="Le mot de passe est obligatoire" 
+                       id="passwordInput" maxlength="30" minlength="5" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{5,}" type="password" value="" required>
+
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Password)
                 </p>
+
+
             </div>
 
             <p class="error">
@@ -65,3 +78,20 @@
 
 </div>
 
+<script>
+    var passwordInput = document.getElementById('passwordInput');
+    passwordInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Utilisez au moins cinq caractères avec des majuscules, minuscules, des chiffres et des symboles.');
+    }
+    var firstNameInput = document.getElementById('firstNameInput');
+    firstNameInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Le prénom doit faire au moins deux caractères. Les chiffres ne sont pas autorisés')
+    }
+    var lastNameInput = document.getElementById('lastNameInput');
+    lastNameInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Le nom doit faire au moins deux caractères. Les chiffres ne sont pas autorisés')
+    }
+</script>
