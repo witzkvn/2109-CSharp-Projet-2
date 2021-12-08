@@ -48,8 +48,6 @@
                     @{
                         foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
                         {
-                            if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
-                            {
                                 if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
                                 {
                                     <option selected value="@cat.Id">@cat.Name</option>
@@ -59,6 +57,7 @@
                                     <option value="@cat.Id">@cat.Name</option>
                                     }
                                 }
+                                
                             }
                         }
                     </select>
