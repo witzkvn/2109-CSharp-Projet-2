@@ -66,7 +66,7 @@
         width: 100vw;
         background-color: var(--bg-medium);
         transform: translateX(100%);
-        display: flex;
+        display: none;
         flex-direction: column;
         min-height: 100vh;
         z-index: 100;
@@ -81,6 +81,7 @@
 
     #nav-menu.active {
         transform: translateX(0);
+        display: flex;
     }
 
     .navbar-link:not(:first-child) {
