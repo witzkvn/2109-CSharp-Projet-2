@@ -113,7 +113,7 @@ namespace WildPay
                 Response.Redirect("/Account/Error");
             } else
             {
-                //Response.Redirect("/Home/Error");
+                Response.Redirect("/Home/Error");
             }
         }
     }
