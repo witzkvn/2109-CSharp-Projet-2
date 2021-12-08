@@ -113,20 +113,13 @@
 }
 
 #expense-toggle-graph{
-    display: block;
+    display: none;
     margin: 2rem auto;
     width: max-content;
     text-align: center;
 }
 
-#expense-toggle-graph ~ .expense-graph{
-    display: none;
-    transition: all 0.2s ease;
-}
 
-#expense-toggle-graph.active ~ .expense-graph {
-    display: block;
-}
 
 @media screen and (max-width: 900px) {
     .expense .row{
@@ -164,5 +157,18 @@
 
     .expense .list-group-item h3{
         text-align: left;
+    }
+
+    #expense-toggle-graph{
+        display: block;
+    }
+
+    #expense-toggle-graph ~ .expense-graph {
+        display: none;
+        transition: all 0.2s ease;
+    }
+
+    #expense-toggle-graph.active ~ .expense-graph {
+        display: block;
     }
 }
