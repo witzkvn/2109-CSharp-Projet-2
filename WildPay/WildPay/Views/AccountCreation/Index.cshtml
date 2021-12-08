@@ -19,10 +19,19 @@
             <h3>Créer un nouveau compte</h3>
 
             <div class="form-group">
+                @Html.LabelFor(Model => Model.Firstname)
+                <input type="text" id="firstNameInput" class="form-control"
+                       minlength="2" maxlength="20" name="Firstname"
+                       required />
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Firstname)
+                </p>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
-                <input type="text" id="lastNameInput" class="form-control" 
-                       minlength="2" maxlength="20" name="LastName" 
-                       pattern = "[a-z A-ZéèçàÉÀÈÇ\\-]+$" 
+                <input type="text" id="lastnameInput" class="form-control" 
+                       minlength="2" maxlength="20" name="Lastname" 
                        required/>
 
 
@@ -31,16 +40,6 @@
                 </p>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(Model => Model.Firstname)
-                <input type="text" id="firstNameInput" class="form-control"
-                       minlength="2" maxlength="20" name="Firstname"
-                       pattern="[a-z A-ZéèçàÉÀÈÇ\\-]+$"
-                       required />
-                <p class="error">
-                    @Html.ValidationMessageFor(Model => Model.Firstname)
-                </p>
-            </div>
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Email)
@@ -87,11 +86,11 @@
     var firstNameInput = document.getElementById('firstNameInput');
     firstNameInput.oninvalid = function (event)
     {
-        event.target.setCustomValidity('Le prénom doit faire au moins deux caractères. Les chiffres ne sont pas autorisés')
+        event.target.setCustomValidity('Le prénom doit faire au moins deux caractères.')
     }
     var lastNameInput = document.getElementById('lastNameInput');
     lastNameInput.oninvalid = function (event)
     {
-        event.target.setCustomValidity('Le nom doit faire au moins deux caractères. Les chiffres ne sont pas autorisés')
+        event.target.setCustomValidity('Le nom doit faire au moins deux caractères.')
     }
 </script>

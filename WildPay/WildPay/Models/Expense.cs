@@ -19,7 +19,7 @@ namespace WildPay.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Required(ErrorMessage = "Le titre de la dépense est obligatoire")]
-        [MaxLength(50, ErrorMessage = "Le nom doit faire 50 caractères au maximum"), MinLength(4)]
+        [MaxLength(50, ErrorMessage = "Le nom doit faire 50 caractères au maximum"), MinLength(3, ErrorMessage ="Le nom doit faire 3 caractères au minimum")]
         [DisplayName("Titre")]
         public string Title { get; set; }
 
@@ -28,6 +28,7 @@ namespace WildPay.Models
         [DisplayName("Montant")]
         public double Value { get; set; }
 
+        [Required(ErrorMessage ="Le nom de l'utilisateur est obligatoire")]
         public int FkUserId { get; set; }
         [ForeignKey("FkUserId")]
         public User User { get; set; }

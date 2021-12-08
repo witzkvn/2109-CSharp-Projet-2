@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Name)
-                @Html.TextBoxFor(Model => Model.Name, new { type = "text", minlength = 3, maxlength = 20 })
+                @Html.TextBoxFor(Model => Model.Name, new { type = "text", minlength = 3, maxlength = 20, required="required" })
                 <input class="btn btn-primary" type="submit" value="Valider" />
 
                 @if (ViewBag.Confirm != "")
