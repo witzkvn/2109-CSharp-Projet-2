@@ -57,7 +57,7 @@ namespace WildPay.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Format mot de passe incorrect ";
+                        ViewBag.Message = "Mot de passe invalide. Utilisez au moins cinq caractères avec des majuscules, minuscules, des chiffres et des symboles.";
                     }
 
                 }
