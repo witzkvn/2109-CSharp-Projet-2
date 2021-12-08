@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="NewUserImageFile">Photo de profil</label>
-                    <input name="NewUserImageFile" type="file" />
+                    <input name="NewUserImageFile" type="file" id="user-image-input" />
                     @if (ViewBag.ImageUploadMessage != null || ViewBag.ImageUploadMessage != "")
                     {
                         <p class="error">@ViewBag.ImageUploadMessage</p>
@@ -78,3 +78,19 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    let fileInput = document.getElementById('user-image-input');
+    fileInput.addEventListener("change", (e) => {
+        var files = fileInput.files;
+        var fileSize = 0;
+        if (files.length != 0) {
+            fileSize = files[0].size;
+        }
+        if (fileSize > 2000000) {
+            alert("Le fichier téléchargé est trop lourd !");
+            fileInput.value = "";
+            return false;
+        }
+    })
+</script>
