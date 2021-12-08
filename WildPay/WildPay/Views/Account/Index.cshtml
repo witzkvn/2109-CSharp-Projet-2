@@ -48,7 +48,9 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.Firstname, new { @class = "form-control", type = "text", minlength = 2, maxlength = 20 })
+                    <input type="text" id="firstNameInput" class="form-control"
+                           minlength="2" maxlength="20" name="FirstName" value="@Model.Firstname"
+                           required />
                     <p class="error">
                         @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
                     </p>
@@ -56,7 +58,9 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.Lastname, new { @class = "form-control", type = "text", minlength = 2, maxlength = 20 })
+                    <input type="text" id="lastnameInput" class="form-control"
+                           minlength="2" maxlength="20" name="Lastname" value="@Model.Lastname"
+                           required />
                     <p class="error">
                         @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
                     </p>

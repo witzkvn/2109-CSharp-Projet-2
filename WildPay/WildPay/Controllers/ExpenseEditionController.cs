@@ -34,7 +34,8 @@ namespace WildPay.Controllers
             if (ModelState.IsValid)
             {
                 DatabaseTools.CreateOrUpdateExpense(newExpense);
-                return RedirectToAction("Index", "Expense", new { confirmationMessage = "La dépense a bien été ajoutée" });
+                string confirmation = newExpense.Id != 0 ? "La dépense a bien été éditée" : "La dépense a bien été ajoutée";
+                return RedirectToAction("Index", "Expense", new { confirmationMessage = confirmation });
             }
             else
             {

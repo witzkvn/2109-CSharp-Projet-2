@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Title)
-                @Html.TextBoxFor(Model => Model.Title, new { type = "text", minlength = 4, maxlength = 50 })
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text", minlength = 3, maxlength = 20, required = "required" })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Title)
                 </p>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.CreatedAt)
 
-                <input type="date" value="@ViewBag.date" , name="newDate" required />
+                <input type="date" value="@ViewBag.date" , name="newDate" , required />
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.CreatedAt)
                 </p>
@@ -86,7 +86,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(Model => Model.Value)
-                    @Html.TextBoxFor(Model => Model.Value, new { type = "number", min = "0.1", max = "100000", step = "0.01", @Value = Model.Value.ToString().Replace(',', '.')})
+                    @Html.TextBoxFor(Model => Model.Value, new { type = "number", min = "0.1", max = "100000", step = "0.01", required="required", @Value = Model.Value.ToString().Replace(',', '.')})
                     <p class="error">
                         @Html.ValidationMessageFor(Model => Model.Value)
                     </p>
@@ -125,3 +125,12 @@
     @Html.Partial("_DeleteConfirmation", expASupp);
 }
 
+
+<script>
+    var titleInput = document.getElementById('Title');
+    titleInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Veuillez saisir un titre d\'au moins trois caractères de long.');
+    }
+
+</script>
