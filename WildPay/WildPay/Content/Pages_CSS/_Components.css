@@ -131,4 +131,8 @@
     .form-group label{
         text-align: left;
     }
+
+    .modal-inner{
+        margin: auto 3rem;
+    }
 }

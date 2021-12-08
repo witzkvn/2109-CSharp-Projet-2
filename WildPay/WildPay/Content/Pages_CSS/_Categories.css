@@ -84,3 +84,10 @@
     background-color: var(--error);
 }
 
+@media screen and (max-width: 900px) {
+    .categories-wrapper .form-group {
+        grid-template-columns: 1fr;
+        margin-bottom: 0;
+    }
+
+}

@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Title)
-                @Html.TextBoxFor(Model => Model.Title, new { type = "text", minlength=4, maxlength=50 })
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text", minlength = 4, maxlength = 50 })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Title)
                 </p>
@@ -57,6 +57,7 @@
                                 else
                                 {
                                     <option value="@cat.Id">@cat.Name</option>
+                                    }
                                 }
                             }
                         }
