@@ -36,13 +36,18 @@ namespace WildPay.Tools
             // au moins 1 caractère special 
             // au moins 5 caractères de long
             return new Regex(RegexPassword).IsMatch(userPassword);
+        }
 
-            //Regex hasNumber = new Regex(@"[0-9]+");
-            //Regex specialChars = new Regex("[^A-Za-z0-9]");
+        public static bool IsTextOk(string text)
+        {
+            // que des lettres et lettres avec accents
+            return new Regex(RegexText).IsMatch(text);
+        }
 
-                //hasNumber.IsMatch(userPassword) &&
-                //userPassword.Length >= 5 &&
-                //specialChars.IsMatch(userPassword);
+        public static bool IsTextAndNumberOk(string textAndNumbers)
+        {
+            // que des lettres et lettres avec accents
+            return new Regex(RegexTextAndNumbers).IsMatch(textAndNumbers);
         }
 
         public static bool IsDateOk(string date)
