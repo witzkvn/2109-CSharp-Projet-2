@@ -44,22 +44,22 @@ namespace WildPay.Tools
         {
             using (WildPayContext db = new WildPayContext())
             {
-                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
-                //        new SqlParameter("@name", "restaurant"),
-                //        new SqlParameter("@group_Id", groupId),
-                //        new SqlParameter("@IsBase", true));
-                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
-                //        new SqlParameter("@name", "transport"),
-                //        new SqlParameter("@group_Id", groupId),
-                //        new SqlParameter("@IsBase", true));
-                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
-                //        new SqlParameter("@name", "courses"),
-                //        new SqlParameter("@group_Id", groupId),
-                //        new SqlParameter("@IsBase", true));
-                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
-                //        new SqlParameter("@name", "hebergement"),
-                //        new SqlParameter("@group_Id", groupId),
-                //        new SqlParameter("@IsBase", true));
+                db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                        new SqlParameter("@name", "restaurant"),
+                        new SqlParameter("@group_Id", groupId),
+                        new SqlParameter("@IsBase", true));
+                db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                        new SqlParameter("@name", "transport"),
+                        new SqlParameter("@group_Id", groupId),
+                        new SqlParameter("@IsBase", true));
+                db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                        new SqlParameter("@name", "courses"),
+                        new SqlParameter("@group_Id", groupId),
+                        new SqlParameter("@IsBase", true));
+                db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                        new SqlParameter("@name", "hebergement"),
+                        new SqlParameter("@group_Id", groupId),
+                        new SqlParameter("@IsBase", true));
             }
         }
 
