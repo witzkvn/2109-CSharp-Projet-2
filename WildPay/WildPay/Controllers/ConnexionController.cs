@@ -11,7 +11,6 @@ namespace WildPay.Controllers
 {
     public class ConnexionController : Controller
     {
-        // GET: Connexion
         public ActionResult Index(bool creationSuccess = false)
         {
             ViewBag.ConfirmationCreationCompte = creationSuccess;
