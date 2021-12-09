@@ -203,17 +203,52 @@ BEGIN
 END
  GO 
 
- DROP PROCEDURE IF EXISTS sp_AddMemberToGroup;
+DROP PROCEDURE IF EXISTS sp_AddMemberToGroup;
  GO 
 CREATE PROCEDURE sp_AddMemberToGroup
-	@user_Id INT, 
+	@UserEmail VARCHAR(200), 
+	@group_Id INT,
+	@ajoutOk INT OUTPUT 
+AS
+BEGIN
+	SELECT @ajoutOk = 0;
+	DECLARE @User_Id INT;
+    SELECT TOP 1 @User_Id = Id FROM [WildPay-1].[dbo].[User] WHERE Email = @UserEmail;
+	IF (@User_Id <> 0)
+		BEGIN
+		IF NOT EXISTS (select 1 FROM UserGroup WHERE Group_Id = @group_Id AND User_Id = @User_Id)
+			BEGIN
+			INSERT INTO [UserGroup](User_Id, Group_Id)
+			VALUES(@user_Id, @group_Id);
+			SELECT @ajoutOk = 1;
+			END
+		END
+	END
+ GO 
+
+
+DROP PROCEDURE IF EXISTS sp_DeleteGroup;
+ GO 
+CREATE PROCEDURE sp_DeleteGroup
 	@group_Id INT
 AS
 BEGIN
-	INSERT INTO [UserGroup](Group_Id, User_Id)
-	VALUES(@group_Id, @user_Id);
+ DELETE FROM [EXPENSE] 
+ WHERE [EXPENSE].FkGroupId = @group_Id
+ DELETE FROM [UserGroup] 
+ WHERE [UserGroup].Group_Id = @group_Id 
+ DELETE FROM [GroupCategory]
+ WHERE Group_Id = @group_Id
+--DELETE FROM Category
+--WHERE category.Id in
+--(SELECT * FROM Category
+--INNER JOIN GroupCategory on ([GroupCategory].Category_Id = Category.Id)
+--WHERE (@group_Id = GroupCategory.Group_Id))
+
 END
  GO 
+
+
 
  DROP PROCEDURE IF EXISTS sp_UpdateGroup;
  GO 

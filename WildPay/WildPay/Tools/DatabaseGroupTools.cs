@@ -40,15 +40,55 @@ namespace WildPay.Tools
             }
         }
 
-        internal static void AddMemberToGroup(int memberId, int id)
+        internal static void AddBaseCategories(int groupId)
         {
             using (WildPayContext db = new WildPayContext())
             {
-                SqlParameter memberIdSql = new SqlParameter("@user_Id", memberId);
-                SqlParameter groupSql = new SqlParameter("@group_Id", id);
+                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                //        new SqlParameter("@name", "restaurant"),
+                //        new SqlParameter("@group_Id", groupId),
+                //        new SqlParameter("@IsBase", true));
+                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                //        new SqlParameter("@name", "transport"),
+                //        new SqlParameter("@group_Id", groupId),
+                //        new SqlParameter("@IsBase", true));
+                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                //        new SqlParameter("@name", "courses"),
+                //        new SqlParameter("@group_Id", groupId),
+                //        new SqlParameter("@IsBase", true));
+                //db.Database.ExecuteSqlCommand("sp_CreerCategory @name, @group_Id, @IsBase",
+                //        new SqlParameter("@name", "hebergement"),
+                //        new SqlParameter("@group_Id", groupId),
+                //        new SqlParameter("@IsBase", true));
+            }
+        }
 
-                db.Database.ExecuteSqlCommand("sp_AddMemberToGroup @user_Id, @group_Id",
-                    memberIdSql, groupSql);
+        public static bool AddedMemberToGroup(string memberMail, int groupId)
+        {
+            bool isOk;
+            using (WildPayContext db = new WildPayContext())
+            {
+                SqlParameter mailSql = new SqlParameter("@UserEmail", memberMail);
+                SqlParameter groupSql = new SqlParameter("@group_Id", groupId);
+                var returnCode = new SqlParameter("@ajoutOk", 0);
+                returnCode.SqlDbType = SqlDbType.Bit;
+                returnCode.Direction = ParameterDirection.Output;
+
+                db.Database.ExecuteSqlCommand("sp_AddMemberToGroup @UserEmail, @group_Id, @ajoutOk OUTPUT", mailSql, groupSql, returnCode);
+                isOk = (bool)returnCode.Value;
+                return isOk;
+            }
+        }
+
+        public static List<User> GetUsersForGroup(int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                List<User> users = db.Database.SqlQuery<User>
+                ("sp_GetUsersForGroup @p0", groupId).OrderBy(user => user.Firstname)
+                .ToList();
+                return users;
+
             }
         }
 

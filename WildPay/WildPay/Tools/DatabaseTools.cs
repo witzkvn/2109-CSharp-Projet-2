@@ -39,6 +39,17 @@ namespace WildPay.Tools
             }
         }
 
+        public static List<Category> GetCategoriesFomGroup(int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                return db.Database.SqlQuery<Category>
+                ("sp_GetCategory @p0", groupId).OrderBy(cat => cat.Name)
+                .ToList();
+            }
+        }
+
+
         public static Expense GetExpenseById(int idExpense)
         {
             using (WildPayContext db = new WildPayContext())
@@ -73,6 +84,9 @@ namespace WildPay.Tools
                 return null;
             }
         }
+
+
+
 
         public static List<User> GetAllUsers()
         {

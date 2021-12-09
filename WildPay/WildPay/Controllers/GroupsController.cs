@@ -44,6 +44,10 @@ namespace WildPay.Controllers
             if (ModelState.IsValid)
             {
                 Session["group"] = DatabaseGroupTools.CreateGroupForUser((int)Session["id"], group.Name);
+                DatabaseGroupTools.AddBaseCategories((int)Session["group"]);
+
+
+
                 return RedirectToAction("GroupsList");
             }
 
@@ -51,14 +55,16 @@ namespace WildPay.Controllers
         }
 
 
-        public ActionResult GroupEdit(int? id)
+        public ActionResult GroupEdit(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Group group = db.Groups.Find(id);
-            ViewBag.listeUsers = db.Users.ToList();
+            Session["group"] = id;
+            ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup(id);
+
             if (group == null)
             {
                 return HttpNotFound();
@@ -69,13 +75,13 @@ namespace WildPay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GroupEdit([Bind(Include = "Id,CreatedAt,Name")] Group group, int memberId)
+        public ActionResult GroupEdit([Bind(Include = "Id,CreatedAt,Name")] Group group, string memberMail)
         {
             if (ModelState.IsValid)
             {
-                if (memberId !=0)
+                if (memberMail != "")
                 {
-                    DatabaseGroupTools.AddMemberToGroup(memberId, group.Id);
+                    bool ok = DatabaseGroupTools.AddedMemberToGroup(memberMail, group.Id);
                 }
                 else
                 {

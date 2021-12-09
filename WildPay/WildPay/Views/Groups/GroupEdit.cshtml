@@ -1,4 +1,5 @@
 ﻿@model WildPay.Models.Group
+@using WildPay.Models
 
 @{
     ViewBag.Title = "Edit";
@@ -27,14 +28,16 @@
 
     <div class="form-group">
         <label for="auteur-select">Membres du groupe</label>
-        <select name="memberId" id="memberId">
-            @{
-                foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
+        <input type="email" name="memberMail" />
+    </div>
+
+    <div>
+        @{ 
+            foreach (User user in ViewBag.listeUsers)
                 {
-                    <option value="@auteur.Id">@auteur.Firstname</option>
+                    <span>@user.Email</span>
                 }
-            }
-        </select>
+        }
     </div>
 
     <div class="form-group">

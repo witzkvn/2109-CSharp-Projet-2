@@ -20,7 +20,7 @@ namespace WildPay.Controllers
             {
                 ViewBag.Confirm = deleteMessage;
             }
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFomGroup((int)Session["group"]);
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace WildPay.Controllers
         private bool CategoryAlreadyExists(WildPayContext db, Category newCategory)
         {
             SqlParameter categoryName = new SqlParameter("@name", newCategory.Name);
-            int principalGroupId = Utilities.GetGroupePrincipalId();
+            int principalGroupId = (int)Session["group"];
             SqlParameter groupId = new SqlParameter("@group_Id", principalGroupId);
             return db.Database.SqlQuery<Category>
                 ("sp_GetCategoryByName @name, @group_Id",
@@ -91,7 +91,7 @@ namespace WildPay.Controllers
         private void AddCategory(WildPayContext db, Category newCategory)
         {
             SqlParameter newName = new SqlParameter("@name", newCategory.Name);
-            int principalGroupId = Utilities.GetGroupePrincipalId();
+            int principalGroupId = (int)Session["group"];
             SqlParameter idGroup = new SqlParameter("@group_Id", principalGroupId);
             db.Database.ExecuteSqlCommand
                 ("sp_CreerCategory @name, @group_Id, @IsBase",
