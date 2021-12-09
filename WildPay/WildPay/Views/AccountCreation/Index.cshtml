@@ -20,9 +20,9 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Firstname)
-                <input type="text" id="firstNameInput" class="form-control"
-                       minlength="2" maxlength="20" name="Firstname"
+                <input type="text" id="firstnameInput" class="input-validation-error form-control"  data-val="true" 
                        pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
+                       minlength="2" maxlength="20" name="Firstname"
                        required />
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Firstname)
@@ -31,12 +31,10 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
-                <input type="text" id="lastnameInput" class="form-control" 
+                <input type="text" id="lastnameInput" class="input-validation-error form-control"  data-val="true" 
                        pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$" 
                        minlength="2" maxlength="20" name="Lastname" 
                        required/>
-
-
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Lastname)
                 </p>
@@ -85,13 +83,13 @@
     {
         event.target.setCustomValidity('Utilisez au moins cinq caractères avec des majuscules, minuscules, des chiffres et des symboles.');
     }
-    var firstNameInput = document.getElementById('firstNameInput');
-    firstNameInput.oninvalid = function (event)
+    var firstnameInput = document.getElementById('firstNameInput');
+    firstnameInput.oninvalid = function (event)
     {
         event.target.setCustomValidity('Le prénom doit faire au moins deux caractères.')
     }
-    var lastNameInput = document.getElementById('lastNameInput');
-    lastNameInput.oninvalid = function (event)
+    var lastnameInput = document.getElementById('lastNameInput');
+    lastnameInput.oninvalid = function (event)
     {
         event.target.setCustomValidity('Le nom doit faire au moins deux caractères.')
     }
