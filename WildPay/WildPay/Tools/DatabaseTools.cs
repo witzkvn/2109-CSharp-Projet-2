@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using WildPay.DAL;
 using WildPay.Models;
+using System.Data.Entity;
 
 namespace WildPay.Tools
 {
@@ -72,6 +73,17 @@ namespace WildPay.Tools
                 return null;
             }
         }
+
+        public static List<User> GetAllUsers()
+        {
+            List<User> users = new List<User>();
+            using (WildPayContext db = new WildPayContext())
+            {
+                users = db.Users.ToList(); // eventuellement changer en SP 
+            }
+            return users;
+        }
+
 
         public static void CreateOrUpdateExpense(Expense newExpense)
         {

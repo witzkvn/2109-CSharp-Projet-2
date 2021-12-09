@@ -135,6 +135,7 @@
     <Compile Include="Controllers\AccountCreationController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ExpenseEditionController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="DAL\WildPayContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,6 +171,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\AssetsTools.cs" />
+    <Compile Include="Tools\DatabaseGroupTools.cs" />
     <Compile Include="Tools\DatabaseTools.cs" />
     <Compile Include="Tools\ConverterTools.cs" />
     <Compile Include="Tools\FormatTools.cs" />
@@ -247,6 +249,9 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Categories\_DeleteConfirmation.cshtml" />
     <Content Include="Views\ExpenseEdition\_DeleteConfirmation.cshtml" />
+    <Content Include="Views\Groups\GroupCreation.cshtml" />
+    <Content Include="Views\Groups\GroupEdit.cshtml" />
+    <Content Include="Views\Groups\GroupsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

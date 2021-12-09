@@ -167,12 +167,15 @@ DROP PROCEDURE IF EXISTS sp_CreerGroup;
  GO 
 CREATE PROCEDURE sp_CreerGroup
 @name VARCHAR(200),
+@user_Id INT, 
 @GroupID int OUTPUT
 AS
 BEGIN
 	INSERT INTO [Group](Name, CreatedAt) VALUES
 	(@name, GETDATE())
 	SELECT @GroupID = SCOPE_IDENTITY() 
+	INSERT INTO [UserGroup](Group_Id, User_Id) VALUES
+	(@GroupID, @user_Id)
 END
  GO 
 
@@ -186,6 +189,47 @@ BEGIN
 	WHERE Name = 'principal';
 END
  GO 
+
+DROP PROCEDURE IF EXISTS sp_GetGroupsForUser;
+ GO 
+CREATE PROCEDURE sp_GetGroupsForUser
+	@user_Id INT
+AS
+BEGIN
+	SELECT * FROM [Group]
+	INNER JOIN [UserGroup] 
+	ON [Group].Id = [UserGroup].Group_Id
+	WHERE [UserGroup].User_Id = @user_Id;
+END
+ GO 
+
+ DROP PROCEDURE IF EXISTS sp_AddMemberToGroup;
+ GO 
+CREATE PROCEDURE sp_AddMemberToGroup
+	@user_Id INT, 
+	@group_Id INT
+AS
+BEGIN
+	INSERT INTO [UserGroup](Group_Id, User_Id)
+	VALUES(@group_Id, @user_Id);
+END
+ GO 
+
+ DROP PROCEDURE IF EXISTS sp_UpdateGroup;
+ GO 
+CREATE PROCEDURE sp_UpdateGroup
+	@group_Id INT,
+	@name VARCHAR(200)
+AS
+BEGIN
+	UPDATE [Group]
+	SET
+	Name = @name
+	WHERE [Group].Id = @group_Id;
+END
+ GO 
+
+
 
 
 -- EXPENSE
