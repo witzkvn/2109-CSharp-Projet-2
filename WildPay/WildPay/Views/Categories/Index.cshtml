@@ -1,5 +1,4 @@
 ﻿@using WildPay.Models
-@using WildPay.Tools
 
 @model Category
 @{
@@ -22,8 +21,8 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Name)
                 <input type="text" id="name" class="form-control"
+                        pattern="@FormatTools.RegexTextAndNumbers"                       
                        minlength="2" maxlength="20" name="Name"
-                       pattern="^[0-9A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][0-9a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[0-9A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
                        required />         
                 <input class="btn btn-primary" type="submit" value="Valider" />
 

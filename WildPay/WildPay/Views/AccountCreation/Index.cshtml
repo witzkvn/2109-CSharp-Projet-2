@@ -21,7 +21,7 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Firstname)
                 <input type="text" id="firstnameInput" class="input-validation-error form-control"  data-val="true" 
-                       pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$"
+                       pattern="@FormatTools.RegexText"
                        minlength="2" maxlength="20" name="Firstname"
                        required />
                 <p class="error">
@@ -32,7 +32,7 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
                 <input type="text" id="lastnameInput" class="input-validation-error form-control"  data-val="true" 
-                       pattern="^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ][a-z A-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ\\ \\-]*[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]$" 
+                       pattern="@FormatTools.RegexText"                       
                        minlength="2" maxlength="20" name="Lastname" 
                        required/>
                 <p class="error">
@@ -53,7 +53,7 @@
                 @Html.LabelFor(Model => Model.Password)
 
                 <input class="input-validation-error form-control" data-val="true" data-val-required="Le mot de passe est obligatoire" 
-                       id="passwordInput" maxlength="30" minlength="5" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{5,}" type="password" value="" required>
+                       id="passwordInput" pattern="@FormatTools.RegexPassword" maxlength="30" minlength="5" name="Password" type="password" value="" required>
 
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Password)

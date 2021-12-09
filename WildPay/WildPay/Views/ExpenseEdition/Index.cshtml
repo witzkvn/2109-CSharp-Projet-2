@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Title)
-                @Html.TextBoxFor(Model => Model.Title, new { type = "text", minlength = 3, maxlength = 20, required = "required" })
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text", pattern = FormatTools.RegexTextAndNumbers, minlength = 3, maxlength = 20, required = "required"  })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Title)
                 </p>
