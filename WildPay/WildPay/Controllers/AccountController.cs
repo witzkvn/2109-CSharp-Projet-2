@@ -40,6 +40,13 @@ namespace WildPay.Controllers
         public ActionResult Index([Bind(Include = "Id, Firstname, Lastname, NewUserImageFile")] User user)
         {
             string updateMessage = "";
+
+            if (!FormatTools.IsTextOk(user.Firstname) || !FormatTools.IsTextOk(user.Lastname))
+            {
+                updateMessage = "Le format du nom ou du prénom n'est pas correct.";
+                return RedirectToAction("Index", "Account", new { error = updateMessage });
+            }
+
             using (WildPayContext db = new WildPayContext())
             {
                 if (ModelState.IsValidField("Firstname") && ModelState.IsValidField("Lastname"))

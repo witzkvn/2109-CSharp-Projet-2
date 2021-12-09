@@ -17,14 +17,28 @@ namespace WildPay.Controllers
         {
             ViewBag.Message ="";
         }
-        public ActionResult Index()
+        public ActionResult Index(string error = null)
         {
+            if(error != null)
+            {
+                ViewBag.Message = error;
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Index(User newUser)
         {
+            if (!FormatTools.IsTextOk(newUser.Firstname) || !FormatTools.IsTextOk(newUser.Lastname))
+            {
+                string updateMessage = "Le nom ou le prénom ne doivent contenir que des lettres.";
+                return RedirectToAction("Index", "AccountCreation", new { error = updateMessage });
+            }
+            if (!FormatTools.IsPasswordFormatOk(newUser.Password))
+            {
+                string updateMessage = "Le mot de passe doit contenir au moins 5 caractères, dont 1 chiffre et 1 caractère spécial.";
+                return RedirectToAction("Index", "AccountCreation", new { error = updateMessage });
+            }
             if (ModelState.IsValid)
             {
                 using (WildPayContext db = new WildPayContext())
@@ -37,8 +51,7 @@ namespace WildPay.Controllers
                         return View("Index");
                     }
 
-                    if (FormatTools.IsPasswordFormatOk(newUser.Password))
-                    {
+                   
                         newUser.Password = FormatTools.HashPassword(newUser.Password.Trim());
 
                         int principalGroupId = Utilities.GetGroupePrincipalId();
@@ -54,12 +67,6 @@ namespace WildPay.Controllers
                         return RedirectToAction("Index", "Connexion", new {
                             creationSuccess = true
                     });
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Mot de passe invalide. Utilisez au moins cinq caractères avec des majuscules, minuscules, des chiffres et des symboles.";
-                    }
-
                 }
 
             }

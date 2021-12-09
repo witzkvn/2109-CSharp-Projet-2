@@ -27,7 +27,7 @@ namespace WildPay.Controllers
         [HttpPost]
         public ActionResult Index(Category newCategory)
         {
-            if (ModelState.IsValid)
+                if (ModelState.IsValid)
             {
                 using (WildPayContext db = new WildPayContext())
                 {
@@ -74,7 +74,6 @@ namespace WildPay.Controllers
                 }
             }
             ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
-            //return View("Index");
             return RedirectToAction("Index", new { deleteMessage = "Categorie supprimée " });
         }
 
