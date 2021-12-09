@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,8 +15,6 @@ namespace WildPay.Controllers
 {
     public class GroupsController : Controller
     {
-        private WildPayContext db = new WildPayContext();
-
 
         public ActionResult GroupsList(string errorMessage = null, string validationMessage=null)
         {
@@ -46,8 +45,6 @@ namespace WildPay.Controllers
                 Session["group"] = DatabaseGroupTools.CreateGroupForUser((int)Session["id"], group.Name);
                 DatabaseGroupTools.AddBaseCategories((int)Session["group"]);
 
-
-
                 return RedirectToAction("GroupsList");
             }
 
@@ -61,7 +58,7 @@ namespace WildPay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
+            Group group = DatabaseGroupTools.GetGroupById(id);
             Session["group"] = id;
             ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup(id);
 
@@ -94,14 +91,27 @@ namespace WildPay.Controllers
         }
 
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteGroup(int groupId)
         {
-            Group group = db.Groups.Find(id);
-            db.Groups.Remove(group);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Group groupToEdit = DatabaseGroupTools.GetGroupById(groupId);
+            ViewBag.title = "Editer un groupe";
+            ViewBag.groupToDelete = groupToEdit;
+            ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup(groupId);
+            return View("GroupEdit", groupToEdit);
+        }
+
+        public ActionResult ConfirmDeleteGroup(int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                SqlParameter groupSql = new SqlParameter("@group_Id", groupId);
+                db.Database.ExecuteSqlCommand("sp_DeleteGroup @group_Id", groupSql);
+            }
+            if (groupId == (int)Session["group"])
+            {
+                DatabaseGroupTools.GetDefaultIdGroupForUser((int)Session["id"]);
+            }
+            return RedirectToAction("GroupsList", "Groups", new { errorMessage = "", validationMessage = "le groupe a bien été supprimé" });
         }
 
     }

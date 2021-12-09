@@ -252,6 +252,7 @@
     <Content Include="Views\Groups\GroupCreation.cshtml" />
     <Content Include="Views\Groups\GroupEdit.cshtml" />
     <Content Include="Views\Groups\GroupsList.cshtml" />
+    <Content Include="Views\Groups\_DeleteConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

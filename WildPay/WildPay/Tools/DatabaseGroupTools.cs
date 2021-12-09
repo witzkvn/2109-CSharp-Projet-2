@@ -88,7 +88,32 @@ namespace WildPay.Tools
                 ("sp_GetUsersForGroup @p0", groupId).OrderBy(user => user.Firstname)
                 .ToList();
                 return users;
+            }
+        }
 
+        public static int GetDefaultIdGroupForUser(int userId)
+        {
+            int GroupId = 0;
+            using (WildPayContext db = new WildPayContext())
+            {
+                var returnCode = new SqlParameter();
+                returnCode.ParameterName = "@GroupID";
+                returnCode.SqlDbType = SqlDbType.Int;
+                returnCode.Direction = ParameterDirection.Output;
+                SqlParameter userSql = new SqlParameter("@user_Id", userId);
+                db.Database.ExecuteSqlCommand("sp_GetDefaultGroupForUser @user_Id, @GroupID OUTPUT", userSql, returnCode);
+                GroupId = (int)returnCode.Value;
+                return GroupId;
+            }
+        }
+
+        public static Group GetGroupById(int id)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                Group group = db.Database.SqlQuery<Group>
+                ("sp_GetGroupById @p0", id).FirstOrDefault();
+                return group;
             }
         }
 

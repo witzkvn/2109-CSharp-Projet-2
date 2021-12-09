@@ -39,7 +39,7 @@ namespace WildPay.Tools
             }
         }
 
-        public static List<Category> GetCategoriesFomGroup(int groupId)
+        public static List<Category> GetCategoriesFromGroup(int groupId)
         {
             using (WildPayContext db = new WildPayContext())
             {
@@ -87,7 +87,6 @@ namespace WildPay.Tools
 
 
 
-
         public static List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
@@ -99,9 +98,8 @@ namespace WildPay.Tools
         }
 
 
-        public static void CreateOrUpdateExpense(Expense newExpense)
+        public static void CreateOrUpdateExpense(Expense newExpense, int groupId)
         {
-            int groupId = Utilities.GetGroupePrincipalId();
             using (WildPayContext db = new WildPayContext())
             {
                 SqlParameter dateSql = new SqlParameter("@date", newExpense.CreatedAt);

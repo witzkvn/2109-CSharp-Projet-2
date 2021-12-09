@@ -20,7 +20,7 @@ namespace WildPay.Controllers
             {
                 ViewBag.Confirm = deleteMessage;
             }
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesFomGroup((int)Session["group"]);
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
             return View();
         }
 
@@ -49,14 +49,14 @@ namespace WildPay.Controllers
                 ViewBag.Error = "Categorie incorrecte";
             } 
 
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesFomGroup((int)Session["group"]);
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
 
             return View("Index");
         }
 
         public ActionResult DeleteCategorie(int categorieIDToDelete)
         {
-            List<Category> listeCategories = DatabaseTools.GetCategoriesFomGroup((int)Session["group"]);
+            List<Category> listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
             ViewBag.listeCategories = listeCategories;
             ViewBag.categoryASupprimer = listeCategories.Where(c => c.Id == categorieIDToDelete).First();
             return View("Index");
@@ -73,7 +73,7 @@ namespace WildPay.Controllers
                     db.Database.ExecuteSqlCommand("sp_SuppressionCategory @CategoryId", categorieID);
                 }
             }
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesFomGroup((int)Session["group"]);
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
             return RedirectToAction("Index", new { deleteMessage = "Categorie supprimée " });
         }
 
