@@ -83,6 +83,10 @@
     margin: 0 auto;
 }
 
+#expense-graph2 {
+    margin-top: 2.5rem
+}
+
 .expense .flex.fixed {
     height: max-content;
     position: sticky;
