@@ -50,24 +50,10 @@ namespace WildPay.Tools
             return new Regex(RegexTextAndNumbers).IsMatch(textAndNumbers);
         }
 
-        public static bool IsDateOk(string date)
-        {
-            DateTime dateResult;
-            if (DateTime.TryParse(date, out dateResult))
-            {
-                if (dateResult > DateTime.Now)
-                    return false;
-                else if (dateResult.Year < DateTime.Now.Year - 10)
-                    return false;
-            }
-            return false;
-        }
-
         public static string ConvertInShortDate(DateTime date)
         { 
             return date.ToString("dd/MM/yyyy"); ;
         }
-
 
 
         public static string HashPassword(string passwordToHash)
