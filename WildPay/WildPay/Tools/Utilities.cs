@@ -23,7 +23,7 @@ namespace WildPay.Tools
             }
             else
             {
-                return char.ToUpper(mot[0]) + mot.Substring(1);
+                return char.ToUpper(mot[0]) + mot.Substring(1).ToLower();
             }
         }
 
