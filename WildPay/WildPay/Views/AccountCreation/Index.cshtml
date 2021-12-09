@@ -11,28 +11,35 @@
 <div class="login-page">
     <h2>Bienvenue sur WildPay !</h2>
 
+        <div class="box login-wrapper">
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
 
-        <div id="login-wrapper" class="box">
             <h3>Créer un nouveau compte</h3>
 
             <div class="form-group">
+                @Html.LabelFor(Model => Model.Firstname)
+                <input type="text" id="firstnameInput" class="input-validation-error form-control"  data-val="true" 
+                       pattern="@FormatTools.RegexText"
+                       minlength="2" maxlength="20" name="Firstname"
+                       required />
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Firstname)
+                </p>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(Model => Model.Lastname)
-                @Html.EditorFor(Model => Model.Lastname)
+                <input type="text" id="lastnameInput" class="input-validation-error form-control"  data-val="true" 
+                       pattern="@FormatTools.RegexText"                       
+                       minlength="2" maxlength="20" name="Lastname" 
+                       required/>
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Lastname)
                 </p>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(Model => Model.Firstname)
-                @Html.EditorFor(Model => Model.Firstname)
-                <p class="error">
-                    @Html.ValidationMessageFor(Model => Model.Firstname)
-                </p>
-            </div>
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Email)
@@ -44,10 +51,15 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Password)
-                @Html.EditorFor(Model => Model.Password)
+
+                <input class="input-validation-error form-control" data-val="true" data-val-required="Le mot de passe est obligatoire" 
+                       id="passwordInput" pattern="@FormatTools.RegexPassword" maxlength="30" minlength="5" name="Password" type="password" value="" required>
+
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Password)
                 </p>
+
+
             </div>
 
             <p class="error">
@@ -59,9 +71,26 @@
             </button>
             <a href="@Url.Action("Index", "Connexion")">Déjà un compte ? Connexion</a>
 
-        </div>
     }
 
+        </div>
 
 </div>
 
+<script>
+    var passwordInput = document.getElementById('passwordInput');
+    passwordInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Utilisez au moins cinq caractères avec des majuscules, minuscules, des chiffres et des symboles.');
+    }
+    var firstnameInput = document.getElementById('firstNameInput');
+    firstnameInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Le prénom doit faire au moins deux caractères.')
+    }
+    var lastnameInput = document.getElementById('lastNameInput');
+    lastnameInput.oninvalid = function (event)
+    {
+        event.target.setCustomValidity('Le nom doit faire au moins deux caractères.')
+    }
+</script>

@@ -105,3 +105,35 @@
 .whoarewe-text{
     flex-shrink: 1;
 }
+
+@media screen and (max-width: 1200px){
+    .features-grid{
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header{
+        grid-template-columns: 1fr;
+    }
+
+    .header-left{
+        text-align: center;
+        align-items: center;
+    }
+
+    .header-left .moto-second {
+        text-align: center;
+    }
+
+    .header-right{
+        margin: 0 auto;
+    }
+    .header-right img {
+        height: 30vh;
+        width: auto;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }

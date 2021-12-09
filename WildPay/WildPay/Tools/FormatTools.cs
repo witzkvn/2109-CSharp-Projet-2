@@ -9,18 +9,45 @@ namespace WildPay.Tools
 {
     public class FormatTools
     {
+        private static string LettresAZAccent { get {
+                return "A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ";
+            } }
+        public static string RegexText { get {
+                return "^[" + LettresAZAccent + "][" + LettresAZAccent + @"\\ \\-]*[" + LettresAZAccent + "]$";
+            } }
+        public static string RegexTextAndNumbers
+        {
+            get
+            {
+                return "^[0-9" + LettresAZAccent + "][0-9" + LettresAZAccent + @"\\ \\-]*[0-9" + LettresAZAccent + "]$";
+            }
+        }
+        public static string RegexPassword
+        {
+            get
+            {
+                return @"(?=.*\d)(?=.*[0-9])(?=.*[^A-Za-z0-9]).{5,}";
+            }
+        }
+
         public static bool IsPasswordFormatOk(string userPassword)
         {
             // au moins 1 chiffre 
             // au moins 1 caractère special 
             // au moins 5 caractères de long
-            Regex hasNumber = new Regex(@"[0-9]+");
-            Regex specialChars = new Regex("[^A-Za-z0-9]");
+            return new Regex(RegexPassword).IsMatch(userPassword);
+        }
 
-            return
-                hasNumber.IsMatch(userPassword) &&
-                userPassword.Length >= 5 &&
-                specialChars.IsMatch(userPassword);
+        public static bool IsTextOk(string text)
+        {
+            // que des lettres et lettres avec accents
+            return new Regex(RegexText).IsMatch(text);
+        }
+
+        public static bool IsTextAndNumberOk(string textAndNumbers)
+        {
+            // que des lettres et lettres avec accents
+            return new Regex(RegexTextAndNumbers).IsMatch(textAndNumbers);
         }
 
         public static bool IsDateOk(string date)

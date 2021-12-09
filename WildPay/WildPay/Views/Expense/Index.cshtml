@@ -16,7 +16,15 @@
                 <ion-icon name="add-circle"></ion-icon>
                 Ajouter une dépense
             </a>
+
+
             <div class="list-group">
+            @if (ViewBag.Confirm != "")
+            {
+                <p class="message success">
+                    @ViewBag.Confirm
+                </p>
+            }
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
@@ -44,7 +52,7 @@
 
                 @foreach (var user in ViewBag.listeUsers)
                 {
-                    if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] > 0)
+                    if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] >= 0)
                     {
                         <h4 class="user-bilan">Vous devez <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
                     }
@@ -71,10 +79,14 @@
                 }
 
             </div>
+            <button class="btn btn-transparent" id="expense-toggle-graph">Voir les graphiques</button>
+            @if (ViewBag.listeUsers.Count > 1)
+            {
+                <div class="expense-graph" id="expense-graph">
+                    <canvas id="myChart"></canvas>
+                </div>
+            }
 
-            <div class="expense-graph">
-                <canvas id="myChart"></canvas>
-            </div>
 
         </div>
     </div>
@@ -118,4 +130,10 @@
         document.getElementById('myChart'),
         config
     );
+
+
+    let toggleGraphBtn = document.getElementById("expense-toggle-graph");
+    toggleGraphBtn.addEventListener("click", (e) => {
+        e.target.classList.toggle("active");
+    });
 </script>

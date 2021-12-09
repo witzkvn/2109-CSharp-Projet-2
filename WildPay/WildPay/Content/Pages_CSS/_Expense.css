@@ -87,8 +87,88 @@
     height: max-content;
     position: sticky;
     top: 2rem;
+    overflow-y: scroll;
+    height: 90vh;
+}
+
+.expense .flex.fixed::-webkit-scrollbar {
+    background-color: var(--bg-dark);
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.expense .flex.fixed::-webkit-scrollbar-thumb {
+    background-color: var(--bg-light);
+    height: 1rem;
+    width: 1rem;
 }
 
 .expense .user-bilan{
     margin-bottom: 2.5rem;
+}
+
+.expense .message.success{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#expense-toggle-graph{
+    display: none;
+    margin: 2rem auto;
+    width: max-content;
+    text-align: center;
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .expense .row{
+        grid-template-columns: 1fr;
+    }
+
+    .expense .list-group{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .expense .flex.fixed {
+        position: relative;
+        order: -1;
+        margin-bottom: 10rem;
+        height: auto;
+        overflow: unset;
+    }
+
+    .expense .flex a.button{
+        position: sticky;
+        z-index: 15;
+        top: 0;
+        padding: 1.5rem 3rem;
+        background-color: var(--bg-medium);
+        width: 100%;
+        text-align: center;
+        margin: 0 auto 2rem auto;
+    }
+
+    .expense .expense-graph {
+        width: 50%;
+    }
+
+    .expense .list-group-item h3{
+        text-align: left;
+    }
+
+    #expense-toggle-graph{
+        display: block;
+    }
+
+    #expense-toggle-graph ~ .expense-graph {
+        display: none;
+        transition: all 0.2s ease;
+    }
+
+    #expense-toggle-graph.active ~ .expense-graph {
+        display: block;
+    }
 }

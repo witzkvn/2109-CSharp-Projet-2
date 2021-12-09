@@ -18,36 +18,36 @@
 
         @using (Html.BeginForm("Validate", "ExpenseEdition"))
         {
-            @*@Html.ValidationSummary(true)*@
+            @Html.ValidationSummary(true)
 
             @Html.HiddenFor(Model => Model.Id)
 
-            <div id="login-wrapper">
+        <div id="login-wrapper">
 
-                <div class="form-group">
-                    @Html.LabelFor(Model => Model.Title)
-                    @Html.EditorFor(Model => Model.Title)
-                    <p class="error">
-                        @Html.ValidationMessageFor(Model => Model.Title)
-                    </p>
-                </div>
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.Title)
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text", pattern = FormatTools.RegexTextAndNumbers, minlength = 3, maxlength = 20, required = "required"  })
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.Title)
+                </p>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(Model => Model.CreatedAt)
+            <div class="form-group">
+                @Html.LabelFor(Model => Model.CreatedAt)
 
-                    <input type="date" value="@ViewBag.date" , name="newDate" />
-                    <p class="error">
-                        @Html.ValidationMessageFor(Model => Model.CreatedAt)
-                    </p>
-                </div>
+                <input type="date" value="@ViewBag.date" name="newDate" required />
+                <p class="error">
+                    @Html.ValidationMessageFor(Model => Model.CreatedAt)
+                </p>
+            </div>
 
-                <div class="form-group">
-                    <label for="categorie-select">Catégorie</label>
-                    <select name="categorieId" id="categorieId">
-                        <option value="">Choisir une catégorie</option>
-                        @{
-                            foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
-                            {
+            <div class="form-group">
+                <label for="categorie-select">Catégorie</label>
+                <select name="categorieId" id="categorieId">
+                    <option value="">Choisir une catégorie</option>
+                    @{
+                        foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
+                        {
                                 if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
                                 {
                                     <option selected value="@cat.Id">@cat.Name</option>
@@ -55,7 +55,9 @@
                                 else
                                 {
                                     <option value="@cat.Id">@cat.Name</option>
+                                    }
                                 }
+                                
                             }
                         }
                     </select>
@@ -84,7 +86,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(Model => Model.Value)
-                    @Html.TextBoxFor(Model => Model.Value, new { type = "number", min = "0.1", max = "100000", step = "0.01" })
+                    @Html.TextBoxFor(Model => Model.Value, new { type = "number", min = "0.1", max = "100000", step = "0.01", required="required", @Value = Model.Value.ToString().Replace(',', '.')})
                     <p class="error">
                         @Html.ValidationMessageFor(Model => Model.Value)
                     </p>
@@ -96,9 +98,6 @@
                 </p>
 
                 <div class="expense-edition-buttons">
-                    <button class="btn btn-primary" type="submit">
-                        Valider
-                    </button>
 
                     @{
                         if (Model.Id != 0)
@@ -108,6 +107,10 @@
                             </a>
                         }
                     }
+
+                    <button class="btn btn-primary" type="submit">
+                        Valider
+                    </button>
                 </div>
 
             </div>
@@ -122,3 +125,12 @@
     @Html.Partial("_DeleteConfirmation", expASupp);
 }
 
+
+<script>
+    //var titleInput = document.getElementById('Title');
+    //titleInput.oninvalid = function (event)
+    //{
+    //    event.target.setCustomValidity('Veuillez saisir un titre d\'au moins trois caractères de long.');
+    //}
+
+</script>

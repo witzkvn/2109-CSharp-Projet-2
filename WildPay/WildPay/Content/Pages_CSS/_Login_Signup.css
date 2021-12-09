@@ -8,7 +8,7 @@
     margin-bottom: 6rem;
 }
 
-#login-wrapper {
+.login-wrapper {
     min-width: 35rem;
     display: flex;
     flex-direction: column;
@@ -39,4 +39,10 @@
 
 .login-page form a:hover {
     color: var(--primary-medium);
+}
+
+@media screen and (max-width: 900px) {
+    .login-wrapper{
+        width: 100%;
+    }
 }
