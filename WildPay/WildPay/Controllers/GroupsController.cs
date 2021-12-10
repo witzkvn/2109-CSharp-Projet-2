@@ -94,6 +94,12 @@ namespace WildPay.Controllers
 
         public ActionResult DeleteGroup(int groupId)
         {
+            if (groupId == Utilities.GetGroupePrincipalId()) {
+                List<Group> groupes = DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
+                Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser(groupId);
+                Session["groupname"] = DatabaseGroupTools.GetGroupById(groupId).Name;
+                return View("GroupsList", groupes);
+            } 
             Group groupToEdit = DatabaseGroupTools.GetGroupById(groupId);
             ViewBag.groupToDelete = groupToEdit;
             ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup(groupId);
@@ -102,6 +108,12 @@ namespace WildPay.Controllers
 
         public ActionResult ConfirmDeleteGroup(int groupId)
         {
+            if (groupId == Utilities.GetGroupePrincipalId()) {
+                List<Group> groupes = DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
+                Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser(groupId);
+                Session["groupname"] = DatabaseGroupTools.GetGroupById(groupId).Name;
+                return View("GroupsList", groupes);
+            } 
             using (WildPayContext db = new WildPayContext())
             {
                 SqlParameter groupSql = new SqlParameter("@group_Id", groupId);

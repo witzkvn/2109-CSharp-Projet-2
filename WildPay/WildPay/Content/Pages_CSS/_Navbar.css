@@ -23,7 +23,7 @@
     transition: all 0.2s ease;
 }
 
-.navbar-link:first-of-type{
+.navbar-link.nav-link-group {
     display: none;
 }
 
@@ -45,7 +45,6 @@
 
 #mobileNavOpen, #mobileNavClose {
     display: none;
-    /*margin-left: auto;*/
     font-size: 3rem;
     align-items: center;
     cursor: pointer;
@@ -71,7 +70,7 @@
         position: relative;
     }
 
-    .navbar-link:first-of-type {
+    .navbar-link.nav-link-group {
         display: flex;
     }
 

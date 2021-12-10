@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Edit";
+    int groupePrincipalId = Utilities.GetGroupePrincipalId();
 }
 
 <div class="expense-edition-page">
@@ -33,7 +34,7 @@
                 <div class="expense-edition-buttons">
 
                     @{
-                        if (Model.Id != 0)
+                        if (Model.Id != 0 && Model.Id != groupePrincipalId)
                         {
                             <a href="@Url.Action("DeleteGroup", "Groups", new { groupId = Model.Id })">
                                 <input type="button" class="btn btn-warning" value="Supprimer" />
