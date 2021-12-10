@@ -91,6 +91,33 @@ namespace WildPay.Controllers
             return View(group);
         }
 
+        public ActionResult DeleteMember(int memberToDeleteId, int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                User user = db.Users.Where(u => u.Id == memberToDeleteId).First();
+                ViewBag.user = user;
+            }
+
+            Group group = DatabaseGroupTools.GetGroupById(groupId);
+            ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup(groupId);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+            return View("GroupEdit", group);
+        }
+
+        public ActionResult ConfirmDeleteMember(int userId, int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                throw new HttpUnhandledException("a faire");
+            }
+            return RedirectToAction("GroupEdit", new { });
+        }
+
+
 
         public ActionResult DeleteGroup(int groupId)
         {
