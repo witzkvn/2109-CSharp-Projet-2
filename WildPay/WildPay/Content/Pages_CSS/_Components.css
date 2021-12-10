@@ -114,6 +114,15 @@
     margin: 5rem auto 0 auto;
 }
 
+.groupe-name-title {
+    text-align: center;
+    /*background-color: var(--accent-medium);*/
+    /*color: white;*/
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
 .modal-buttons > .btn:first-child {
     margin-right: 1.5rem;
 }

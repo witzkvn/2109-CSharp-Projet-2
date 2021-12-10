@@ -4,8 +4,12 @@
     gap: 0 4rem;
 }
 
-.expense h2 {
+.expense h3, .expense h2 {
     text-align: center;
+}
+
+.expense h2{
+    margin-bottom: 6rem;
 }
 
 .expense .list-group-item:not(:last-of-type) {

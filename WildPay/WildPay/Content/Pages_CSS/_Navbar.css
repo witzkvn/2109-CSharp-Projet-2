@@ -23,10 +23,6 @@
     transition: all 0.2s ease;
 }
 
-.navbar-link.nav-link-group {
-    display: none;
-}
-
 .navbar-link:hover {
     color: var(--primary-medium);
 }
@@ -48,12 +44,7 @@
     font-size: 3rem;
     align-items: center;
     cursor: pointer;
-}
-
-.nav-group-name {
-    margin-right: 8rem;
-    margin-left: 2rem;
-    font-weight: bold;
+    margin-left: auto;
 }
 
 @media screen and (max-width: 900px) {
@@ -70,10 +61,6 @@
         position: relative;
     }
 
-    .navbar-link.nav-link-group {
-        display: flex;
-    }
-
     #nav-menu {
         position: absolute;
         top: 0;
@@ -87,10 +74,6 @@
         min-height: 100vh;
         z-index: 100;
         transition: all .2s ease;
-    }
-
-    .nav-group-name{
-        margin: 0 auto;
     }
 
     .nav-content {
