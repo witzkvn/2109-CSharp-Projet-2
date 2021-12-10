@@ -32,8 +32,9 @@ namespace WildPay.Controllers
                 else
                 {
                     Session["Id"] = userDetails.Id;
-                    Session["Firstname"] = userDetails.Firstname;
+                    Session["Firstname"] = Utilities.GetPremiereLettreMajuscule(userDetails.Firstname);
                     Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser(userDetails.Id);
+                    Session["groupname"] = Utilities.GetPremiereLettreMajuscule(DatabaseGroupTools.GetGroupById((int)Session["group"]).Name);
                     return RedirectToAction("GroupsList", "Groups");
                 }
             }

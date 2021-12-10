@@ -197,6 +197,7 @@
     <Content Include="Content\Pages_CSS\_Expense.css" />
     <Content Include="Content\Pages_CSS\_ExpenseEdition.css" />
     <Content Include="Content\Pages_CSS\_fonts.css" />
+    <Content Include="Content\Pages_CSS\_Groups.css" />
     <Content Include="Content\Pages_CSS\_Home.css" />
     <Content Include="Content\Pages_CSS\_Login_Signup.css" />
     <Content Include="Content\Pages_CSS\_Navbar.css" />

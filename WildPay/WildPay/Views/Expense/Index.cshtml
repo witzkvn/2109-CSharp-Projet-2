@@ -6,12 +6,15 @@
     {
         Response.Redirect("~/Connexion/Index");
     }
+    string groupeName = @Utilities.GetPremiereLettreMajuscule((string)Session["groupname"]);
 }
 
 <div class="expense">
+    @*<div class="groupe-name-title text-no-overflow box">Groupe : @Session["groupname"]</div>*@
+    <h2>Groupe @groupeName</h2>
     <div class="row">
         <div class="flex">
-            <h2>Dépenses du groupe</h2>
+            <h3>Dépenses</h3>
             <a class="button" href="@Url.Action("Index", "ExpenseEdition")">
                 <ion-icon name="add-circle"></ion-icon>
                 Ajouter une dépense
@@ -47,7 +50,7 @@
             </div>
         </div>
         <div class="flex fixed">
-            <h2>Bilan du groupe</h2>
+            <h3>Bilan</h3>
             <div class="expense-bilan">
 
                 @foreach (var user in ViewBag.listeUsers)

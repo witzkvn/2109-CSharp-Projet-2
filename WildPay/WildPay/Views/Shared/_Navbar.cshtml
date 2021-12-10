@@ -1,8 +1,8 @@
-﻿
-<div class="navbar">
-    <div class="navbar-logo">
+﻿<div class="navbar">
+        <div class="navbar-logo">
             @Html.ActionLink("WildPay", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-    </div>
+        </div>
+    
     <div class="mobile-nav-open" id="mobileNavOpen">
         <ion-icon name="menu"></ion-icon>
     </div>
@@ -20,8 +20,11 @@
                 }
                 else
                 {
-                    <a href="" class="navbar-link">
-                        @Session["group"]
+                    <a href="@Url.Action("GroupsList","Groups")" class="navbar-link nav-link-group">
+                        <ion-icon name="people"></ion-icon>
+                        <p class="text-no-overflow">
+                            Groupe @Utilities.GetPremiereLettreMajuscule((string)Session["groupname"])
+                        </p>
                     </a>
 
                     <a href="@Url.Action("Index","Expense")" class="navbar-link">
@@ -38,7 +41,7 @@
 
                     <a href="@Url.Action("Index","Account")" class="navbar-link">
                         <ion-icon name="person-circle"></ion-icon>
-                        <p>Compte</p>
+                        <p>@Session["Firstname"]</p>
                     </a>
 
 
