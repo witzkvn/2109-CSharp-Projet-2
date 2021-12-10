@@ -80,10 +80,13 @@
 
             </div>
             <button class="btn btn-transparent" id="expense-toggle-graph">Voir les graphiques</button>
-            @if (ViewBag.listeUsers.Count > 1)
+            @if (ViewBag.listExpenses.Count > 0)
             {
                 <div class="expense-graph" id="expense-graph">
                     <canvas id="myChart"></canvas>
+                </div>
+                <div class="expense-graph" id="expense-graph2">
+                    <canvas id="myChart2"></canvas>
                 </div>
             }
 
@@ -96,6 +99,9 @@
 <script>
     let labelsValues = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expLabels))');
     let expValues = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expValues))');
+    let labelsValues2 = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expLabels2))');
+    let expValues2 = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expValues2))');
+
 
     let getColorsArray = (itemsNb) => {
         let colorsArray = [];
@@ -120,15 +126,64 @@
         }]
     };
 
+    const data2 = {
+        labels: labelsValues2,
+        datasets: [{
+            label: ' ',
+            data: expValues2,
+            backgroundColor: [...getColorsArray(expValues2?.length)],
+            hoverOffset: 1,
+            borderColor: "#d3d7d9",
+            borderWidth: 1
+        }]
+    };
+
     const config = {
         type: 'doughnut',
         data: data,
         options: {}
     };
 
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        drawOnChartArea: false,
+                        borderColor: '#232323',
+                        color: '#232323',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Somme en €'
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false,
+                        borderColor: '#232323'
+                    }
+                }
+            }
+        }
+    };
+
     const myChart = new Chart(
         document.getElementById('myChart'),
         config
+    );
+
+    const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
     );
 
 
