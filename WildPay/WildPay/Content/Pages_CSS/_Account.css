@@ -48,3 +48,9 @@
 .account .account-form p.error{
     margin-top: 1rem;
 }
+
+@media screen and (max-width: 900px) {
+    .account .account-form {
+        width: 100%;
+    }
+}
