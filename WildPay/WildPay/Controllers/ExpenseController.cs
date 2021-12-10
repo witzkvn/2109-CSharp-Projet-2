@@ -59,9 +59,12 @@ namespace WildPay.Controllers
                     ("sp_SommeParCategory @p0", GroupId)
                     .ToDictionary(k => k.NameCategory, v => v.SommeCategory);
 
-            double SumCatNull = db.Expenses.Where(e => e.FkCategoryId == null).Sum(e => e.Value);
-
-            nameSumByCat.Add("Autre", SumCatNull);
+            double SumCatNull = 0;
+            if (db.Expenses.Count() > 0 && db.Expenses.Any(e => e.FkCategoryId == null)) 
+            {
+                SumCatNull = db.Expenses.Where(e => e.FkCategoryId == null).Sum(e => e.Value);
+                nameSumByCat.Add("Autre", SumCatNull);
+            }
 
             List<string> nameCat = new List<string>();
             nameCat = nameSumByCat.Select(kvp => kvp.Key).ToList();
