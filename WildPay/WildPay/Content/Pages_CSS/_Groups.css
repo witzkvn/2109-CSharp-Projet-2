@@ -1,0 +1,55 @@
+﻿.groupes .button {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
+}
+
+.groupes .button:hover {
+    color: var(--primary-medium);
+}
+
+.groupes .button ion-icon {
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+
+.groupes .btn {
+    display: flex;
+    align-items: center;
+}
+
+.groupes .btn ion-icon{
+    margin-left: 0.5rem;
+}
+
+.groupes h2 {
+    text-align: center;
+}
+
+.groupes a.box{
+    display: flex;
+    flex-direction: column;
+    transition: all .2s ease;
+}
+
+.groupes a.box:hover {
+    transform: translateY(-2px);
+}
+
+.groupes a.box:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.groupes-list {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 2rem;
+    align-items: center;
+}
+
+.groupes-list h3{
+    text-align: left;
+}

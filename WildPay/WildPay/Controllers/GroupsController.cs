@@ -110,6 +110,7 @@ namespace WildPay.Controllers
             if (groupId == (int)Session["group"])
             {
                 Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser((int)Session["id"]);
+                Session["groupname"] = DatabaseGroupTools.GetGroupById((int)Session["group"]).Name;
             }
             return RedirectToAction("GroupsList", "Groups", new { errorMessage = "", validationMessage = "le groupe a bien été supprimé" });
         }

@@ -2,37 +2,38 @@
 
 @{
     ViewBag.Title = "Index";
+    int sessionGroupId = (int)Session["group"];
 }
 
-<h2>Index</h2>
+<div class="groupes">
+    <h2>Liste des groupes</h2>
+    <a class="button" href="@Url.Action("GroupCreation","Groups")"><ion-icon name="add-circle"></ion-icon> Créer un groupe</a>
+    
+    <div class="groupes-list">
 
-<p>
-    @Html.ActionLink("Creer un groupe", "GroupCreation")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+                <a href="@Url.Action("GroupEdit", "Groups", new { id = item.Id })" class="box">
+                    <div class="text-no-overflow">
+                        <h3>@Utilities.GetPremiereLettreMajuscule(item.Name)</h3>
+                    </div>
+                    <p>Groupe créé le @item.CreatedAt</p>
+                </a>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Id)
-    </td>
-
-    <td>
-        @Html.DisplayFor(modelItem => item.CreatedAt)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "GroupEdit", new { id = item.Id })
-    </td>
-</tr>
-}
-
-</table>
+                if(sessionGroupId == item.Id)
+                {
+                    <div class="btn btn-transparent">
+                        Choisi
+                        <ion-icon name="checkmark-circle"></ion-icon>
+                    </div>
+                }
+                else
+                {
+                    <a href="" class="btn btn-primary">
+                        Choisir
+                    </a>
+                }
+        }
+    </div>
+        
+</div>
