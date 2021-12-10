@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace WildPay.Models
 
         [Required(ErrorMessage = "Le nom du groupe est obligatoire")]
         [MaxLength(50, ErrorMessage = "Le nom doit faire 50 caractères au maximum"), MinLength(0)]
+        [DisplayName("Nom")]
         public string Name { get; set; }
 
         //public int FkUserId { get; set; }

@@ -5,7 +5,9 @@
             @Html.ActionLink("WildPay", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <a href="@Url.Action("GroupsList","Groups")" class="navbar-link group-name">
-            Groupe : @Session["groupname"]
+            <div class="text-no-overflow">
+                Groupe : @Session["groupname"]
+            </div>
         </a>
     </div>
     

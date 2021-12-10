@@ -13,7 +13,7 @@
 
         @foreach (var item in Model)
         {
-                <a href="@Url.Action("GroupEdit", "Groups", new { id = item.Id })" class="box">
+                <a href="@Url.Action("GroupEdit", "Groups", new { groupId = item.Id })" class="box">
                     <div class="text-no-overflow">
                         <h3>@Utilities.GetPremiereLettreMajuscule(item.Name)</h3>
                     </div>
@@ -29,7 +29,7 @@
                 }
                 else
                 {
-                    <a href="" class="btn btn-primary">
+                    <a href="@Url.Action("ChangeGroup","Groups",new { groupId = item.Id })" class="btn btn-primary">
                         Choisir
                     </a>
                 }
