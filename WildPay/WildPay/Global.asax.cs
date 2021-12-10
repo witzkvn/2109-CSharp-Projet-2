@@ -111,7 +111,8 @@ namespace WildPay
             if (Request.FilePath == "/Account" && httpException.WebEventCode == WebEventCodes.RuntimeErrorPostTooLarge)
             {
                 Response.Redirect("/Account/Error");
-            } else
+            }
+            else
             {
                 Response.Redirect("/Home/Error");
             }

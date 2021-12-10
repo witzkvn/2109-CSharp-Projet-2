@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using WildPay.DAL;
 using WildPay.Models;
+using System.Data.Entity;
 
 namespace WildPay.Tools
 {
@@ -37,6 +38,17 @@ namespace WildPay.Tools
                 return null;
             }
         }
+
+        public static List<Category> GetCategoriesFromGroup(int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                return db.Database.SqlQuery<Category>
+                ("sp_GetCategory @p0", groupId).OrderBy(cat => cat.Name)
+                .ToList();
+            }
+        }
+
 
         public static Expense GetExpenseById(int idExpense)
         {
@@ -73,9 +85,21 @@ namespace WildPay.Tools
             }
         }
 
-        public static void CreateOrUpdateExpense(Expense newExpense)
+
+
+        public static List<User> GetAllUsers()
         {
-            int groupId = Utilities.GetGroupePrincipalId();
+            List<User> users = new List<User>();
+            using (WildPayContext db = new WildPayContext())
+            {
+                users = db.Users.ToList(); // eventuellement changer en SP 
+            }
+            return users;
+        }
+
+
+        public static void CreateOrUpdateExpense(Expense newExpense, int groupId)
+        {
             using (WildPayContext db = new WildPayContext())
             {
                 SqlParameter dateSql = new SqlParameter("@date", newExpense.CreatedAt);

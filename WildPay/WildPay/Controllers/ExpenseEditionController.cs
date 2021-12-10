@@ -19,8 +19,8 @@ namespace WildPay.Controllers
             if (Session["Id"] != null)
                 newExpense.FkUserId = (int)Session["Id"];
             ViewBag.title = "Ajouter une dépense";
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
-            ViewBag.listeUsers = DatabaseTools.GetUsersForGroup();
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
+            ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
             ViewBag.date = DateTime.Now.ToString("yyyy-MM-dd");
             return View(newExpense);
         }
@@ -32,8 +32,8 @@ namespace WildPay.Controllers
             {
                 ViewBag.Error = "Le titre de la dépense ne doit contenir que des lettres ou des chiffres.";
                 ViewBag.title = newExpense.Id == 0 ? "Ajouter une dépense" : "Editer une dépense";
-                ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
-                ViewBag.listeUsers = DatabaseTools.GetUsersForGroup();
+                ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
+                ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
                 ViewBag.date = newDate.ToString("yyyy-MM-dd");
                 return View("Index", newExpense);
             }
@@ -43,15 +43,15 @@ namespace WildPay.Controllers
             newExpense.CreatedAt = newDate;
             if (ModelState.IsValid)
             {
-                DatabaseTools.CreateOrUpdateExpense(newExpense);
+                DatabaseTools.CreateOrUpdateExpense(newExpense, (int)Session["group"]);
                 string confirmation = newExpense.Id != 0 ? "La dépense a bien été éditée" : "La dépense a bien été ajoutée";
                 return RedirectToAction("Index", "Expense", new { confirmationMessage = confirmation });
             }
             else
             {
                 ViewBag.title = newExpense.Id == 0 ? "Ajouter une dépense" : "Editer une dépense";
-                ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
-                ViewBag.listeUsers = DatabaseTools.GetUsersForGroup();
+                ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
+                ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
                 ViewBag.date = newDate.ToString("yyyy-MM-dd");
                 return View("Index", newExpense);
             }
@@ -63,8 +63,8 @@ namespace WildPay.Controllers
         {
             Expense expenseToEdit = DatabaseTools.GetExpenseById(expenseId);
             ViewBag.title = "Editer une dépense";
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
-            ViewBag.listeUsers = DatabaseTools.GetUsersForGroup();
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
+            ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
             ViewBag.date = expenseToEdit.CreatedAt.ToString("yyyy-MM-dd");
             return View("Index", expenseToEdit);
         }
@@ -73,8 +73,8 @@ namespace WildPay.Controllers
         {
             Expense expenseToEdit = DatabaseTools.GetExpenseById(expenseId);
             ViewBag.title = "Editer une dépense";
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
-            ViewBag.listeUsers = DatabaseTools.GetUsersForGroup();
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
+            ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
             ViewBag.date = expenseToEdit.CreatedAt.ToString("yyyy-MM-dd");
             ViewBag.expenseToDelete = expenseToEdit;
             return View("Index", expenseToEdit);

@@ -20,6 +20,9 @@
                 }
                 else
                 {
+                    <a href="" class="navbar-link">
+                        @Session["group"]
+                    </a>
 
                     <a href="@Url.Action("Index","Expense")" class="navbar-link">
                         <ion-icon name="pricetags"></ion-icon>
