@@ -104,9 +104,13 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                SqlParameter groupSql = new SqlParameter("@group_Id", groupId);
-                db.Database.ExecuteSqlCommand("sp_DeleteGroup @group_Id", groupSql);
+                Group groupToDelete = db.Groups.Where(g => g.Id == groupId).First();
+                List<Category> cat = db.Categories.Include(c => c.Groups).Where(c => c.Groups.Any(g => g.Id == groupId)).ToList();
+                db.Groups.Remove(groupToDelete);
+                db.Categories.RemoveRange(cat);
+                db.SaveChanges();
             }
+
             if (groupId == (int)Session["group"])
             {
                 Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser((int)Session["id"]);

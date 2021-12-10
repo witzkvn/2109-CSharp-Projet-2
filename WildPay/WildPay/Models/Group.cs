@@ -19,11 +19,6 @@ namespace WildPay.Models
         [MaxLength(50, ErrorMessage = "Le nom doit faire 50 caractères au maximum"), MinLength(0)]
         public string Name { get; set; }
 
-        //public int FkUserId { get; set; }
-        ////[InverseProperty("Author")]
-        //[ForeignKey("FkUserId")]
-        //public User Author { get; set; }
-
         public virtual ICollection<Category> Categories { get; set; }
 
         //[InverseProperty("Members")]

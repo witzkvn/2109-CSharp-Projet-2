@@ -254,26 +254,7 @@ BEGIN
  GO 
 
 
-DROP PROCEDURE IF EXISTS sp_DeleteGroup;
- GO 
-CREATE PROCEDURE sp_DeleteGroup
-	@group_Id INT
-AS
-BEGIN
- DELETE FROM [EXPENSE] 
- WHERE [EXPENSE].FkGroupId = @group_Id
- DELETE FROM [UserGroup] 
- WHERE [UserGroup].Group_Id = @group_Id 
- DELETE FROM [GroupCategory]
- WHERE Group_Id = @group_Id
---DELETE FROM Category
---WHERE category.Id in
---(SELECT * FROM Category
---INNER JOIN GroupCategory on ([GroupCategory].Category_Id = Category.Id)
---WHERE (@group_Id = GroupCategory.Group_Id))
 
-END
- GO 
 
 
 
