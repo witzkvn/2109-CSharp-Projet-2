@@ -2,13 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 2rem;
+    padding: 1rem 2rem;
     background-color: var(--bg-light);
     height: auto;
 }
 
-.nav-content{
-    padding: 1rem 0;
+.nav-content {
     display: flex;
     align-items: center;
 }
@@ -45,6 +44,7 @@
 }
 
 @media screen and (max-width: 900px){
+
     .navbar {
         overflow-x: hidden;
     }
