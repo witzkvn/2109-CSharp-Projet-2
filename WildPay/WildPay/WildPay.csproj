@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111231129433_initial.Designer.cs" />
     <Compile Include="Migrations\202111241035437_add-migration initil.cs" />
     <Compile Include="Migrations\202111241035437_add-migration initil.designer.cs">
       <DependentUpon>202111241035437_add-migration initil.cs</DependentUpon>
@@ -186,7 +187,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\default.png" />
-    <Content Include="Content\Images\error.png" />
     <Content Include="Content\Images\header.png" />
     <Content Include="Content\Pages_CSS\_Account.css" />
     <Content Include="Content\Pages_CSS\_Categories.css" />
@@ -209,6 +209,7 @@
     <Content Include="Content\Pages_CSS\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EmbeddedResource Include="Migrations\202111231129433_initial.resx" />
     <EmbeddedResource Include="Migrations\202111251515498_category-base.resx">
       <DependentUpon>202111251515498_category-base.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,9 +246,9 @@
     <Content Include="Views\Expense\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\ExpenseEdition\Index.cshtml" />
-    <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Categories\_DeleteConfirmation.cshtml" />
     <Content Include="Views\ExpenseEdition\_DeleteConfirmation.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
