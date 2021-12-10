@@ -78,7 +78,7 @@ namespace WildPay.Controllers
             {
                 if (memberMail != "")
                 {
-                    bool ok = DatabaseGroupTools.AddedMemberToGroup(memberMail, group.Id);
+                    bool memberAdded = DatabaseGroupTools.AddedMemberToGroup(memberMail, group.Id);
                 }
                 else
                 {
