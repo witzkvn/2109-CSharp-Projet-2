@@ -67,7 +67,18 @@
     margin-bottom: 0.5rem;
 }
 
-@media screen and (max-width: 650px){
+.group-creation-note {
+    margin: 4rem auto 2rem auto;
+    display: block;
+    text-align: center;
+}
+
+.group-creation-buttons{
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 650px) {
     .groupes-list {
         grid-template-columns: 1fr;
     }
