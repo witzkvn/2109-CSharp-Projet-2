@@ -1,10 +1,12 @@
-﻿@{
+﻿@using WildPay.Tools
+
+@{
+
     if (Session["Id"] == null)
     {
         Response.Redirect("~/Connexion/Index");
     }
 }
-
 
 <div class="expense">
     <div class="row">
@@ -14,7 +16,15 @@
                 <ion-icon name="add-circle"></ion-icon>
                 Ajouter une dépense
             </a>
+
+
             <div class="list-group">
+            @if (ViewBag.Confirm != "")
+            {
+                <p class="message success">
+                    @ViewBag.Confirm
+                </p>
+            }
 
                 @foreach (var expense in ViewBag.listExpenses)
                 {
@@ -28,8 +38,13 @@
                         {
                             <img class="user-image user-image-sm" src="~/Content/Images/default.png" />
                         }
-                        <p class="category span2 text-no-overflow">@expense.Name</p>
-                        <p class="espace span2 text-no-overflow">Payé par @expense.Firstname @expense.Lastname au groupe</p>
+                        <p class="category span2 text-no-overflow">
+                            @if (expense.Name != null)
+                            {
+                                @Utilities.GetPremiereLettreMajuscule(expense.Name)
+                            }
+                        </p>
+                        <p class="espace span2 text-no-overflow">Payé par  @expense.Lastname.ToUpper() @Utilities.GetPremiereLettreMajuscule(@expense.Firstname) au groupe</p>
                         <p class="date">@expense.DateCourte</p>
                         <p class="expense-value">@expense.Value €</p>
                     </a>
@@ -39,27 +54,47 @@
         <div class="flex fixed">
             <h2>Bilan du groupe</h2>
             <div class="expense-bilan">
+
                 @foreach (var user in ViewBag.listeUsers)
                 {
-                    if (@ViewBag.SommesDues[user.Id] > 0)
+                    if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] >= 0)
                     {
-                        <h4>@user.Firstname @user.Lastname doit @ViewBag.SommesDues[user.Id] € au groupe</h4>
+                        <h4 class="user-bilan">Vous devez <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
+                    }
+                    else if (user.Id == ViewBag.userID && @ViewBag.SommesDues[user.Id] < 0)
+                    {
+                        <h4 class="user-bilan">Le groupe vous doit <span class="text-primary">@(ViewBag.SommesDues[user.Id]*-1) €</span></h4>
                     }
                 }
 
                 @foreach (var user in ViewBag.listeUsers)
                 {
-                    if (@ViewBag.SommesDues[user.Id] < 0)
+                    if (@ViewBag.SommesDues[user.Id] > 0 && user.Id != ViewBag.userID)
                     {
-                        <h4>Le groupe doit @(ViewBag.SommesDues[user.Id]*-1) € à @user.Firstname @user.Lastname</h4>
+                        <h4>@Utilities.GetNomCompletUser(user) doit <span class="text-secondary">@ViewBag.SommesDues[user.Id] €</span> au groupe</h4>
+                    }
+                }
+
+                @foreach (var user in ViewBag.listeUsers)
+                {
+                    if (@ViewBag.SommesDues[user.Id] < 0 && user.Id != ViewBag.userID)
+                    {
+                        <h4>Le groupe doit <span class="text-primary">@(ViewBag.SommesDues[user.Id]*-1) €</span> à @Utilities.GetNomCompletUser(user)</h4>
                     }
                 }
 
             </div>
+            <button class="btn btn-transparent" id="expense-toggle-graph">Voir les graphiques</button>
+            @if (ViewBag.listExpenses.Count > 0)
+            {
+                <div class="expense-graph" id="expense-graph">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="expense-graph" id="expense-graph2">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            }
 
-            <div class="expense-graph">
-                <canvas id="myChart"></canvas>
-            </div>
 
         </div>
     </div>
@@ -69,6 +104,9 @@
 <script>
     let labelsValues = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expLabels))');
     let expValues = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expValues))');
+    let labelsValues2 = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expLabels2))');
+    let expValues2 = JSON.parse('@Html.Raw(Json.Encode(@ViewBag.expValues2))');
+
 
     let getColorsArray = (itemsNb) => {
         let colorsArray = [];
@@ -87,7 +125,21 @@
             label: 'My First Dataset',
             data: expValues,
             backgroundColor: [...getColorsArray(expValues?.length)],
-            hoverOffset: 1
+            hoverOffset: 1,
+            borderColor: "#d3d7d9",
+            borderWidth: 1
+        }]
+    };
+
+    const data2 = {
+        labels: labelsValues2,
+        datasets: [{
+            label: ' ',
+            data: expValues2,
+            backgroundColor: [...getColorsArray(expValues2?.length)],
+            hoverOffset: 1,
+            borderColor: "#d3d7d9",
+            borderWidth: 1
         }]
     };
 
@@ -97,9 +149,51 @@
         options: {}
     };
 
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        drawOnChartArea: false,
+                        borderColor: '#232323',
+                        color: '#232323',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Somme en €'
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false,
+                        borderColor: '#232323'
+                    }
+                }
+            }
+        }
+    };
+
     const myChart = new Chart(
         document.getElementById('myChart'),
         config
     );
-</script>
+
+    const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
+    );
+
+
+    let toggleGraphBtn = document.getElementById("expense-toggle-graph");
+    toggleGraphBtn.addEventListener("click", (e) => {
+        e.target.classList.toggle("active");
+    });
 </script>

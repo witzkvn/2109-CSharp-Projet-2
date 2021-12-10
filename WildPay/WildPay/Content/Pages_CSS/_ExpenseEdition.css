@@ -8,9 +8,11 @@
 .expense-edition-buttons{
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.expense-edition-buttons button:first-of-type{
+.expense-edition-buttons a:first-of-type{
     margin-right: 2rem;
 }
 

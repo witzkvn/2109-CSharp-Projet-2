@@ -1,6 +1,6 @@
 ﻿
 @model WildPay.Models.Expense
-
+@using WildPay.Models
 
 @{
     if (Session["Id"] == null)
@@ -18,7 +18,7 @@
 
         @using (Html.BeginForm("Validate", "ExpenseEdition"))
         {
-            @*@Html.ValidationSummary(true)*@
+            @Html.ValidationSummary(true)
 
             @Html.HiddenFor(Model => Model.Id)
 
@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Title)
-                @Html.EditorFor(Model => Model.Title)
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text", pattern = FormatTools.RegexTextAndNumbers, minlength = 3, maxlength = 20, required = "required"  })
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Title)
                 </p>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.CreatedAt)
 
-                <input type="date" value="@ViewBag.date" , name="newDate" />
+                <input type="date" value="@ViewBag.date" name="newDate" required />
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.CreatedAt)
                 </p>
@@ -48,71 +48,89 @@
                     @{
                         foreach (WildPay.Models.Category cat in ViewBag.listeCategories)
                         {
-                            if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
-                            {
-                                <option selected value="@cat.Id">@cat.Name</option>
-                            }
-                            else
-                            {
-                                <option value="@cat.Id">@cat.Name</option>
+                                if (Model.FkCategoryId != null && Model.FkCategoryId == cat.Id)
+                                {
+                                    <option selected value="@cat.Id">@Utilities.GetPremiereLettreMajuscule(cat.Name)</option>
+                                }
+                                else
+                                {
+                                    <option value="@cat.Id">@Utilities.GetPremiereLettreMajuscule(cat.Name)</option>
+                                    }
+                                }
+                                
                             }
                         }
-                    }
-                </select>
-            </div>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="auteur-select">Auteur</label>
-                <select name="auteurId" id="auteurId">
+                <div class="form-group">
+                    <label for="auteur-select">Auteur</label>
+                    <select name="auteurId" id="auteurId">
+
+                        @{
+                            foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
+                            {
+                                if (Model.FkUserId == auteur.Id)
+                                {
+                                    <option selected value="@auteur.Id">@Utilities.GetNomCompletUser(auteur)</option>
+                                }
+                                else
+                                {
+                                    <option value="@auteur.Id">@Utilities.GetNomCompletUser(auteur)</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Value">Montant (€)</label>
+                    @Html.TextBoxFor(Model => Model.Value, new { type = "number", min = "0.1", max = "100000", step = "0.01", required="required", @Value = Model.Value.ToString().Replace(',', '.')})
+                    <p class="error">
+                        @Html.ValidationMessageFor(Model => Model.Value)
+                    </p>
+                </div>
+
+
+                <p class="error">
+                    @ViewBag.Message
+                </p>
+
+                <div class="expense-edition-buttons">
 
                     @{
-                        foreach (WildPay.Models.User auteur in ViewBag.listeUsers)
+                        if (Model.Id != 0)
                         {
-                            if (Model.FkUserId == auteur.Id)
-                            {
-                                <option selected value="@auteur.Id">@auteur.Firstname</option>
-                            }
-                            else
-                            {
-                                <option value="@auteur.Id">@auteur.Firstname</option>
-                            }
+                            <a href="@Url.Action("DeleteExpense", "ExpenseEdition", new { expenseId = Model.Id })">
+                                <input type="button" class="btn btn-warning" value="Supprimer" />
+                            </a>
                         }
                     }
-                </select>
+
+                    <button class="btn btn-primary" type="submit">
+                        Valider
+                    </button>
+                </div>
+
             </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(Model => Model.Value)
-                @Html.TextBoxFor(Model => Model.Value, new { type = "number", min = "0.1", max = "100000", step = "0.01" })
-                <p class="error">
-                    @Html.ValidationMessageFor(Model => Model.Value)
-                </p>
-            </div>
-
-
-            <p class="error">
-                @ViewBag.Message
-            </p>
-
-            <div class="expense-edition-buttons">
-                <button class="btn btn-primary" type="submit">
-                    Valider
-                </button>
-
-                @{
-                    if (Model.Id != null && Model.Id != 0)
-                    {
-                        <a href="@Url.Action("DeleteExpense", "ExpenseEdition", new { expenseId = Model.Id })">
-                            <input type="button" class="btn btn-danger" value="Supprimer" />
-                        </a>
-                    }
-                }
-            </div>
-
-        </div>
         }
 
     </div>
 </div>
 
+@if (ViewBag.expenseToDelete != null)
+{
+    Expense expASupp = ViewBag.expenseToDelete;
+    @Html.Partial("_DeleteConfirmation", expASupp);
+}
+
+
+<script>
+    //var titleInput = document.getElementById('Title');
+    //titleInput.oninvalid = function (event)
+    //{
+    //    event.target.setCustomValidity('Veuillez saisir un titre d\'au moins trois caractères de long.');
+    //}
+
+</script>

@@ -17,7 +17,7 @@ namespace WildPay.Controllers
         WildPayContext db = new WildPayContext();
         int GroupId = Utilities.GetGroupePrincipalId();
         // GET: Expense
-        public ActionResult Index()
+        public ActionResult Index(string confirmationMessage = null)
         {
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)
@@ -38,10 +38,44 @@ namespace WildPay.Controllers
 
             ViewBag.listeUsers = user;
             ViewBag.SommesDues = SommesDues(ViewBag.listeUsers);
+            ViewBag.userID = Convert.ToInt32(Session["Id"]);
 
-            ViewBag.expLabels = new List<string>() { "Clea", "Seb", "Kevin" };
-            ViewBag.expValues = new List<double>() { 25.5, 58.2, 16.3 };
+            Dictionary<string, double> nameSumByUser = new Dictionary<string, double>();
+            nameSumByUser = db.Database.SqlQuery<SommeParUser>
+                    ("sp_SommeParUser @p0", GroupId)
+                    .ToDictionary(k => k.PrenomNom, v => v.Somme);
 
+            List<string> prenomNom = new List<string>();
+            prenomNom = nameSumByUser.Select(kvp => kvp.Key).ToList();
+
+            List<double> somme = new List<double>();
+            somme = nameSumByUser.Select(kvp => kvp.Value).ToList();
+
+            ViewBag.expLabels = prenomNom;
+            ViewBag.expValues = somme;
+
+            Dictionary<string, double> nameSumByCat = new Dictionary<string, double>();
+            nameSumByCat = db.Database.SqlQuery<SommeParCategory>
+                    ("sp_SommeParCategory @p0", GroupId)
+                    .ToDictionary(k => k.NameCategory, v => v.SommeCategory);
+
+            double SumCatNull = 0;
+            if (db.Expenses.Count() > 0 && db.Expenses.Any(e => e.FkCategoryId == null)) 
+            {
+                SumCatNull = db.Expenses.Where(e => e.FkCategoryId == null).Sum(e => e.Value);
+                nameSumByCat.Add("Autre", SumCatNull);
+            }
+
+            List<string> nameCat = new List<string>();
+            nameCat = nameSumByCat.Select(kvp => kvp.Key).ToList();
+
+            List<double> sommeCat = new List<double>();
+            sommeCat = nameSumByCat.Select(kvp => kvp.Value).ToList();
+
+            ViewBag.expLabels2 = nameCat;
+            ViewBag.expValues2 = sommeCat;
+
+            ViewBag.Confirm = confirmationMessage;
             return View();
         }
 
@@ -81,6 +115,7 @@ namespace WildPay.Controllers
                     new SqlParameter("@groupId", GroupId),
                     returnSomme2);
                     string returnSommeToStringSiNull = returnSomme2.Value.ToString();
+                    if (returnSommeToStringSiNull == "") returnSommeToStringSiNull = "0";
                     sommeDueParUser = Convert.ToDouble(returnSommeToStringSiNull);
                     sommeDueParUserShort = FormatTools.ConvertinShortDouble(sommeDueParUser);
                 }
@@ -90,6 +125,5 @@ namespace WildPay.Controllers
 
             return sommesDues;
         }
-
     }
 }

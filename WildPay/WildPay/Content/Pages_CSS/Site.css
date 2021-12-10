@@ -26,7 +26,7 @@ html{
 body {
     font-size: 1.6rem;
     min-height: 100vh;
-    background-color: var(--bg-light);
+    background-color: var(--bg-medium);
     color: var(--text-color);
     font-family: sans-serif;
     display: flex;
@@ -62,13 +62,13 @@ input {
     outline: none;
 }
 
-    input:focus-visible{
-        outline: 1px solid var(--grey-medium);
-    }
+input:focus-visible{
+    outline: 1px solid var(--grey-medium);
+}
 
-    .error {
-        color: var(--error);
-    }
+.error {
+    color: var(--error);
+}
 
 .success {
     color: var(--success);
@@ -96,7 +96,7 @@ input:focus:valid{
 
 footer {
     font-size: 1.2rem;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-darker);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,3 +109,54 @@ footer button.themeBtn{
     margin-left: 4rem;
 }
 
+.text-primary{
+    color: var(--primary-medium);
+}
+
+.text-secondary{
+    color: var(--secondary-medium);
+}
+
+
+@media screen and (max-width: 1200px) {
+    .container.body-content{
+        width: 100%;
+        max-width: 100%;
+        padding: 2rem 6rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    body{
+        font-size: 1.3rem;
+    }
+
+    h1 {
+        margin-bottom: 3rem;
+        font-size: 3rem;
+    }
+
+    h2 {
+        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+    }
+
+    h3 {
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+
+    h4, h5, h6 {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .container.body-content {
+        padding: 2rem;
+    }
+}

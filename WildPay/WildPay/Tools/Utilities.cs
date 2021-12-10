@@ -23,11 +23,18 @@ namespace WildPay.Tools
             }
             else
             {
-                return char.ToUpper(mot[0]) + mot.Substring(1);
+                return char.ToUpper(mot[0]) + mot.Substring(1).ToLower();
             }
         }
 
         public static string GetNomCompletUser(User user)
+        {
+            if (user != null)
+                return $"{user.Lastname.ToUpper()} {GetPremiereLettreMajuscule(user.Firstname)}";
+            else return "Utilisateur WildPay";
+        }
+
+        public static string GetNomCompletUser(ListUser user)
         {
             if (user != null)
                 return $"{user.Lastname.ToUpper()} {GetPremiereLettreMajuscule(user.Firstname)}";

@@ -14,8 +14,12 @@ namespace WildPay.Controllers
     public class CategoriesController : Controller
     {
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(string deleteMessage = null)
         {
+            if (deleteMessage != null)
+            {
+                ViewBag.Confirm = deleteMessage;
+            }
             ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
             return View();
         }
@@ -23,40 +27,54 @@ namespace WildPay.Controllers
         [HttpPost]
         public ActionResult Index(Category newCategory)
         {
-            if (ModelState.IsValid)
+                if (ModelState.IsValid)
             {
                 using (WildPayContext db = new WildPayContext())
                 {
                     if (!CategoryAlreadyExists(db, newCategory))
                     {
                         AddCategory(db, newCategory);
-                        ViewBag.Message = "Categorie ajoutée ";
+                        ViewBag.Confirm = "Categorie ajoutée ";
+                        ViewBag.Error = "";
                     }
                     else
                     {
-                        ViewBag.Message = "La categorie existe déjà ";
+                        ViewBag.Confirm = "";
+                        ViewBag.Error = "La categorie existe déjà ";
                     }
                 }
             }
-            else ViewBag.Message = "Categorie incorrecte";
+            else {
+                ViewBag.Confirm = "";
+                ViewBag.Error = "Categorie incorrecte";
+            } 
 
             ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
 
             return View("Index");
         }
 
-        public ActionResult DeleteCategorie(int categorieToDelete)
+        public ActionResult DeleteCategorie(int categorieIDToDelete)
+        {
+            List<Category> listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
+            ViewBag.listeCategories = listeCategories;
+            ViewBag.categoryASupprimer = listeCategories.Where(c => c.Id == categorieIDToDelete).First();
+            return View("Index");
+        }
+
+        public ActionResult ConfirmDeleteCategorie(int idCategory)
         {
             using (WildPayContext db = new WildPayContext())
             {
-                Category selectedCategory = db.Categories.Where(cat => cat.Id == categorieToDelete).FirstOrDefault();
-                if (!selectedCategory.IsBase && selectedCategory != null)
+                Category selectedCategory = db.Categories.Where(cat => cat.Id == idCategory).FirstOrDefault();
+                if (selectedCategory != null && !selectedCategory.IsBase)
                 {
-                    SqlParameter categorieID = new SqlParameter("@CategoryId", categorieToDelete);
+                    SqlParameter categorieID = new SqlParameter("@CategoryId", idCategory);
                     db.Database.ExecuteSqlCommand("sp_SuppressionCategory @CategoryId", categorieID);
                 }
             }
-            return RedirectToAction("Index", "Categories");
+            ViewBag.listeCategories = DatabaseTools.GetCategoriesForDefaultGroup();
+            return RedirectToAction("Index", new { deleteMessage = "Categorie supprimée " });
         }
 
         private bool CategoryAlreadyExists(WildPayContext db, Category newCategory)

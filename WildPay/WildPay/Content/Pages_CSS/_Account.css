@@ -1,46 +1,50 @@
-﻿.Account {
+﻿.account {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Account hr {
-    margin: 3rem 0;
+.account hr {
+    margin: 2rem 0;
 }
 
-.Account .account-form {
+.account .account-form {
     width: 60%;
     margin: 0 auto;
 }
 
-.Account h2{
+.account h2{
     margin-bottom: 5rem;
 }
 
-.Account .user-header {
+.account .user-header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Account .user-image{
+.account .user-image{
     margin-bottom: 1rem;
 }
 
-.Account .form-group.submitBtn {
+.account .form-group.submitBtn {
     margin-top: 2rem;
     margin-bottom: 6rem;
 }
 
-.Account .note {
+.account .note {
     font-weight: bold;
 }
 
-.Account button.btn.btn-primary{
+.account button.btn.btn-primary{
     margin: 2rem auto 4rem auto;
     display: block;
 }
 
-.Account p:last-of-type{
+.account p:last-of-type{
     text-align: center;
+}
+
+.account .account-form p.error{
+    margin-top: 1rem;
 }

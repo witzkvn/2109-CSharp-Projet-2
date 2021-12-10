@@ -46,6 +46,28 @@
     background-color: var(--secondary-light);
 }
 
+.btn.btn-warning {
+    background-color: var(--warning-medium);
+    color: white;
+    border: 2px solid var(--warning-dark);
+    transition: all .2s ease;
+}
+
+.btn.btn-warning:hover {
+    background-color: var(--warning-light);
+}
+
+.btn.btn-transparent {
+    background-color: var(--bg-dark);
+    color: inherit;
+    border: 2px solid var(--bg-dark);
+    transition: all .2s ease;
+}
+
+.btn.btn-transparent:hover {
+    background-color: var(--bg-light);
+}
+
 
 .form-group {
     width: 100%;
@@ -61,4 +83,56 @@
 
 .form-group p {
     grid-column: span 2;
+}
+
+.modal {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black-overlay);
+}
+
+.modal-inner {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.modal-inner p {
+    margin-top: 3rem;
+    font-weight: bold;
+}
+
+.modal-buttons {
+    display: flex;
+    margin: 5rem auto 0 auto;
+}
+
+.modal-buttons > .btn:first-child {
+    margin-right: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+    .form-group {
+        grid-template-columns: 1fr;
+        gap:  0.5rem 0;
+    }
+
+    .form-group * {
+        grid-column: 1/2;
+    }
+
+    .form-group label{
+        text-align: left;
+    }
+
+    .modal-inner{
+        margin: auto 3rem;
+    }
 }

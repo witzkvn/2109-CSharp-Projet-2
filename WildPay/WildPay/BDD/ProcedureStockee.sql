@@ -297,3 +297,30 @@ CREATE PROCEDURE sp_GetSommeDueSiNull
 	)
    END
  GO 
+ 
+   DROP PROCEDURE IF EXISTS sp_SommeParUser;
+ GO 
+CREATE PROCEDURE sp_SommeParUser
+	@groupId INT
+   AS
+   BEGIN
+	SELECT (CONCAT ((UPPER(Lastname)), ' ', (UPPER(left(Firstname,1)) + LOWER(SUBSTRING(Firstname,2,LEN(Firstname)))))) AS PrenomNom, SUM(value) AS Somme FROM [Expense]
+	INNER JOIN [User] ON [Expense].FkUserId = [User].Id
+	WHERE FkGroupId = @groupId
+	GROUP BY Firstname, Lastname
+   END
+ GO 
+
+    DROP PROCEDURE IF EXISTS sp_SommeParCategory;
+ GO 
+CREATE PROCEDURE sp_SommeParCategory
+	@groupId INT
+   AS
+   BEGIN
+	SELECT ((UPPER(left(Name,1)) + LOWER(SUBSTRING(Name,2,LEN(Name))))) AS NameCategory, SUM(value) AS SommeCategory FROM [Expense]
+	INNER JOIN Category ON [Expense].FkCategoryId = [Category].Id
+	WHERE FkGroupId = @groupId
+	GROUP BY Name
+	ORDER BY Name DESC
+   END
+ GO 

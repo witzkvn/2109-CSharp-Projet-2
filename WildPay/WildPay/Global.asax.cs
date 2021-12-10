@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -98,6 +99,21 @@ namespace WildPay
                             new SqlParameter("@IsBase", true));
                 }
                 #endregion
+            }
+        }
+
+        private void Application_Error(object sender, EventArgs e)
+        {
+            var ex = Server.GetLastError();
+            var httpException = ex as HttpException ?? ex.InnerException as HttpException;
+            if (httpException == null) return;
+
+            if (Request.FilePath == "/Account" && httpException.WebEventCode == WebEventCodes.RuntimeErrorPostTooLarge)
+            {
+                Response.Redirect("/Account/Error");
+            } else
+            {
+                Response.Redirect("/Home/Error");
             }
         }
     }

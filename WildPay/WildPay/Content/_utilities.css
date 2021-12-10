@@ -31,10 +31,27 @@
     padding: 2rem;
     border-radius: 10px;
     border: 1px solid var(--bg-medium);
+    background-color: var(--bg-light);
+}
+
+body.dark .box {
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 2px 8px 0px;
 }
 
 .text-no-overflow {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 900px) {
+    .box{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .box {
+        width: 100%;
+    }
 }

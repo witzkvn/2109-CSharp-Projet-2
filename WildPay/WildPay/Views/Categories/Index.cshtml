@@ -1,5 +1,4 @@
 ﻿@using WildPay.Models
-@using WildPay.Tools
 
 @model Category
 @{
@@ -21,19 +20,32 @@
 
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Name)
-                @Html.EditorFor(Model => Model.Name)
+                <input type="text" id="name" class="form-control"
+                        pattern="@FormatTools.RegexTextAndNumbers"                       
+                       minlength="2" maxlength="20" name="Name"
+                       required />         
                 <input class="btn btn-primary" type="submit" value="Valider" />
 
-                <p class="message error">
-                    @Html.ValidationMessageFor(Model => Model.Name)
-                    @ViewBag.Message
-                </p>
+                @if (ViewBag.Confirm != "")
+                {
+                    <p class="message success">
+                        @Html.ValidationMessageFor(Model => Model.Name)
+                        @ViewBag.Confirm
+                    </p>
+                }
+                else if (ViewBag.Error != "")
+                {
+                    <p class="message error">
+                        @Html.ValidationMessageFor(Model => Model.Name)
+                        @ViewBag.Error
+                    </p>
+                }
             </div>
             @Html.ValidationSummary(true)
         }
 
         <h4>Catégories existantes :</h4>
-        <p class="error">ATTENTION : la suppression d'une catégorie est définitive et les catégories des dépenses associées devront être à nouveau saisies manuellement.</p>
+        <p class="error warning">ATTENTION : la suppression d'une catégorie est définitive et les catégories des dépenses associées devront être à nouveau saisies manuellement.</p>
 
         <div class="categories-list">
 
@@ -44,16 +56,17 @@
                     <div class="categorie-name">
                         @if (cat.IsBase == false)
                         {
-                            <a class="categories-delete" href='@Url.Action("DeleteCategorie", "Categories", new { categorieToDelete = cat.Id })'>
+                            <a class="categories-delete" href='@Url.Action("DeleteCategorie", "Categories", new { categorieIDToDelete = cat.Id})'>
                                 <ion-icon name="trash"></ion-icon>
                             </a>
-                        } else
+                        }
+                        else
                         {
                             <div class="categories-delete disabled">
                                 <ion-icon name="trash"></ion-icon>
                             </div>
                         }
-                    <p class="text-no-overflow">@Utilities.GetPremiereLettreMajuscule(cat.Name)</p>
+                        <p class="text-no-overflow">@Utilities.GetPremiereLettreMajuscule(cat.Name)</p>
                     </div>
 
                 }
@@ -61,6 +74,14 @@
 
         </div>
 
+
     </div>
 
 </div>
+
+
+@if (ViewBag.categoryASupprimer != null)
+{
+    Category catASupp = ViewBag.categoryASupprimer;
+    @Html.Partial("_DeleteConfirmation", catASupp);
+}
