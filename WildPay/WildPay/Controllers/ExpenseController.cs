@@ -54,6 +54,25 @@ namespace WildPay.Controllers
 
             ViewBag.expLabels = prenomNom;
             ViewBag.expValues = somme;
+
+            Dictionary<string, double> nameSumByCat = new Dictionary<string, double>();
+            nameSumByCat = db.Database.SqlQuery<SommeParCategory>
+                    ("sp_SommeParCategory @p0", GroupId)
+                    .ToDictionary(k => k.NameCategory, v => v.SommeCategory);
+
+            double SumCatNull = db.Expenses.Where(e => e.FkCategoryId == null).Sum(e => e.Value);
+
+            nameSumByCat.Add("Autre", SumCatNull);
+
+            List<string> nameCat = new List<string>();
+            nameCat = nameSumByCat.Select(kvp => kvp.Key).ToList();
+
+            List<double> sommeCat = new List<double>();
+            sommeCat = nameSumByCat.Select(kvp => kvp.Value).ToList();
+
+            ViewBag.expLabels2 = nameCat;
+            ViewBag.expValues2 = sommeCat;
+
             ViewBag.Confirm = confirmationMessage;
             return View();
         }
@@ -104,6 +123,5 @@ namespace WildPay.Controllers
 
             return sommesDues;
         }
-
     }
 }
