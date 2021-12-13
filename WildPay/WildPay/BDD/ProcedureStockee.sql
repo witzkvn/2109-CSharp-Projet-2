@@ -163,6 +163,19 @@ END
 
 
 -- GROUP
+DROP PROCEDURE IF EXISTS sp_CreerGroupInit;
+ GO 
+CREATE PROCEDURE sp_CreerGroupInit
+@name VARCHAR(200),
+@GroupID int OUTPUT
+AS
+BEGIN
+	INSERT INTO [Group](Name, CreatedAt) VALUES
+	(@name, GETDATE())
+	SELECT @GroupID = SCOPE_IDENTITY() 
+END
+ GO 
+
 DROP PROCEDURE IF EXISTS sp_CreerGroup;
  GO 
 CREATE PROCEDURE sp_CreerGroup
@@ -254,13 +267,15 @@ BEGIN
  GO 
 
 
-  DROP PROCEDURE IF EXISTS sp_DeleteGroup;
+  DROP PROCEDURE IF EXISTS sp_DeleteMemberGroup;
  GO 
-CREATE PROCEDURE sp_DeleteGroup
+CREATE PROCEDURE sp_DeleteMemberGroup
 @User_Id INT,
 @group_Id INT
 AS
 BEGIN
+DELETE FROM [Expense]
+WHERE FkUserId = @User_Id AND FkGroupId = @group_Id
 DELETE FROM [UserGroup]
 WHERE User_Id = @User_Id AND Group_Id = @group_Id
 END

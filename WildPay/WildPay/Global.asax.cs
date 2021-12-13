@@ -74,7 +74,7 @@ namespace WildPay
                     newGroupId.SqlDbType = SqlDbType.Int;
                     newGroupId.Direction = ParameterDirection.Output;
 
-                    db.Database.ExecuteSqlCommand("sp_CreerGroup @name, @GroupID OUTPUT",
+                    db.Database.ExecuteSqlCommand("sp_CreerGroupInit @name, @GroupID OUTPUT",
                             newGroupId,
                             new SqlParameter("@name", "principal")
                             );

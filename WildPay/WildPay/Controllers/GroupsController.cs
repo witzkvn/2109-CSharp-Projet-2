@@ -114,10 +114,10 @@ namespace WildPay.Controllers
             {
                 SqlParameter userSql = new SqlParameter("@User_Id", userId);
                 SqlParameter groupSql = new SqlParameter("@groupId", groupId);
-                db.Database.ExecuteSqlCommand("sp_DeleteGroup @User_Id, @groupId", userSql, groupSql);
+                db.Database.ExecuteSqlCommand("sp_DeleteMemberGroup @User_Id, @groupId", userSql, groupSql);
             }
 
-            return RedirectToAction("GroupEdit", new { });
+            return RedirectToAction("GroupEdit", new {groupId = groupId});
         }
 
 
