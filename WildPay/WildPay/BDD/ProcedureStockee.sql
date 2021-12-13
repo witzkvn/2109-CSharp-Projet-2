@@ -254,7 +254,17 @@ BEGIN
  GO 
 
 
-
+  DROP PROCEDURE IF EXISTS sp_DeleteGroup;
+ GO 
+CREATE PROCEDURE sp_DeleteGroup
+@User_Id INT,
+@group_Id INT
+AS
+BEGIN
+DELETE FROM [UserGroup]
+WHERE User_Id = @User_Id AND Group_Id = @group_Id
+END
+ GO 
 
 
 

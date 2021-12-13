@@ -112,8 +112,11 @@ namespace WildPay.Controllers
         {
             using (WildPayContext db = new WildPayContext())
             {
-                throw new HttpUnhandledException("a faire");
+                SqlParameter userSql = new SqlParameter("@User_Id", userId);
+                SqlParameter groupSql = new SqlParameter("@groupId", groupId);
+                db.Database.ExecuteSqlCommand("sp_DeleteGroup @User_Id, @groupId", userSql, groupSql);
             }
+
             return RedirectToAction("GroupEdit", new { });
         }
 
