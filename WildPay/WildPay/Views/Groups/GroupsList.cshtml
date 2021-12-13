@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WildPay.Models.Group>
+﻿@using WildPay.Models
+@model Dictionary<Group, int>
 
 @{
     if (Session["Id"] == null)
@@ -29,16 +30,17 @@
 
 
 
-        @foreach (var item in Model)
+        @foreach (KeyValuePair<Group, int> kvp in Model)
         {
-            <a href="@Url.Action("GroupEdit", "Groups", new { groupId = item.Id })" class="box">
+            <a href="@Url.Action("GroupEdit", "Groups", new { groupId = kvp.Key.Id })" class="box">
                 <div class="text-no-overflow">
-                    <h3>@Utilities.GetPremiereLettreMajuscule(item.Name)</h3>
+                    <h3>@Utilities.GetPremiereLettreMajuscule(kvp.Key.Name)</h3>
                 </div>
-                <p>Groupe créé le @item.CreatedAt</p>
+                <p>@kvp.Value membre(s) dans le groupe</p>
+                <pc class="groupe-date">Groupe créé le @FormatTools.ConvertInShortDate(kvp.Key.CreatedAt)</pc>
             </a>
 
-            if (sessionGroupId == item.Id)
+            if (sessionGroupId == kvp.Key.Id)
             {
                 <div class="btn btn-transparent">
                     Choisi
@@ -47,7 +49,7 @@
             }
             else
             {
-                <a href="@Url.Action("ChangeGroup","Groups",new { groupId = item.Id })" class="btn btn-primary">
+                <a href="@Url.Action("ChangeGroup","Groups",new { groupId = kvp.Key.Id })" class="btn btn-primary">
                     Choisir
                 </a>
             }

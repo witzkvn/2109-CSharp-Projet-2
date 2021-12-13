@@ -12,15 +12,19 @@ namespace WildPay.Tools
 {
     public class DatabaseGroupTools
     {
-        public static List<Group> GetGroupsForUser(int userID)
+        public static Dictionary<Group, int> GetGroupsForUser(int userID)
         {
             using (WildPayContext db = new WildPayContext())
             {
                 SqlParameter userSql = new SqlParameter("@user_Id", userID);
-                List<Group> groups = db.Database.SqlQuery<Group>
-                ("sp_GetGroupsForUser @user_Id", userSql).OrderBy(group => group.Name)
-                .ToList();
-                return groups;
+                Dictionary<Group, int> groupsDictionary = new Dictionary<Group, int>();
+                List<Group> groups = db.Groups.Where(g => g.Users.Any(u => u.Id == userID)).OrderBy(group => group.Name).ToList();
+                foreach (var item in groups)
+                {
+                    int usersNbInGroup = item.Users.Count;
+                    groupsDictionary.Add(item, usersNbInGroup);
+                }
+                return groupsDictionary;
             }
         }
 
