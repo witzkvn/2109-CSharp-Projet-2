@@ -41,6 +41,7 @@
         <input type="text" id="name" class="form-control"
                pattern="@FormatTools.RegexTextAndNumbers"
                minlength="2" maxlength="20" name="Name"
+               value="@Model.Name"
                required />
         <p class="error">
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
