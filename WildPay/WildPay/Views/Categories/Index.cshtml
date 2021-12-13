@@ -6,12 +6,11 @@
     {
         Response.Redirect("~/Connexion/Index");
     }
+    string groupeName = @Utilities.GetPremiereLettreMajuscule((string)Session["groupname"]);
 }
 
 <div class="categories">
-    <h2>Catégories des dépenses du groupe</h2>
-
-
+    <h2>Groupe @groupeName</h2>
 
     <div class="categories-wrapper box">
         @using (Html.BeginForm())
@@ -21,9 +20,9 @@
             <div class="form-group">
                 @Html.LabelFor(Model => Model.Name)
                 <input type="text" id="name" class="form-control"
-                        pattern="@FormatTools.RegexTextAndNumbers"                       
+                       pattern="@FormatTools.RegexTextAndNumbers"
                        minlength="2" maxlength="20" name="Name"
-                       required />         
+                       required />
                 <input class="btn btn-primary" type="submit" value="Valider" />
 
                 @if (ViewBag.Confirm != "")

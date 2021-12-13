@@ -1,5 +1,4 @@
-﻿
-<div class="navbar">
+﻿<div class="navbar">
     <div class="navbar-logo">
         <a href="@Url.Action("Index", "Home")" class="logo">
             Wild<span>Pay</span>
@@ -22,6 +21,12 @@
                 }
                 else
                 {
+                    <a href="@Url.Action("GroupsList","Groups")" class="navbar-link nav-link-group">
+                        <ion-icon name="people"></ion-icon>
+                        <p class="text-no-overflow">
+                            Groupe @Utilities.GetPremiereLettreMajuscule((string)Session["groupname"])
+                        </p>
+                    </a>
 
                     <a href="@Url.Action("Index","Expense")" class="navbar-link">
                         <ion-icon name="pricetags"></ion-icon>
@@ -37,7 +42,7 @@
 
                     <a href="@Url.Action("Index","Account")" class="navbar-link">
                         <ion-icon name="person-circle"></ion-icon>
-                        <p>Compte</p>
+                        <p>@Session["Firstname"]</p>
                     </a>
 
 

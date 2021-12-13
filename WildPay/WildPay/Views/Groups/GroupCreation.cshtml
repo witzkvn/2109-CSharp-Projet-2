@@ -1,0 +1,35 @@
+﻿@model WildPay.Models.Group
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="group-creation">
+    <h2>Création d'un groupe</h2>
+
+    <div class="box">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+                
+                <p class="group-creation-note">Note : vous serez automatiquement rattaché(e) au groupé créé.</p>
+
+                <div class="expense-edition-buttons">
+                    <a href="@Url.Action("GroupsList", "Groups")" class="btn btn-transparent">Retour à la liste</a>
+                    <input type="submit" value="Créer le groupe" class="btn btn-primary" />
+                </div>
+        }
+    </div>
+    
+</div>
+
