@@ -19,6 +19,10 @@ namespace WildPay.Controllers
         // GET: Expense
         public ActionResult Index(string confirmationMessage = null)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
             GroupId = (int)Session["group"];
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)

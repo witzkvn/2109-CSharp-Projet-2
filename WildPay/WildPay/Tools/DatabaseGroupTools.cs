@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -114,6 +115,26 @@ namespace WildPay.Tools
                 Group group = db.Database.SqlQuery<Group>
                 ("sp_GetGroupById @p0", id).FirstOrDefault();
                 return group;
+            }
+        }
+
+        public static bool IsPartOfGroup(int userId, int groupId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                Group groupe = db.Groups.Find(groupId);
+                return groupe.Users.Any(u => u.Id == userId);
+            }
+        }
+
+        public static bool IsUserAllowedToAccessCategory(int userId, int categoryId)
+        {
+            using (WildPayContext db = new WildPayContext())
+            {
+                Category category = db.Categories.Where(c => c.Id == categoryId).Include(cat => cat.Groups).FirstOrDefault();
+                int groupeId = category.Groups.Select(g => g.Id).FirstOrDefault();
+                Group groupe = db.Groups.Find(groupeId);
+                return groupe.Users.Any(u => u.Id == userId);
             }
         }
 
