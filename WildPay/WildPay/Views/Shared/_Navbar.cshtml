@@ -1,8 +1,9 @@
 ﻿<div class="navbar">
-        <div class="navbar-logo">
-            @Html.ActionLink("WildPay", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-    
+    <div class="navbar-logo">
+        <a href="@Url.Action("Index", "Home")" class="logo">
+            Wild<span>Pay</span>
+</a>
+    </div>
     <div class="mobile-nav-open" id="mobileNavOpen">
         <ion-icon name="menu"></ion-icon>
     </div>

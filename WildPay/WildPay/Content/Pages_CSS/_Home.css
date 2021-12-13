@@ -1,20 +1,25 @@
 ﻿.header {
     padding: 3rem 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.3fr;
     gap: 5rem;
 }
 .header-left{
     display: flex;
     flex-direction: column;
 }
-.header-left h1 {
+
+.header-left p{
+    line-height: 1.5;
+}
+
+.header-left h1.logo {
     margin: auto 0 6rem 0;
-    font-size: 6rem;
+    font-size: 8rem;
 }
 
 .header-left .moto-main{
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
