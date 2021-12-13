@@ -88,7 +88,8 @@
 }
 
 #expense-graph2 {
-    margin-top: 2.5rem
+    margin-top: 2.5rem;
+    height: 25vh;
 }
 
 .expense .flex.fixed {
