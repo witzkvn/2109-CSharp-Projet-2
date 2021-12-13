@@ -80,6 +80,8 @@ namespace WildPay.Controllers
             ViewBag.expLabels2 = nameCat;
             ViewBag.expValues2 = sommeCat;
 
+            ViewBag.sommeTotale = FormatTools.ConvertinShortDouble(sommeCat.Sum());
+
             ViewBag.Confirm = confirmationMessage;
             return View();
         }
