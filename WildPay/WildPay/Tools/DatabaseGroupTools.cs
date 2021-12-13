@@ -131,11 +131,6 @@ namespace WildPay.Tools
             }
         }
 
-        public static bool IsPrincipalGroup(int groupId)
-        {
-            return groupId == Utilities.GetGroupePrincipalId() ? true : false;
-        }
-
         public static bool IsUserAllowedToAccessCategory(int userId, int categoryId)
         {
             using (WildPayContext db = new WildPayContext())
