@@ -4,6 +4,7 @@
     <div class="box modal-inner">
         <h2>Suppression d'utilisateur</h2>
         <p>Voulez-vous vraiment supprimer le membre @Utilities.GetNomCompletUser(Model) du groupe ?</p>
+        <p class="error">Cela supprimera toutes ses dépenses. </p>
         <div class="modal-buttons">
             <a class="btn btn-transparent" href="@Url.Action("GroupEdit", "Groups", new {groupId = (int)ViewData["groupId"]})">Retour à l'édition</a>
             <a class="btn btn-warning" href="@Url.Action("ConfirmDeleteMember", "Groups", new { userId = Model.Id, groupId =(int)ViewData["groupId"]})">Supprimer</a>
