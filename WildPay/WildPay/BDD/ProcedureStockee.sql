@@ -163,9 +163,9 @@ END
 
 
 -- GROUP
-DROP PROCEDURE IF EXISTS sp_CreerGroup;
+DROP PROCEDURE IF EXISTS sp_CreerGroupInit;
  GO 
-CREATE PROCEDURE sp_CreerGroup
+CREATE PROCEDURE sp_CreerGroupInit
 @name VARCHAR(200),
 @GroupID int OUTPUT
 AS
@@ -173,6 +173,22 @@ BEGIN
 	INSERT INTO [Group](Name, CreatedAt) VALUES
 	(@name, GETDATE())
 	SELECT @GroupID = SCOPE_IDENTITY() 
+END
+ GO 
+
+DROP PROCEDURE IF EXISTS sp_CreerGroup;
+ GO 
+CREATE PROCEDURE sp_CreerGroup
+@name VARCHAR(200),
+@user_Id INT, 
+@GroupID int OUTPUT
+AS
+BEGIN
+	INSERT INTO [Group](Name, CreatedAt) VALUES
+	(@name, GETDATE())
+	SELECT @GroupID = SCOPE_IDENTITY() 
+	INSERT INTO [UserGroup](Group_Id, User_Id) VALUES
+	(@GroupID, @user_Id)
 END
  GO 
 
@@ -186,6 +202,102 @@ BEGIN
 	WHERE Name = 'principal';
 END
  GO 
+
+
+DROP PROCEDURE IF EXISTS sp_GetDefaultGroupForUser;
+ GO 
+CREATE PROCEDURE sp_GetDefaultGroupForUser
+	@user_Id int, 
+	@GroupID int OUTPUT
+AS
+BEGIN
+	SELECT TOP 1 @GroupID = Id FROM [Group]
+	INNER JOIN [UserGroup]
+	ON [Group].Id = [UserGroup].Group_Id
+	WHERE [UserGroup].User_Id = @user_Id
+END
+ GO 
+
+DROP PROCEDURE IF EXISTS sp_GetGroupsForUser;
+ GO 
+CREATE PROCEDURE sp_GetGroupsForUser
+	@user_Id INT
+AS
+BEGIN
+	SELECT * FROM [Group]
+	INNER JOIN [UserGroup] 
+	ON [Group].Id = [UserGroup].Group_Id
+	WHERE [UserGroup].User_Id = @user_Id;
+END
+ GO 
+
+
+DROP PROCEDURE IF EXISTS sp_GetGroupById;
+ GO 
+CREATE PROCEDURE sp_GetGroupById
+	@group_Id INT
+AS
+BEGIN
+	SELECT * FROM [Group]
+	WHERE [Group].Id = @group_Id;
+END
+ GO 
+
+DROP PROCEDURE IF EXISTS sp_AddMemberToGroup;
+ GO 
+CREATE PROCEDURE sp_AddMemberToGroup
+	@UserEmail VARCHAR(200), 
+	@group_Id INT,
+	@ajoutOk INT OUTPUT 
+AS
+BEGIN
+	SELECT @ajoutOk = 0;
+	DECLARE @User_Id INT;
+    SELECT TOP 1 @User_Id = Id FROM [WildPay-1].[dbo].[User] WHERE Email = @UserEmail;
+	IF (@User_Id <> 0)
+		BEGIN
+		IF NOT EXISTS (select 1 FROM UserGroup WHERE Group_Id = @group_Id AND User_Id = @User_Id)
+			BEGIN
+			INSERT INTO [UserGroup](User_Id, Group_Id)
+			VALUES(@user_Id, @group_Id);
+			SELECT @ajoutOk = 1;
+			END
+		END
+	END
+ GO 
+
+
+  DROP PROCEDURE IF EXISTS sp_DeleteMemberGroup;
+ GO 
+CREATE PROCEDURE sp_DeleteMemberGroup
+@User_Id INT,
+@group_Id INT
+AS
+BEGIN
+DELETE FROM [Expense]
+WHERE FkUserId = @User_Id AND FkGroupId = @group_Id
+DELETE FROM [UserGroup]
+WHERE User_Id = @User_Id AND Group_Id = @group_Id
+END
+ GO 
+
+
+
+ DROP PROCEDURE IF EXISTS sp_UpdateGroup;
+ GO 
+CREATE PROCEDURE sp_UpdateGroup
+	@group_Id INT,
+	@name VARCHAR(200)
+AS
+BEGIN
+	UPDATE [Group]
+	SET
+	Name = @name
+	WHERE [Group].Id = @group_Id;
+END
+ GO 
+
+
 
 
 -- EXPENSE

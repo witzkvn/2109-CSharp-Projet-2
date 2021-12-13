@@ -11,7 +11,6 @@ namespace WildPay.Controllers
 {
     public class ConnexionController : Controller
     {
-        // GET: Connexion
         public ActionResult Index(bool creationSuccess = false)
         {
             ViewBag.ConfirmationCreationCompte = creationSuccess;
@@ -33,8 +32,10 @@ namespace WildPay.Controllers
                 else
                 {
                     Session["Id"] = userDetails.Id;
-                    Session["Firstname"] = userDetails.Firstname;
-                    return RedirectToAction("Index", "Expense");
+                    Session["Firstname"] = Utilities.GetPremiereLettreMajuscule(userDetails.Firstname);
+                    Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser(userDetails.Id);
+                    Session["groupname"] = Utilities.GetPremiereLettreMajuscule(DatabaseGroupTools.GetGroupById((int)Session["group"]).Name);
+                    return RedirectToAction("GroupsList", "Groups");
                 }
             }
         }

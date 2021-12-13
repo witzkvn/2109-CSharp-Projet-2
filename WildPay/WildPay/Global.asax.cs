@@ -74,7 +74,7 @@ namespace WildPay
                     newGroupId.SqlDbType = SqlDbType.Int;
                     newGroupId.Direction = ParameterDirection.Output;
 
-                    db.Database.ExecuteSqlCommand("sp_CreerGroup @name, @GroupID OUTPUT",
+                    db.Database.ExecuteSqlCommand("sp_CreerGroupInit @name, @GroupID OUTPUT",
                             newGroupId,
                             new SqlParameter("@name", "principal")
                             );
@@ -111,9 +111,10 @@ namespace WildPay
             if (Request.FilePath == "/Account" && httpException.WebEventCode == WebEventCodes.RuntimeErrorPostTooLarge)
             {
                 Response.Redirect("/Account/Error");
-            } else
+            }
+            else
             {
-                Response.Redirect("/Home/Error");
+                //Response.Redirect("/Home/Error");
             }
         }
     }

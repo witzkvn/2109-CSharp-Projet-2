@@ -15,10 +15,11 @@ namespace WildPay.Controllers
     public class ExpenseController : Controller
     {
         WildPayContext db = new WildPayContext();
-        int GroupId = Utilities.GetGroupePrincipalId();
+        int GroupId;
         // GET: Expense
         public ActionResult Index(string confirmationMessage = null)
         {
+            GroupId = (int)Session["group"];
             List<ExpenseCategoryJoin> expenses = db.Database.SqlQuery<ExpenseCategoryJoin>
                 ("sp_GetExpense @p0", GroupId)
                 .ToList();
@@ -82,8 +83,8 @@ namespace WildPay.Controllers
         private Dictionary<int, double> SommesDues(List<ListUser> listeUser)
         {
             Dictionary<int, double> sommesDues = new Dictionary<int, double>();
-            
-            foreach(ListUser user in listeUser)
+            GroupId = (int)Session["group"];
+            foreach (ListUser user in listeUser)
             {
                 double sommeDueParUser = 0;
                 double sommeDueParUserShort = 0;
