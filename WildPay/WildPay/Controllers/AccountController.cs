@@ -25,8 +25,12 @@ namespace WildPay.Controllers
                 return RedirectToAction("Index", "Connexion");
             }
             User user = db.Users.Find(Session["Id"]);
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-            if(user.UserImage != null)
+            if (user.UserImage != null)
             {
                 user.UserImageFile = ConverterTools.ByteArrayToStringImage(user.UserImage);
             }
@@ -37,7 +41,7 @@ namespace WildPay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Id, Firstname, Lastname, NewUserImageFile")] User user)
+        public ActionResult Index([Bind(Include = "Firstname, Lastname, NewUserImageFile")] User user)
         {
             string updateMessage = "";
 
@@ -56,6 +60,7 @@ namespace WildPay.Controllers
                         new SqlParameter("@firstname", user.Firstname),
                         new SqlParameter("@lastname", user.Lastname)
                     );
+                    Session["Firstname"] = Utilities.GetPremiereLettreMajuscule(user.Firstname);
                 } else
                 {
                     updateMessage += "Le nom ou le prénom ne sont pas valides\n";

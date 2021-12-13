@@ -12,13 +12,13 @@
     <h2>Liste des groupes</h2>
     <a class="button" href="@Url.Action("GroupCreation", "Groups")"><ion-icon name="add-circle"></ion-icon> Créer un groupe</a>
 
-        @{if (ViewBag.Confirm != "")
+        @{if (ViewBag.Confirm != null)
             {
             <p class="message success">
                 @ViewBag.Confirm
             </p>
             }
-            else if (ViewBag.Error != "")
+            else if (ViewBag.Error != null)
             {
             <p class="message error">
                 @ViewBag.Error

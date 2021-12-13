@@ -13,10 +13,6 @@ namespace WildPay.Controllers
 {
     public class AccountCreationController : Controller
     {
-        public AccountCreationController()
-        {
-            ViewBag.Message ="";
-        }
         public ActionResult Index(string error = null)
         {
             if(error != null)

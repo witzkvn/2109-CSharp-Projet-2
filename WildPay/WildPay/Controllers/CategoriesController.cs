@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WildPay.DAL;
@@ -16,6 +17,10 @@ namespace WildPay.Controllers
         // GET: Categories
         public ActionResult Index(string deleteMessage = null)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
             if (deleteMessage != null)
             {
                 ViewBag.Confirm = deleteMessage;
@@ -27,7 +32,7 @@ namespace WildPay.Controllers
         [HttpPost]
         public ActionResult Index(Category newCategory)
         {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && FormatTools.IsTextAndNumberOk(newCategory.Name))
             {
                 using (WildPayContext db = new WildPayContext())
                 {
@@ -56,14 +61,36 @@ namespace WildPay.Controllers
 
         public ActionResult DeleteCategorie(int categorieIDToDelete)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
+            if (!DatabaseGroupTools.IsUserAllowedToAccessCategory((int)Session["Id"], categorieIDToDelete))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             List<Category> listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
+            Category categoryASupprimer = listeCategories.Where(c => c.Id == categorieIDToDelete).First();
+            if (categoryASupprimer == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ViewBag.listeCategories = listeCategories;
-            ViewBag.categoryASupprimer = listeCategories.Where(c => c.Id == categorieIDToDelete).First();
+            ViewBag.categoryASupprimer = categoryASupprimer;
             return View("Index");
         }
 
         public ActionResult ConfirmDeleteCategorie(int idCategory)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
+            if (!DatabaseGroupTools.IsUserAllowedToAccessCategory((int)Session["Id"], idCategory))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string deleteMsg ="Une erreur est survenue.";
             using (WildPayContext db = new WildPayContext())
             {
                 Category selectedCategory = db.Categories.Where(cat => cat.Id == idCategory).FirstOrDefault();
@@ -71,10 +98,10 @@ namespace WildPay.Controllers
                 {
                     SqlParameter categorieID = new SqlParameter("@CategoryId", idCategory);
                     db.Database.ExecuteSqlCommand("sp_SuppressionCategory @CategoryId", categorieID);
+                    deleteMsg = "Categorie supprimée";
                 }
             }
-            ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
-            return RedirectToAction("Index", new { deleteMessage = "Categorie supprimée " });
+            return RedirectToAction("Index", new { deleteMessage = deleteMsg });
         }
 
         private bool CategoryAlreadyExists(WildPayContext db, Category newCategory)

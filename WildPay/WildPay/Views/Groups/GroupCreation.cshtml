@@ -12,19 +12,27 @@
     <h2>Création d'un groupe</h2>
 
     <div class="box">
+        @if(ViewBag.Error != null)
+            {
+                <p class="error">@ViewBag.Error</p>
+            }
+        <p></p>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                <p class="error">
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </p>
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <input type="text" id="name" class="form-control"
+               pattern="@FormatTools.RegexTextAndNumbers"
+               minlength="2" maxlength="20" name="Name"
+               required />
+        <p class="error">
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </p>
+    </div>
 
             <p class="group-creation-note">Note : vous serez automatiquement rattaché(e) au groupé créé.</p>
 

@@ -93,6 +93,7 @@
                 <div class="expense-graph" id="expense-graph">
                     <canvas id="myChart"></canvas>
                 </div>
+                <p class="expense-total">Total dépensé : @ViewBag.sommeTotale €</p>
                 <div class="expense-graph" id="expense-graph2">
                     <canvas id="myChart2"></canvas>
                 </div>
@@ -152,16 +153,23 @@
         options: {}
     };
 
+    let graph2Height = expValues2.length * 3.5;
+    document.getElementById("expense-graph2").style.height = `${graph2Height}vh`;
+
+
     const config2 = {
         type: 'bar',
         data: data2,
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             indexAxis: 'y',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+            plugins: {
+                legend: {
+                    display: false
+                }
             },
+            scaleShowValues: true,
             scales: {
                 x: {
                     grid: {
@@ -178,6 +186,9 @@
                     grid: {
                         display: false,
                         borderColor: '#232323'
+                    },
+                    ticks: {
+                        autoSkip: false,
                     }
                 }
             }

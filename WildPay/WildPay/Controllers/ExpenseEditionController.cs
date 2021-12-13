@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WildPay.DAL;
@@ -15,6 +16,10 @@ namespace WildPay.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
             Expense newExpense = new Expense();
             if (Session["Id"] != null)
                 newExpense.FkUserId = (int)Session["Id"];
@@ -61,7 +66,19 @@ namespace WildPay.Controllers
 
         public ActionResult EditExpense(int expenseId)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
             Expense expenseToEdit = DatabaseTools.GetExpenseById(expenseId);
+            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], expenseToEdit.FkGroupId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (expenseToEdit == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ViewBag.title = "Editer une dépense";
             ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
             ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
@@ -71,7 +88,15 @@ namespace WildPay.Controllers
 
         public ActionResult DeleteExpense(int expenseId)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
             Expense expenseToEdit = DatabaseTools.GetExpenseById(expenseId);
+            if(expenseToEdit == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ViewBag.title = "Editer une dépense";
             ViewBag.listeCategories = DatabaseTools.GetCategoriesFromGroup((int)Session["group"]);
             ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup((int)Session["group"]);
@@ -82,6 +107,10 @@ namespace WildPay.Controllers
 
         public ActionResult ConfirmDeleteExpense(int idExpense)
         {
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Index", "Connexion");
+            }
             using (WildPayContext db = new WildPayContext())
             {
                 SqlParameter expenseSql = new SqlParameter("@expense_Id", idExpense);
