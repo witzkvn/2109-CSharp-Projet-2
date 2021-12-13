@@ -75,7 +75,7 @@
     transition: all .2s ease;
 }
 
-.btn.btn-transparent:hover {
+.btn.btn-accent:hover {
     background-color: var(--accent-light);
 }
 

@@ -18,11 +18,11 @@
     transition: all 0.2s ease;
 }
 
-.navbar-link:hover{
+.navbar-link:not(.btn):hover{
     color: var(--primary-medium);
 }
 
-.navbar-link:last-of-type:hover {
+.navbar-link:last-of-type:not(.btn):hover {
     color: var(--secondary-medium);
 }
 
