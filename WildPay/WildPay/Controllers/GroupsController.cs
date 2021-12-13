@@ -30,7 +30,8 @@ namespace WildPay.Controllers
             {
                 return RedirectToAction("Index", "Connexion");
             }
-            List<Group> groupes =  DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
+            Dictionary<Group, int> groupes =  DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
+
             return View(groupes);
         }
 

@@ -218,20 +218,6 @@ BEGIN
 END
  GO 
 
-DROP PROCEDURE IF EXISTS sp_GetGroupsForUser;
- GO 
-CREATE PROCEDURE sp_GetGroupsForUser
-	@user_Id INT
-AS
-BEGIN
-	SELECT * FROM [Group]
-	INNER JOIN [UserGroup] 
-	ON [Group].Id = [UserGroup].Group_Id
-	WHERE [UserGroup].User_Id = @user_Id;
-END
- GO 
-
-
 DROP PROCEDURE IF EXISTS sp_GetGroupById;
  GO 
 CREATE PROCEDURE sp_GetGroupById
