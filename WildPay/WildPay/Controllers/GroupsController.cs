@@ -24,7 +24,7 @@ namespace WildPay.Controllers
             }
             if (validationMessage != null)
             {
-                ViewBag.Validation = validationMessage;
+                ViewBag.Confirm = validationMessage;
             }
             List<Group> groupes =  DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
             return View(groupes);
@@ -38,15 +38,14 @@ namespace WildPay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GroupCreation([Bind(Include = "Id,CreatedAt,Name")] Group group)
+        public ActionResult GroupCreation(Group group)
         {
             if (ModelState.IsValid)
             {
                 Session["group"] = DatabaseGroupTools.CreateGroupForUser((int)Session["id"], group.Name);
                 Session["groupname"] = DatabaseGroupTools.GetGroupById((int)Session["group"]).Name;
                 DatabaseGroupTools.AddBaseCategories((int)Session["group"]);
-                List<Group> groupes = DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
-                return View("GroupsList", groupes);
+                return RedirectToAction("GroupsList", new { validationMessage = "Le groupe a bien été créé" });
             }
 
             return View(group);
@@ -55,12 +54,12 @@ namespace WildPay.Controllers
 
         public ActionResult GroupEdit(int groupId)
         {
-            if (groupId == null)
+            if (groupId == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Group group = DatabaseGroupTools.GetGroupById(groupId);
-            Session["group"] = groupId;
+            SetIdAndNameForGroup(groupId);
             ViewBag.listeUsers = DatabaseGroupTools.GetUsersForGroup(groupId);
             if (group == null)
             {
@@ -72,7 +71,7 @@ namespace WildPay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GroupEdit([Bind(Include = "Id,CreatedAt,Name")] Group group, string memberMail)
+        public ActionResult GroupEdit(Group group, string memberMail)
         {
             if (ModelState.IsValid)
             {
@@ -124,11 +123,10 @@ namespace WildPay.Controllers
 
         public ActionResult DeleteGroup(int groupId)
         {
-            if (groupId == Utilities.GetGroupePrincipalId()) {
-                List<Group> groupes = DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
-                Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser(groupId);
-                Session["groupname"] = DatabaseGroupTools.GetGroupById(groupId).Name;
-                return View("GroupsList", groupes);
+            if (groupId == Utilities.GetGroupePrincipalId()) 
+            {
+                SetIdAndNameForGroup(groupId);
+                return RedirectToAction("GroupsList",  new {errorMessage = "Le groupe principal ne peut pas être supprimé."});
             } 
             Group groupToEdit = DatabaseGroupTools.GetGroupById(groupId);
             ViewBag.groupToDelete = groupToEdit;
@@ -139,35 +137,42 @@ namespace WildPay.Controllers
         public ActionResult ConfirmDeleteGroup(int groupId)
         {
             if (groupId == Utilities.GetGroupePrincipalId()) {
-                List<Group> groupes = DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
-                Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser(groupId);
-                Session["groupname"] = DatabaseGroupTools.GetGroupById(groupId).Name;
-                return View("GroupsList", groupes);
+                SetIdAndNameForGroup(groupId);
+                return RedirectToAction("GroupsList", new { errorMessage = "Le groupe principal ne peut pas être supprimé." });
             } 
             using (WildPayContext db = new WildPayContext())
             {
                 Group groupToDelete = db.Groups.Where(g => g.Id == groupId).First();
                 List<Category> cat = db.Categories.Include(c => c.Groups).Where(c => c.Groups.Any(g => g.Id == groupId)).ToList();
                 db.Groups.Remove(groupToDelete);
+                db.SaveChanges();
                 db.Categories.RemoveRange(cat);
                 db.SaveChanges();
             }
 
             if (groupId == (int)Session["group"])
             {
-                Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser((int)Session["id"]);
-                Session["groupname"] = DatabaseGroupTools.GetGroupById((int)Session["group"]).Name;
+                SetDefaultGroupForUser();
             }
-            return RedirectToAction("GroupsList", "Groups", new { errorMessage = "", validationMessage = "le groupe a bien été supprimé" });
+            return RedirectToAction("GroupsList", "Groups", new { errorMessage = "", validationMessage = "Le groupe a bien été supprimé" });
         }
 
         public ActionResult ChangeGroup(int groupId)
         {
-            Group groupSelected = DatabaseGroupTools.GetGroupById(groupId);
+            SetIdAndNameForGroup(groupId);
+            return RedirectToAction("GroupsList");
+        }
+
+        private void SetIdAndNameForGroup(int groupId)
+        {
             Session["group"] = groupId;
             Session["groupname"] = DatabaseGroupTools.GetGroupById(groupId).Name;
-            List<Group> groupes = DatabaseGroupTools.GetGroupsForUser((int)Session["Id"]);
-            return View("GroupsList", groupes);
+        }
+
+        private void SetDefaultGroupForUser()
+        {
+            Session["group"] = DatabaseGroupTools.GetDefaultIdGroupForUser((int)Session["id"]);
+            Session["groupname"] = DatabaseGroupTools.GetGroupById((int)Session["group"]).Name;
         }
 
     }

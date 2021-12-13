@@ -1,10 +1,15 @@
 ﻿@model WildPay.Models.Group
 @using WildPay.Models
 
+
 @{
-    ViewBag.Title = "Edit";
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
     int groupePrincipalId = Utilities.GetGroupePrincipalId();
 }
+
 
 <div class="expense-edition-page">
     <h2>Edition du groupe</h2>
@@ -70,17 +75,17 @@
                         </div>
                     }
                 }
-                        </div>
+            </div>
 
 
-                    }
-                </div>
+        }
+    </div>
 
-    
+
 
 
 </div>
-    
+
 @{ if (ViewBag.groupToDelete != null)
     {
         Group groupASuppr = ViewBag.groupToDelete;
@@ -92,4 +97,4 @@
         //ViewData["group"] = Model.Id;
         @Html.Partial("_DeleteUserConfirmation", userASuppr, new ViewDataDictionary { { "groupId", Model.Id } });
     }
-    }
+}

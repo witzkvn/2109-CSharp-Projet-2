@@ -1,39 +1,57 @@
 ﻿@model IEnumerable<WildPay.Models.Group>
 
 @{
-    ViewBag.Title = "Index";
+    if (Session["Id"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
     int sessionGroupId = (int)Session["group"];
 }
 
 <div class="groupes">
     <h2>Liste des groupes</h2>
-    <a class="button" href="@Url.Action("GroupCreation","Groups")"><ion-icon name="add-circle"></ion-icon> Créer un groupe</a>
-    
+    <a class="button" href="@Url.Action("GroupCreation", "Groups")"><ion-icon name="add-circle"></ion-icon> Créer un groupe</a>
+
+        @{if (ViewBag.Confirm != "")
+            {
+            <p class="message success">
+                @ViewBag.Confirm
+            </p>
+            }
+            else if (ViewBag.Error != "")
+            {
+            <p class="message error">
+                @ViewBag.Error
+            </p>
+                } 
+            }
     <div class="groupes-list">
+
+
 
         @foreach (var item in Model)
         {
-                <a href="@Url.Action("GroupEdit", "Groups", new { groupId = item.Id })" class="box">
-                    <div class="text-no-overflow">
-                        <h3>@Utilities.GetPremiereLettreMajuscule(item.Name)</h3>
-                    </div>
-                    <p>Groupe créé le @item.CreatedAt</p>
-                </a>
+            <a href="@Url.Action("GroupEdit", "Groups", new { groupId = item.Id })" class="box">
+                <div class="text-no-overflow">
+                    <h3>@Utilities.GetPremiereLettreMajuscule(item.Name)</h3>
+                </div>
+                <p>Groupe créé le @item.CreatedAt</p>
+            </a>
 
-                if(sessionGroupId == item.Id)
-                {
-                    <div class="btn btn-transparent">
-                        Choisi
-                        <ion-icon name="checkmark-circle"></ion-icon>
-                    </div>
-                }
-                else
-                {
-                    <a href="@Url.Action("ChangeGroup","Groups",new { groupId = item.Id })" class="btn btn-primary">
-                        Choisir
-                    </a>
-                }
+            if (sessionGroupId == item.Id)
+            {
+                <div class="btn btn-transparent">
+                    Choisi
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                </div>
+            }
+            else
+            {
+                <a href="@Url.Action("ChangeGroup","Groups",new { groupId = item.Id })" class="btn btn-primary">
+                    Choisir
+                </a>
+            }
         }
     </div>
-        
+
 </div>

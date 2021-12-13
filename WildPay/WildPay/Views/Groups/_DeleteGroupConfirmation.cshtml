@@ -4,6 +4,7 @@
     <div class="box modal-inner">
         <h2>Suppression de groupe</h2>
         <p>Voulez-vous vraiment supprimer le groupe @Utilities.GetPremiereLettreMajuscule(Model.Name) ?</p>
+        <p class="error">Cela supprimera toutes les catégories et dépenses associées. </p>
         <div class="modal-buttons">
             <a class="btn btn-transparent" href="@Url.Action("GroupEdit", "Groups", new {groupId = Model.Id})">Retour à l'édition</a>
             <a class="btn btn-warning" href="@Url.Action("ConfirmDeleteGroup", "Groups", new { groupId = Model.Id})">Supprimer</a>
