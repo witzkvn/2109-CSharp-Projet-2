@@ -28,74 +28,80 @@
                 </p>
             }
         }
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+        @{
+            if (Model.Id != 0 && Model.Id != groupePrincipalId)
+            {
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <input type="text" id="name" class="form-control"
-               pattern="@FormatTools.RegexTextAndNumbers"
-               minlength="2" maxlength="20" name="Name"
-               value="@Model.Name"
-               required />
-        <p class="error">
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </p>
-    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <input type="text" id="name" class="form-control"
+                               pattern="@FormatTools.RegexTextAndNumbers"
+                               minlength="2" maxlength="20" name="Name"
+                               value="@Model.Name"
+                               required />
+                        <p class="error">
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
 
-            <div class="form-group">
-                <label for="auteur-select">Ajouter un membre (mail)</label>
-                <input type="email" name="memberMail" />
-            </div>
+                    <div class="form-group">
+                        <label for="auteur-select">Ajouter un membre (mail)</label>
+                        <input type="email" name="memberMail" />
+                    </div>
 
-            <div class="expense-edition-buttons">
+                    <div class="expense-edition-buttons">
 
-                @{
-                    if (Model.Id != 0 && Model.Id != groupePrincipalId)
-                    {
-                        <a href="@Url.Action("DeleteGroup", "Groups", new { groupId = Model.Id })">
-                            <input type="button" class="btn btn-warning" value="Supprimer" />
-                        </a>
-                    }
-                }
-
-                <button class="btn btn-primary" type="submit">
-                    Valider
-                </button>
-            </div>
-
-            <div class="groupe-membres">
-                <h3>Membres du groupe</h3>
-                @{
-                    List<Category> categories = ViewBag.listeCategories;
-                    foreach (User user in ViewBag.listeUsers)
-                    {
-                        <div class="categorie-name">
-                            @if (user.Id != (int)Session["id"])
+                        @{
+                            if (Model.Id != 0 && Model.Id != groupePrincipalId)
                             {
-                                <a class="categories-delete" href='@Url.Action("DeleteMember", "Groups", new { memberToDeleteId = user.Id, groupId = Model.Id })'>
-                                    <ion-icon name="trash"></ion-icon>
+                                <a href="@Url.Action("DeleteGroup", "Groups", new { groupId = Model.Id })">
+                                    <input type="button" class="btn btn-warning" value="Supprimer" />
                                 </a>
                             }
-                            else
-                            {
-                                <div class="categories-delete disabled">
-                                    <ion-icon name="trash"></ion-icon>
-                                </div>
-                            }
-                            <p class="text-no-overflow">@Utilities.GetNomCompletUser(user)</p>
-                        </div>
-                    }
+                        }
+
+                        <button class="btn btn-primary" type="submit">
+                            Valider
+                        </button>
+                    </div>
                 }
-            </div>
-
-
+            }
         }
+
+        <div class="groupe-membres">
+            <h3>Membres du groupe</h3>
+            @{
+                List<Category> categories = ViewBag.listeCategories;
+                foreach (User user in ViewBag.listeUsers)
+                {
+                    <div class="categorie-name">
+                        @if (Model.Id != 0 && Model.Id != groupePrincipalId && user.Id != (int)Session["id"])
+                        {
+                            <a class="categories-delete" href='@Url.Action("DeleteMember", "Groups", new { memberToDeleteId = user.Id, groupId = Model.Id })'>
+                                <ion-icon name="trash"></ion-icon>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="categories-delete disabled">
+                                <ion-icon name="trash"></ion-icon>
+                            </div>
+                        }
+                        <p class="text-no-overflow">@Utilities.GetNomCompletUser(user)</p>
+                    </div>
+                }
+            }
+        </div>
+
+
+
     </div>
 
 
