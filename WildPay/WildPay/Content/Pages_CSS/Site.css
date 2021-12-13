@@ -131,8 +131,13 @@ footer button.themeBtn{
 }
 
 @media screen and (max-width: 900px) {
+    html {
+        overflow: auto;
+    }
     body{
         font-size: 1.3rem;
+        width: 100vw;
+        overflow-x: hidden;
     }
 
     h1 {

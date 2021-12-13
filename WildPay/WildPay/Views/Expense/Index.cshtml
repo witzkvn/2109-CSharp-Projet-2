@@ -41,7 +41,12 @@
                         {
                             <img class="user-image user-image-sm" src="~/Content/Images/default.png" />
                         }
-                        <p class="category span2 text-no-overflow">@expense.Name</p>
+                        <p class="category span2 text-no-overflow">
+                            @if (expense.Name != null)
+                            {
+                                @Utilities.GetPremiereLettreMajuscule(expense.Name)
+                            }
+                        </p>
                         <p class="espace span2 text-no-overflow">Payé par  @expense.Lastname.ToUpper() @Utilities.GetPremiereLettreMajuscule(@expense.Firstname) au groupe</p>
                         <p class="date">@expense.DateCourte</p>
                         <p class="expense-value">@expense.Value €</p>
