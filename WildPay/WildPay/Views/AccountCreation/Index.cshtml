@@ -54,7 +54,7 @@
 
                 <input class="input-validation-error form-control" data-val="true" data-val-required="Le mot de passe est obligatoire" 
                        id="passwordInput" pattern="@FormatTools.RegexPassword" maxlength="30" minlength="5" name="Password" type="password" value="" required>
-
+                <p>Le mot de passe doit faire au moins cinq caractères avec des chiffres et des symboles </p>
                 <p class="error">
                     @Html.ValidationMessageFor(Model => Model.Password)
                 </p>
@@ -77,11 +77,11 @@
 
 </div>
 
-<script>
+@*<script>
     var passwordInput = document.getElementById('passwordInput');
     passwordInput.oninvalid = function (event)
     {
-        event.target.setCustomValidity('Utilisez au moins cinq caractères avec des majuscules, minuscules, des chiffres et des symboles.');
+        event.target.setCustomValidity('Utilisez au moins cinq caractères avec des chiffres et des symboles.');
     }
     var firstnameInput = document.getElementById('firstNameInput');
     firstnameInput.oninvalid = function (event)
@@ -93,4 +93,4 @@
     {
         event.target.setCustomValidity('Le nom doit faire au moins deux caractères.')
     }
-</script>
+</script>*@

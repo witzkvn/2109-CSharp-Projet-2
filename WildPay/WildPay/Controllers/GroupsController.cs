@@ -133,7 +133,9 @@ namespace WildPay.Controllers
             {
                 return RedirectToAction("Index", "Connexion");
             }
-            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId) || memberToDeleteId == 0)
+            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId) || 
+                memberToDeleteId == 0 || 
+                DatabaseGroupTools.IsPrincipalGroup(groupId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -158,7 +160,8 @@ namespace WildPay.Controllers
             {
                 return RedirectToAction("Index", "Connexion");
             }
-            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId) || userId == 0)
+            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId) || userId == 0 ||
+                DatabaseGroupTools.IsPrincipalGroup(groupId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -181,7 +184,7 @@ namespace WildPay.Controllers
                 SetIdAndNameForGroup(groupId);
                 return RedirectToAction("GroupsList",  new {errorMessage = "Le groupe principal ne peut pas être supprimé."});
             }
-            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId))
+            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId) || DatabaseGroupTools.IsPrincipalGroup(groupId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -197,7 +200,7 @@ namespace WildPay.Controllers
                 SetIdAndNameForGroup(groupId);
                 return RedirectToAction("GroupsList", new { errorMessage = "Le groupe principal ne peut pas être supprimé." });
             }
-            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId))
+            if (!DatabaseGroupTools.IsPartOfGroup((int)Session["Id"], groupId) || DatabaseGroupTools.IsPrincipalGroup(groupId))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
